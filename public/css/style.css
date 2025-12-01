@@ -1708,6 +1708,7 @@ button {
 
 .invite-hero-text {
   margin-top: 24px;
+  animation: inviteFadeUp 0.8s ease both 0.1s;
 }
 
 .invite-hero-text h1 {
@@ -1878,6 +1879,7 @@ button {
   gap: 12px;
   align-items: flex-start;
   margin-top: 24px;
+  animation: inviteFadeUp 0.9s ease both 0.25s;
 }
 
 .invite-preview-card {
@@ -2063,6 +2065,7 @@ button {
   gap: 14px;
   margin-bottom: 18px;
   flex-wrap: wrap;
+  animation: inviteFadeUp 0.8s ease both 0.35s;
 }
 
 .toolbar-left,
@@ -2132,6 +2135,7 @@ button {
   top: 100px;
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.06);
   z-index: 2;
+  animation: inviteSlideIn 0.7s ease both 0.45s;
 }
 
 .filter-panel-head {
@@ -2142,20 +2146,17 @@ button {
 }
 
 .close-filter {
-  border: none;
-  background: #f0f2ef;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  color: var(--invite-muted);
+  display: none;
 }
 
 .invite-filter-panel details {
   border-bottom: 1px solid rgba(31, 38, 40, 0.08);
   padding: 12px 0;
+}
+
+.invite-filter-panel .invite-eyebrow {
+  margin: 14px 0 8px;
+  letter-spacing: 0.2em;
 }
 
 .invite-filter-panel details:last-of-type {
@@ -2341,6 +2342,11 @@ button {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: inviteCardIn 0.45s ease forwards;
+  animation-delay: var(--card-delay, 0ms);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .invite-card.is-list {
@@ -2350,6 +2356,44 @@ button {
 
 .invite-card.is-hidden {
   display: none;
+}
+
+.invite-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes inviteCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes inviteFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes inviteSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .invite-card-image {
@@ -2486,6 +2530,8 @@ button {
   border-radius: 10px;
   cursor: pointer;
   min-width: 38px;
+  color: var(--invite-ink);
+  font-weight: 600;
 }
 
 .invite-pagination button.is-active {
@@ -2606,6 +2652,17 @@ button {
   .invite-filter-panel.is-open {
     transform: translateX(0);
     box-shadow: 0 28px 60px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invite-card,
+  .invite-hero-text,
+  .invite-hero-visual,
+  .invite-toolbar,
+  .invite-filter-panel {
+    animation: none !important;
+    transform: none !important;
   }
 }
 

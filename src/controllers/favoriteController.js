@@ -13,7 +13,7 @@ const slugify = (value = '') =>
     .replace(/^-|-$/g, '');
 
 exports.toggleFavorite = async (req, res) => {
-  const { vendorId, vendorSlug, vendorName } = req.body;
+  const { vendorId, vendorSlug, vendorName, vendorPhoto, vendorCategory } = req.body;
   if (!vendorId && !vendorSlug && !vendorName) throw new ApiError(400, 'Vendor identifier is required');
 
   let vendorDoc = null;
@@ -33,17 +33,20 @@ exports.toggleFavorite = async (req, res) => {
       vendorDoc = new Vendor({
         name: fallbackName,
         slug,
-        category: 'venue',
+        category: vendorCategory || 'venue',
         pricing: { type: 'package', amount: 0 },
         city: 'Lebanon',
         amenities: [],
         styles: [],
         cuisines: [],
         dietaryOptions: [],
-        photos: [],
+        photos: vendorPhoto ? [vendorPhoto] : [],
         verified: false,
         isActive: true
       });
+      await vendorDoc.save();
+    } else if (vendorPhoto && (!vendorDoc.photos || vendorDoc.photos.length === 0)) {
+      vendorDoc.photos = [vendorPhoto];
       await vendorDoc.save();
     }
   }

@@ -1,9 +1,9 @@
 .fav-page {
   --fav-gap: 1.6rem;
-  --fav-bg: var(--color-bg-section);
+  --fav-bg: var(--color-bg-light);
   --fav-text: var(--color-1-);
   --fav-accent: var(--color-logo);
-  --fav-accent-soft: var(--color-light-brown);
+  --fav-accent-soft: var(--color-logo);
   --fav-pill-bg: rgba(80, 105, 91, 0.08);
   --fav-pill-text: var(--color-logo);
 }
@@ -86,20 +86,20 @@ body.favorites-page {
 .favorites-hero {
   margin-top: 90px;
   padding: 2.5rem 8vw 1.5rem;
-  background: linear-gradient(135deg, #f7f4ee, #f5f7f5);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .favorites-hero h1 {
   font-family: "Playfair Display", "Cinzel", serif;
   font-size: clamp(2rem, 3vw, 2.6rem);
   margin: 0 0 0.35rem;
-  color: var(--color-brown);
+  color: var(--color-logo);
 }
 
 .favorites-hero p {
   margin: 0;
-  color: var(--fav-text);
+  color: var(--color-1-);
   max-width: 700px;
   line-height: 1.5;
 }
@@ -109,7 +109,7 @@ body.favorites-page {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: var(--fav-accent-soft);
+  color: var(--color-logo);
   font-weight: 700;
 }
 
@@ -120,12 +120,41 @@ body.favorites-page {
   gap: 1.5rem;
 }
 
+.favorites-section {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 14px;
+  padding: 1.2rem 1.2rem 1.6rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+}
+
+.favorites-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+
+.favorites-section h2 {
+  margin: 0;
+  color: var(--color-logo);
+}
+
+.favorites-note {
+  margin: 0.25rem 0 0;
+  color: var(--color-1-);
+  opacity: 0.9;
+}
+
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2.2rem;
   align-items: stretch;
 }
+
 
 .favorite-card {
   background: #fff;

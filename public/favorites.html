@@ -54,22 +54,50 @@
     </header>
 
     <section class="favorites-hero">
-      <h1>Saved Venues</h1>
-      <p>Quickly revisit venues you love, compare options, and keep planning momentum with your curated shortlist.</p>
-      <div class="favorites-meta">
-        <i class="fa-solid fa-heart"></i>
-        <span data-favorites-count>0</span>
-        <span>favorites</span>
-      </div>
+      <h1>Favorites</h1>
+      <p>Revisit your saved venues and invitation cards in one place.</p>
     </section>
 
     <main class="favorites-shell">
-      <div class="empty-state" data-empty-state>
-        <strong>No favorites yet</strong>
-        <p>Tap the heart on any venue to save it here for later.</p>
-        <a class="favorite-link" href="venue.html">Browse venues <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-      <section class="favorites-grid" data-favorites-list></section>
+      <section class="favorites-section">
+        <div class="favorites-section-header">
+          <div>
+            <h2>Saved Venues</h2>
+            <p class="favorites-note">Tap the heart on any venue to keep it here.</p>
+          </div>
+          <div class="favorites-meta">
+            <i class="fa-solid fa-heart"></i>
+            <span data-favorites-count>0</span>
+            <span>favorites</span>
+          </div>
+        </div>
+        <div class="empty-state" data-empty-venues>
+          <strong>No venues yet</strong>
+          <p>Tap the heart on any venue to save it here for later.</p>
+          <a class="favorite-link" href="venue.html">Browse venues <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <section class="favorites-grid" data-venues-list></section>
+      </section>
+
+      <section class="favorites-section">
+        <div class="favorites-section-header">
+          <div>
+            <h2>Saved Invitation Cards</h2>
+            <p class="favorites-note">Hearts you tap on invitation cards show up here.</p>
+          </div>
+          <div class="favorites-meta">
+            <i class="fa-solid fa-heart"></i>
+            <span data-invite-count>0</span>
+            <span>favorites</span>
+          </div>
+        </div>
+        <div class="empty-state" data-empty-invites>
+          <strong>No cards yet</strong>
+          <p>Tap the heart on any invitation to save it here for later.</p>
+          <a class="favorite-link" href="invitation-cards.html">Browse invitations <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <section class="favorites-grid" data-invite-list></section>
+      </section>
     </main>
 
     <footer class="main-footer">

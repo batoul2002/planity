@@ -31,10 +31,14 @@
       return data;
     });
 
-  const listEl = document.querySelector('[data-favorites-list]');
-  const emptyEl = document.querySelector('[data-empty-state]');
-  const countEl = document.querySelector('[data-favorites-count]');
+  const venuesListEl = document.querySelector('[data-venues-list]');
+  const invitesListEl = document.querySelector('[data-invite-list]');
+  const venuesEmptyEl = document.querySelector('[data-empty-venues]');
+  const invitesEmptyEl = document.querySelector('[data-empty-invites]');
+  const venuesCountEl = document.querySelector('[data-favorites-count]');
+  const invitesCountEl = document.querySelector('[data-invite-count]');
   let venueImageMapPromise = null;
+  let invitePriceMapPromise = null;
 
   const getVenueImageMap = async () => {
     if (venueImageMapPromise) return venueImageMapPromise;
@@ -56,43 +60,91 @@
     return venueImageMapPromise;
   };
 
+  const getInvitationPriceMap = async () => {
+    if (invitePriceMapPromise) return invitePriceMapPromise;
+    invitePriceMapPromise = fetch('data/invitations.json')
+      .then((res) => res.json())
+      .then((items) => {
+        const map = {};
+        (items || []).forEach((item) => {
+          const slug = slugify(item.name || item.image || '');
+          if (!slug) return;
+          map[slug] = {
+            price: Number(item.price || 0),
+            salePrice: Number(item.salePrice || item.price || 0)
+          };
+        });
+        return map;
+      })
+      .catch(() => ({}));
+    return invitePriceMapPromise;
+  };
+
   const ensureAuthed = () => {
     if (getToken()) return true;
     window.location.href = 'login.html';
     return false;
   };
 
-  const renderEmpty = () => {
-    if (emptyEl) emptyEl.classList.remove('is-hidden');
-    if (listEl) listEl.innerHTML = '';
-    if (countEl) countEl.textContent = '0';
+  const renderEmpty = (type) => {
+    if (type === 'venues') {
+      venuesEmptyEl?.classList.remove('is-hidden');
+      if (venuesListEl) venuesListEl.innerHTML = '';
+      if (venuesCountEl) venuesCountEl.textContent = '0';
+    } else if (type === 'invites') {
+      invitesEmptyEl?.classList.remove('is-hidden');
+      if (invitesListEl) invitesListEl.innerHTML = '';
+      if (invitesCountEl) invitesCountEl.textContent = '0';
+    }
   };
 
-  const renderFavorites = (vendors = [], imageMap = {}) => {
-    if (!listEl) return;
-    listEl.innerHTML = '';
+  const renderFavorites = (vendors = [], imageMap = {}, invitePriceMap = {}) => {
+    if (venuesListEl) venuesListEl.innerHTML = '';
+    if (invitesListEl) invitesListEl.innerHTML = '';
 
-    if (!vendors.length) {
-      renderEmpty();
-      return;
+    const venues = vendors.filter((v) => (v.category || '').toLowerCase() !== 'invitation');
+    const invites = vendors.filter((v) => (v.category || '').toLowerCase() === 'invitation');
+
+    if (!venues.length) {
+      renderEmpty('venues');
+    } else {
+      venuesEmptyEl?.classList.add('is-hidden');
+      if (venuesCountEl) venuesCountEl.textContent = String(venues.length);
     }
 
-    if (emptyEl) emptyEl.classList.add('is-hidden');
-    if (countEl) countEl.textContent = String(vendors.length);
+    if (!invites.length) {
+      renderEmpty('invites');
+    } else {
+      invitesEmptyEl?.classList.add('is-hidden');
+      if (invitesCountEl) invitesCountEl.textContent = String(invites.length);
+    }
 
-    vendors.forEach((vendor, index) => {
-      const card = document.createElement('article');
-      card.className = 'favorite-card';
-      card.style.setProperty('--fav-delay', `${index * 70}ms`);
-      const venueSlug = slugify(vendor.name || vendor.slug || '');
-      const vendorId = vendor._id || vendor.id || '';
-      const photo = imageMap[venueSlug] || vendor.photos?.[0] || 'images/venues/venue2 (2).jpeg';
-      const priceLabel =
-        vendor.pricing && vendor.pricing.amount
-          ? `${vendor.pricing.type === 'per-person' ? 'Per person' : 'Package'} · $${vendor.pricing.amount}`
-          : 'Contact for pricing';
+    const formatPrice = (value) => `$${Number(value || 0).toFixed(2)}`;
 
-      card.innerHTML = `
+    const priceLabelFor = (vendor, slug) => {
+      const category = (vendor.category || '').toLowerCase();
+      if (category === 'invitation') {
+        const pricing = invitePriceMap[slug] || {};
+        const sale = pricing.salePrice || pricing.price;
+        if (sale) return `${formatPrice(sale)} ea.`;
+      }
+      if (vendor.pricing && vendor.pricing.amount) {
+        return `${vendor.pricing.type === 'per-person' ? 'Per person' : 'Package'} at $${vendor.pricing.amount}`;
+      }
+      return 'Contact for pricing';
+    };
+
+    const renderList = (list, targetEl) => {
+      list.forEach((vendor, index) => {
+        const card = document.createElement('article');
+        card.className = 'favorite-card';
+        card.style.setProperty('--fav-delay', `${index * 70}ms`);
+        const venueSlug = slugify(vendor.slug || vendor.vendorSlug || vendor.name || '');
+        const vendorId = vendor._id || vendor.id || '';
+        const photo = imageMap[venueSlug] || vendor.photos?.[0] || 'images/venues/venue2 (2).jpeg';
+        const priceLabel = priceLabelFor(vendor, venueSlug);
+
+        card.innerHTML = `
         <div class="favorite-media" style="background-image: url('${photo}')"></div>
         <div class="favorite-body">
           <h3 class="favorite-title">${vendor.name || 'Vendor'}</h3>
@@ -102,9 +154,13 @@
           </div>
           <p class="favorite-meta">${priceLabel}</p>
           <div class="favorite-actions">
-            <a class="favorite-link" href="venue-detail.html?venue=${venueSlug}&vendorId=${vendorId}">
+            ${
+              (vendor.category || '').toLowerCase() === 'invitation'
+                ? `<a class="favorite-link" href="invitation-cards.html#invite-${venueSlug}">Invitation</a>`
+                : `<a class="favorite-link" href="venue-detail.html?venue=${venueSlug}&vendorId=${vendorId}">
               View venue <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+            </a>`
+            }
             <button class="favorite-remove" type="button" data-remove-id="${vendorId}">
               Remove
             </button>
@@ -112,32 +168,37 @@
         </div>
       `;
 
-      const removeBtn = card.querySelector('[data-remove-id]');
-      removeBtn?.addEventListener('click', async () => {
-        if (!vendorId) return;
-        try {
-          await apiFetch('/favorites', {
-            method: 'POST',
-            body: JSON.stringify({ vendorId })
-          });
-          await loadFavorites();
-        } catch (err) {
-          alert(err.message || 'Unable to update favorites');
-        }
-      });
+        const removeBtn = card.querySelector('[data-remove-id]');
+        removeBtn?.addEventListener('click', async () => {
+          if (!vendorId) return;
+          try {
+            await apiFetch('/favorites', {
+              method: 'POST',
+              body: JSON.stringify({ vendorId })
+            });
+            await loadFavorites();
+          } catch (err) {
+            alert(err.message || 'Unable to update favorites');
+          }
+        });
 
-      listEl.appendChild(card);
-    });
+        targetEl?.appendChild(card);
+      });
+    };
+
+    renderList(venues, venuesListEl);
+    renderList(invites, invitesListEl);
   };
 
   async function loadFavorites() {
     if (!ensureAuthed()) return;
     try {
-      const [imageMap, res] = await Promise.all([
+      const [imageMap, invitePriceMap, res] = await Promise.all([
         getVenueImageMap(),
+        getInvitationPriceMap(),
         apiFetch('/favorites/mine', { method: 'GET' })
       ]);
-      renderFavorites(Array.isArray(res.data) ? res.data : [], imageMap || {});
+      renderFavorites(Array.isArray(res.data) ? res.data : [], imageMap || {}, invitePriceMap || {});
     } catch (err) {
       renderEmpty();
       alert(err.message || 'Unable to load favorites');

@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const priceMaxInput = document.querySelector('[data-price-max-input]');
   const applyButton = document.querySelector('.apply-filters');
   const PAGE_SIZE = 12;
+  const API_BASE = window.location.origin + '/api/v1';
   let manifest = [];
   let filtered = [];
   let currentPage = 1;
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let heroTimer;
   let viewMode = 'grid';
   let sortMode = 'editors';
+  let hashHandled = false;
 
   const stylePresets = {
     wedding: {
@@ -81,6 +83,89 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const state = { event: 'wedding', styles: new Set(), colors: new Set() };
+  let favoriteSlugs = new Set();
+
+  const slugify = (value = '') =>
+    value
+      .toString()
+      .toLowerCase()
+      .replace(/&/g, 'and')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+
+  // Derive a stable quantity per card so not all show the same minimum order
+  const quantityFor = (item = {}) => {
+    if (item.qty && Number(item.qty) > 0) return Number(item.qty);
+    const slug = slugify(item.name || item.image || '');
+    let hash = 0;
+    for (let i = 0; i < slug.length; i++) {
+      hash = (hash * 31 + slug.charCodeAt(i)) & 0xffffffff;
+    }
+    const buckets = [50, 75, 90, 100, 110, 125, 150];
+    return buckets[Math.abs(hash) % buckets.length];
+  };
+
+  const getToken = () => localStorage.getItem('token');
+
+  const getHashSlug = () =>
+    window.location.hash ? window.location.hash.replace('#', '').replace(/^invite-/, '') : '';
+
+  const apiFetch = async (path, options = {}) => {
+    const headers = options.headers ? { ...options.headers } : {};
+    headers['Content-Type'] = headers['Content-Type'] || 'application/json';
+    const token = getToken();
+    if (token) headers['Authorization'] = 'Bearer ' + token;
+    const res = await fetch(API_BASE + path, { ...options, headers });
+    let data = null;
+    try {
+      data = await res.json();
+    } catch (_) {}
+    if (!res.ok) {
+      const msg = (data && (data.error || data.message)) || `Request failed (${res.status})`;
+      throw new Error(msg);
+    }
+    return data;
+  };
+
+  const loadFavoriteSlugs = async () => {
+    if (!getToken()) {
+      favoriteSlugs = new Set();
+      return;
+    }
+    try {
+      const res = await apiFetch('/favorites/mine', { method: 'GET' });
+      const favorites = Array.isArray(res.data) ? res.data : [];
+      favoriteSlugs = new Set(
+        favorites.map((fav) => slugify(fav.slug || fav.name || '')).filter(Boolean)
+      );
+    } catch (err) {
+      console.warn('Unable to load favorites', err.message || err);
+      favoriteSlugs = new Set();
+    }
+  };
+
+  const alignFiltersToHashTarget = () => {
+    const slug = getHashSlug();
+    if (!slug || !manifest.length) return;
+    const target = manifest.find(
+      (item) => slugify(item.name || item.image || '') === slug
+    );
+    if (!target) return;
+    if (state.event !== target.event) {
+      state.event = target.event;
+      eventChips.forEach((chip) =>
+        chip.classList.toggle('is-active', (chip.dataset.event || '') === state.event)
+      );
+      buildStyleTokens(state.event);
+      buildDesignFilters(state.event);
+      buildColorFilters(state.event);
+    }
+    if (target.style) state.styles = new Set([target.style]);
+    syncStyleTokens();
+    syncDesignFilters();
+  };
 
   const eventStyles = {
     wedding: ['bohemian', 'classic', 'rustic'],
@@ -185,30 +270,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const renderGrid = () => {
     if (!grid) return;
+    if (!hashHandled && window.location.hash && filtered.length) {
+      const targetSlug = window.location.hash.replace('#', '').replace(/^invite-/, '');
+      const targetIdx = filtered.findIndex(
+        (item) => slugify(item.name || item.image || '') === targetSlug
+      );
+      if (targetIdx >= 0) {
+        currentPage = Math.floor(targetIdx / PAGE_SIZE) + 1;
+      }
+    }
     grid.innerHTML = '';
     grid.classList.toggle('is-list', viewMode === 'list');
     const start = (currentPage - 1) * PAGE_SIZE;
-    filtered.slice(start, start + PAGE_SIZE).forEach((item) => {
+    filtered.slice(start, start + PAGE_SIZE).forEach((item, idx) => {
       const card = document.createElement('article');
       card.className = 'invite-card';
       if (viewMode === 'list') card.classList.add('is-list');
+      const itemSlug = slugify(item.name || item.image || '');
       card.dataset.event = item.event;
       card.dataset.style = item.style;
       card.dataset.color = item.color || '';
       card.dataset.image = item.image || '';
+      card.dataset.name = item.name || '';
+      card.dataset.slug = itemSlug;
+      card.dataset.price = item.price ?? '';
+      card.dataset.salePrice = item.salePrice ?? '';
+      const isSaved = favoriteSlugs.has(itemSlug);
+      card.id = `invite-${itemSlug}`;
+      const qty = quantityFor(item);
+      card.style.setProperty('--card-delay', `${(start + idx) * 40}ms`);
       card.innerHTML = `
-        <button class="wishlist" aria-label="Save ${item.name}"><i class="fa-regular fa-heart"></i></button>
+        <button class="wishlist ${isSaved ? 'is-active' : ''}" aria-pressed="${isSaved}" aria-label="Save ${item.name}" data-slug="${itemSlug}"><i class="fa-regular fa-heart"></i></button>
         <div class="invite-card-image" style="background-image:url('${item.image}')"></div>
         <div class="invite-card-body">
           <p class="card-eyebrow">${labelForEvent(item.event)}</p>
           <h3>${prettyName(item.name)}</h3>
-          <div class="card-price"><span class="old">$${(item.price || 0).toFixed(2)}</span> <span class="new">$${(item.salePrice || item.price || 0).toFixed(2)} ea.</span> <span class="note">(100 qty)</span></div>
+          <div class="card-price"><span class="old">$${(item.price || 0).toFixed(2)}</span> <span class="new">$${(item.salePrice || item.price || 0).toFixed(2)} ea.</span> <span class="note">(${qty} qty)</span></div>
           ${createColorDot(item.color)}
         </div>
       `;
       grid.appendChild(card);
     });
     wireWishlists();
+    if (!hashHandled && window.location.hash) {
+      const targetId = window.location.hash.replace('#', '');
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        hashHandled = true;
+        setTimeout(() => {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
+      }
+    }
   };
 
   const renderPagination = (totalPages) => {
@@ -294,7 +407,41 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.invite-card .wishlist').forEach((btn) => {
       btn.addEventListener('click', (event) => {
         event.preventDefault();
-        btn.classList.toggle('is-active');
+        const card = btn.closest('.invite-card');
+        if (!card) return;
+        if (!getToken()) {
+          alert('Please log in to save favorites.');
+          window.location.href = 'login.html';
+          return;
+        }
+        const payload = {
+          vendorSlug: card.dataset.slug || slugify(card.dataset.name || ''),
+          vendorName: prettyName(card.dataset.name || 'Invitation'),
+          vendorPhoto: card.dataset.image || '',
+          vendorCategory: 'invitation'
+        };
+        apiFetch('/favorites', {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        })
+          .then((res) => {
+            const msg = res?.message || '';
+            const added = msg.toLowerCase().includes('added');
+            btn.classList.toggle('is-active', added);
+            btn.setAttribute('aria-pressed', added ? 'true' : 'false');
+            const slug = card.dataset.slug || slugify(card.dataset.name || '');
+            if (slug) {
+              if (added) {
+                favoriteSlugs.add(slug);
+              } else {
+                favoriteSlugs.delete(slug);
+              }
+            }
+            alert(added ? 'Card saved successfully.' : 'Card removed successfully.');
+          })
+          .catch((err) => {
+            alert(err.message || 'Unable to save favorite');
+          });
       });
     });
   };
@@ -506,16 +653,22 @@ document.addEventListener('DOMContentLoaded', () => {
   buildDesignFilters(state.event);
   buildColorFilters(state.event);
   syncStyleTokens();
-  fetch('data/invitations.json')
-    .then((res) => res.json())
-    .then((data) => {
+  Promise.all([loadFavoriteSlugs(), fetch('data/invitations.json').then((res) => res.json())])
+    .then(([, data]) => {
       manifest = data.map((item, idx) => ({ ...item, __idx: idx }));
+      alignFiltersToHashTarget();
       applyFilters();
     })
     .catch((err) => {
       console.error('Failed to load invitations manifest', err);
       if (emptyState) emptyState.hidden = false;
     });
+
+  window.addEventListener('hashchange', () => {
+    hashHandled = false;
+    alignFiltersToHashTarget();
+    if (manifest.length) applyFilters();
+  });
 
   viewToggleButtons.forEach((btn) => {
     const mode = btn.dataset.view || 'grid';
