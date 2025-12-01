@@ -1,0 +1,1393 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planity | Venue Experience</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cinzel:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  </head>
+  <body class="venue-page">
+    <header>
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Planity Logo" class="logo">
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="event-type.html" class="dropbtn">Event Type ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Wedding &amp; Engagement</a></li>
+              <li><a href="#">Birthday</a></li>
+              <li><a href="#">Graduation</a></li>
+              <li><a href="#">Gender Reveal</a></li>
+              <li><a href="#">Madeef Ashouraii</a></li>
+              <li><a href="#">Ramadan Gathering</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="services.html" class="dropbtn active">Services ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="venue.html">Venue</a></li>
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
+              <li><a href="#">DJ</a></li>
+              <li><a href="invitation-cards.html">Invitation Card</a></li>
+            </ul>
+          </li>
+          <li><a href="plan-event.html">Plan Event</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="login.html">Log In</a></li>
+        </ul>
+        <ul class="nav-icons">
+          <li>
+            <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
+          </li>
+          <li>
+            <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+        <main>
+
+      <section class="venue-premium-hero" aria-label="Premium venues introduction">
+        <div class="premium-hero-media">
+          <img src="images/venues/venue2 (2).jpeg" alt="Grand ballroom prepared for a luxury celebration">
+        </div>
+        <div class="premium-hero-content">
+          <span class="hero-chip">
+            <i class="fa-solid fa-crown"></i>
+            Premium Venues
+          </span>
+          <h1>
+            Where dreams <span>find their perfect setting</span>
+          </h1>
+          <p>
+            From elegant ballrooms to enchanting gardens, discover the perfect backdrop for your celebration. Each venue is verified by
+            Planity scouts so your story begins in a space with soul.
+          </p>
+          <div class="hero-actions">
+            <a href="#venue-list" class="hero-cta primary">Explore venues</a>
+            <button type="button" class="hero-cta ghost">Schedule a tour</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="venue-listing" id="venue-list">
+        <div class="venue-list-head">
+          <p class="venue-eyebrow">Curated Lebanon venues</p>
+          <h2>Trusted properties by region.</h2>
+          <p>
+            Details below are current as of July 2024 from venue managers and
+            Planity scouting visits.
+          </p>
+          <form class="venue-filter-bar">
+            <div class="filter-field">
+              <label for="venue-region">Region</label>
+              <select id="venue-region" name="region">
+                <option value="all">All Lebanon</option>
+                <option value="beirut">Beirut &amp; Coast</option>
+                <option value="mount">Mount Lebanon</option>
+                <option value="north">North</option>
+                <option value="bekaa">Bekaa</option>
+                <option value="south">South</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label for="venue-setting">Setting</label>
+              <select id="venue-setting" name="setting">
+                <option value="all">Indoor &amp; Outdoor</option>
+                <option value="indoor">Indoor</option>
+                <option value="outdoor">Outdoor</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label for="venue-budget">Max starting budget (USD)</label>
+              <input type="number" id="venue-budget" name="budget" placeholder="e.g. 35000" min="0" step="500">
+            </div>
+            <button type="button" class="svx-cta small" data-venue-filter="">
+              <i class="fa-solid fa-sliders"></i>
+              Apply filters
+            </button>
+          </form>
+          <div class="venue-quick-nav" aria-label="Jump to venue region">
+            <span>Jump to:</span>
+            <div class="venue-pill-group">
+              <a href="#region-beirut" class="venue-pill">Beirut</a>
+              <a href="#region-mount" class="venue-pill">Mount</a>
+              <a href="#region-north" class="venue-pill">North</a>
+              <a href="#region-bekaa" class="venue-pill">Bekaa</a>
+              <a href="#region-south" class="venue-pill">South</a>
+            </div>
+          </div>
+          <div class="venue-trust-grid">
+            <article>
+              <i class="fa-solid fa-person-hiking"></i>
+              <div>
+                <h3>Scouted in person</h3>
+                <p>Every venue is walked by Planity planners for layout, logistics, and guest flow.</p>
+              </div>
+            </article>
+            <article>
+              <i class="fa-solid fa-scale-balanced"></i>
+              <div>
+                <h3>Transparent budgets</h3>
+                <p>Starting investments are verified with managers quarterly so you plan with real numbers.</p>
+              </div>
+            </article>
+            <article>
+              <i class="fa-solid fa-headset"></i>
+              <div>
+                <h3>Concierge follow-up</h3>
+                <p>Share a shortlist and a scout will coordinate tours or holds within 24 hours.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="venue-list">
+          <article class="venue-card" id="region-beirut" data-region="beirut" data-budget="35000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/sursock1.webp" alt="Sursock Palace Gardens">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Sursock Palace Gardens</h3>
+                  <p>Achrafieh, Beirut</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Beirut &amp; Coast</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>Up to 450 seated</li>
+                <li><i class="fa-solid fa-sun"></i>Open-air terraces + salons</li>
+                <li><i class="fa-solid fa-dollar-sign"></i>Starting investment: $35,000</li>
+              </ul>
+              <p class="venue-note">
+                Historic palace gardens framed by century-old trees; ideal for heritage weddings and cultural galas.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <!-- External venues curated from Oreblanc -->
+          <article class="venue-card" id="region-mount" data-region="mount" data-budget="42000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Blanc De Chene1.jpeg" alt="Blanc De Chene terraces">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Blanc De Chene</h3>
+                  <p>Bikfaya, Metn</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>200 indoor / 500 garden capacity</li>
+                <li><i class="fa-solid fa-piano"></i>Seated welcome area with live piano</li>
+                <li><i class="fa-solid fa-car"></i>On-site valet corridor</li>
+              </ul>
+              <p class="venue-note">
+                Hilltop estate with layered terraces and polished guest flow drawn from the Oreblanc outdoor venue index.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" id="region-north" data-region="north" data-budget="38000" data-setting="indoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Byblos Palace1.jpeg" alt="Byblos Sur Mer hotel">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Byblos Sur Mer</h3>
+                  <p>Old Port, Jbeil</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Byblos Coast</span>
+                  <span class="venue-setting-tag">Indoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-water"></i>Edge-of-the-sea ballroom views</li>
+                <li><i class="fa-solid fa-hotel"></i>Luxury guest suites onsite</li>
+                <li><i class="fa-solid fa-umbrella-beach"></i>Private harbor terrace cocktails</li>
+              </ul>
+              <p class="venue-note">
+                Boutique hotel perched on Byblos harbor, offering serene, fully serviced reception halls with Mediterranean vistas.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="beirut" data-budget="48000" data-setting="indoor">
+            <div class="venue-card-media">
+              <img src="https://oreblanc.com/wp-content/uploads/2018/10/Lancaster-6.jpg" alt="Lancaster Eden Bay ballroom with chandeliers">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Lancaster Eden Bay (Beirut)</h3>
+                  <p>Ramlet al-Baida, Beirut</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Beirut &amp; Coast</span>
+                  <span class="venue-setting-tag">Indoor &amp; Beach</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>Up to 600 guests</li>
+                <li><i class="fa-solid fa-water"></i>Oreblanc beach venue listing</li>
+                <li><i class="fa-solid fa-crown"></i>Premium Lancaster hospitality</li>
+              </ul>
+              <p class="venue-note">
+                Featured on Oreblanc for its beachfront ballroom, Lancaster Eden Bay welcomes lavish fairy-tale receptions with resort service.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="32000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Domaine De Padoue1.jpeg" alt="Domaine De Padoue lawns">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Domaine De Padoue</h3>
+                  <p>Ghbale, Keserwan</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-tree"></i>Pine-framed lawn &amp; sunset view</li>
+                <li><i class="fa-solid fa-feather-pointed"></i>Natural boho palette</li>
+                <li><i class="fa-solid fa-person-hiking"></i>Yoga &amp; retreat friendly</li>
+              </ul>
+              <p class="venue-note">
+                Simplistic, nature-forward clearing curated by Oreblanc for couples wanting minimal styling and raw mountain air.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="36000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Tanit Venue1.jpg" alt="Tanit Venue terrace">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Tanit Venue</h3>
+                  <p>Nahr El Kalb, Keserwan</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Coastal Hills</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-sun"></i>Hilltop microclimate keeps evenings cool</li>
+                <li><i class="fa-solid fa-layer-group"></i>Indoor lounges pair with open decks</li>
+                <li><i class="fa-solid fa-magic"></i>Customizable lighting over stone arcs</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc highlight for events needing flexible indoor/outdoor staging with uninterrupted sky views.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="30000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Nuit Blanche1.jpg" alt="Nuit Blanche overlooking Beirut">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Nuit Blanche</h3>
+                  <p>Mar Roukoz, Metn</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Beirut Skyline</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-city"></i>Panoramic overlooks of Beirut</li>
+                <li><i class="fa-solid fa-tower-observation"></i>Indoor backup salons</li>
+                <li><i class="fa-solid fa-tree"></i>Pine grove ceremony nook</li>
+              </ul>
+              <p class="venue-note">
+                Blends forest calm with city lights, offering both garden promenades and airy glass halls.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="28000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Aldea1.jpg" alt="Aldea terraces">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Aldea</h3>
+                  <p>Ain Saadeh, Metn</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-mountain-sun"></i>400m elevation breezes</li>
+                <li><i class="fa-solid fa-panorama"></i>Views stretching from peaks to coast</li>
+                <li><i class="fa-solid fa-road"></i>10-minute access from Beirut</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc describes Aldea as a panoramic amphitheater with natural stonework and sweeping decks.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <div class="venue-parallax-slice" aria-hidden="true">
+            <div class="venue-parallax-content">
+              <p class="venue-eyebrow">Planity signature moment</p>
+              <h3>Pause between regions, breathe in the view.</h3>
+              <span>Scroll to keep exploring.</span>
+            </div>
+          </div>
+
+          <article class="venue-card" data-region="mount" data-budget="34000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Blanchic1.jpeg" alt="Blanchic Baabdat cliff venue">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Blanchic</h3>
+                  <p>Baabdat, Metn</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-clapperboard"></i>Modern cliff-edge scenography</li>
+                <li><i class="fa-solid fa-bolt-lightning"></i>Custom lighting grid</li>
+                <li><i class="fa-solid fa-star"></i>Perfect for fashion or entertainment shows</li>
+              </ul>
+              <p class="venue-note">
+                Contemporary platform perched over the Metn mountains, built for show-stopping reveals and crisp minimal styling.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" id="region-south" data-region="south" data-budget="26000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Prime Valley Resort1.jpg" alt="Prime Valley Resort pool">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Prime Valley Resort</h3>
+                  <p>Nabea Al Safa, Chouf</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Chouf</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-person-swimming"></i>Signature poolside aisle</li>
+                <li><i class="fa-solid fa-tents"></i>Weekend lodge stays</li>
+                <li><i class="fa-solid fa-tree"></i>Pine forest surround</li>
+              </ul>
+              <p class="venue-note">
+                Resort-style escape highlighted by Oreblanc for its relaxed pool, cabanas, and laid-back Chouf energy.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="40000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Domaine De Zekrit1.jpg" alt="Domaine De Zekrit stone arches">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Domaine De Zekrit</h3>
+                  <p>Zekrit, Metn</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-landmark"></i>Phoenician-era ruins onsite</li>
+                <li><i class="fa-solid fa-fireworks"></i>Firework-friendly skyline</li>
+                <li><i class="fa-solid fa-route"></i>Multi-terrace layouts</li>
+              </ul>
+              <p class="venue-note">
+                Historic stone domain curated for couples wanting dramatic arches and layered processions.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="33000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/O Ciel1.jpg" alt="O Ciel hilltop venue">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>O Ciel</h3>
+                  <p>Nahr El Kalb, Keserwan</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-landmark-dome"></i>Perched above the river ruins</li>
+                <li><i class="fa-solid fa-cloud"></i>Breezy terrace between sea and sky</li>
+                <li><i class="fa-solid fa-cubes"></i>Modular indoor lounge + decks</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc spotlights O Ciel as a fairytale-ready blank canvas for cliffside vows.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="south" data-budget="25000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Palagio Resort1.jpg" alt="Palagio Resort beach">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Palagio Resort</h3>
+                  <p>Tyre, South</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">South</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-umbrella-beach"></i>Direct beachfront aisle</li>
+                <li><i class="fa-solid fa-route"></i>Scenic coastal approach</li>
+                <li><i class="fa-solid fa-champagne-glasses"></i>Sunset pool deck</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc recommends Palagio for breezy ceremonies and full-weekend guest stays.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="north" data-budget="36000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Mehrine1.jpeg" alt="Mehrine elemental venue">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Mehrine</h3>
+                  <p>Jbeil, North</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">North</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-wind"></i>Concept balancing earth, fire, water &amp; wind</li>
+                <li><i class="fa-solid fa-scroll"></i>Purpose-built staging pads</li>
+                <li><i class="fa-solid fa-bahai"></i>Sculptural fire features</li>
+              </ul>
+              <p class="venue-note">
+                Featured by Oreblanc for immersive storytelling in the Byblos highlands.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="beirut" data-budget="45000" data-setting="indoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Le Royal Beirut1.jpg" alt="Le Royal Beirut ballroom">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Le Royal Beirut</h3>
+                  <p>Dbayeh, Beirut</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Beirut</span>
+                  <span class="venue-setting-tag">Indoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-hotel"></i>Five-star infrastructure &amp; suites</li>
+                <li><i class="fa-solid fa-chess-queen"></i>Custom shows and couture cakes</li>
+                <li><i class="fa-solid fa-martini-glass"></i>Poolside cocktail terraces</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc’s go-to grand hotel ballroom for couture-level productions.
+              </p>
+            </div>
+              <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="north" data-budget="27000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Batroun Village Club1.jpg" alt="Batroun Village Club view">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Batroun Village Club</h3>
+                  <p>Batroun Hills</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">North</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-panorama"></i>Views from north to south Lebanon</li>
+                <li><i class="fa-solid fa-sailboat"></i>Mediterranean backdrop</li>
+                <li><i class="fa-solid fa-bell-concierge"></i>Resort services on site</li>
+              </ul>
+              <p class="venue-note">
+                Hilltop club flagged by Oreblanc for panoramic ceremonies and guest lodging.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="south" data-budget="24000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Bustan Zarife1.jpg" alt="Bustan Zarife garden">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Bustan Zarife</h3>
+                  <p>Tyre, South</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">South</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-leaf"></i>Fruit grove &amp; yoga-ready lawns</li>
+                <li><i class="fa-solid fa-heart"></i>Boho-focused styling</li>
+                <li><i class="fa-solid fa-calendar-check"></i>Oreblanc-hosted tours</li>
+              </ul>
+              <p class="venue-note">
+                A southern garden venue dedicated to unplugged weddings and wellness gatherings.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="31000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Aurelia1.jpeg" alt="Aurelia Bhersaf">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Aurelia</h3>
+                  <p>Bhersaf, Metn</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-bolt"></i>Modern lighting canopy</li>
+                <li><i class="fa-solid fa-user-astronaut"></i>Trend-forward staging</li>
+                <li><i class="fa-solid fa-mountain"></i>Cedar ridge panorama</li>
+              </ul>
+              <p class="venue-note">
+                According to Oreblanc, Aurelia merges new-gen design with Lebanese tradition.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="south" data-budget="28000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Life Venue1.jpg" alt="Life Venue Jiyeh">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Life Venue</h3>
+                  <p>Jiyeh Coast</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">South</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-arrows-to-dot"></i>Adaptable indoor/outdoor plates</li>
+                <li><i class="fa-solid fa-calendar-days"></i>Tailor-made packages</li>
+                <li><i class="fa-solid fa-road"></i>20 minutes from Beirut</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc positions Life Venue as a flexible coastal canvas for any guest count.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="north" data-budget="39000" data-setting="indoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Byblos Palace1.jpeg" alt="Byblos Palace ballroom">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Byblos Palace</h3>
+                  <p>Jbeil Waterfront</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">North</span>
+                  <span class="venue-setting-tag">Indoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-ship"></i>Steps from the historic port</li>
+                <li><i class="fa-solid fa-dice-d20"></i>Near Casino du Liban</li>
+                <li><i class="fa-solid fa-bus"></i>40-minute airport transfer</li>
+              </ul>
+              <p class="venue-note">
+                A seafront ballroom Oreblanc lists for destination-friendly logistics and glamorous interiors.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" id="region-bekaa" data-region="bekaa" data-budget="32000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Cherry On Top1.jpeg" alt="Cherry On Top venue">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Cherry On Top</h3>
+                  <p>Bteghrine ridge (Bekaa access)</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Bekaa rim</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>200 indoor / 500 garden capacity</li>
+                <li><i class="fa-solid fa-piano"></i>Live piano welcome area</li>
+                <li><i class="fa-solid fa-car"></i>Dedicated valet flow + staged arrivals</li>
+              </ul>
+              <p class="venue-note">
+                Highlighted by Oreblanc as a hilltop escape that keeps Bekaa Valley couples close to home with refined terraces carved into the cherry groves.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <div class="bekaa-elite" aria-label="Bekaa Valley five-star venues">
+            <div class="bekaa-elite-head">
+              <p class="venue-eyebrow">Bekaa Highlights</p>
+              <h2>Five-star escapes between the vineyards.</h2>
+              <p>
+                These Oreblanc favorites pair postcard-worthy valley settings with concierge-level service—perfect for couples who asked us
+                for Bekaa exclusives.
+              </p>
+            </div>
+            <div class="bekaa-elite-shell" data-bekaa-slider="">
+              <button class="bekaa-slider-control prev" type="button" aria-label="Previous Bekaa venue" data-bekaa-prev="">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <div class="bekaa-elite-track" data-bekaa-track="">
+                <article class="bekaa-venue-card">
+                  <figure>
+                    <img src="images/venues/West Bekaa Country Club1.jpeg" alt="Cherry On Top terraces at sunset" loading="lazy">
+                  </figure>
+                  <div class="bekaa-venue-body">
+                    <p class="bekaa-venue-region">Bteghrine • Bekaa Rim</p>
+                    <h3>Cherry On Top</h3>
+                    <p class="bekaa-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      Orchard-cut terraces, live piano welcomes, and valet-managed arrivals make Cherry On Top the most-requested Bekaa hilltop escape.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="bekaa-venue-card">
+                  <figure>
+                    <img src="images/venues/Taanayel Ecolodge1.jpeg" alt="Taanayel Ecolodge lakeside lawn" loading="lazy">
+                  </figure>
+                  <div class="bekaa-venue-body">
+                    <p class="bekaa-venue-region">Taanayel • Central Bekaa</p>
+                    <h3>Taanayel Ecolodge</h3>
+                    <p class="bekaa-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      Adobe lodges, lakeside lawns, and arcenciel hospitality deliver a slow-living experience that city guests rave about.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="bekaa-venue-card">
+                  <figure>
+                    <img src="images/venues/West Bekaa Country Club2.jpg" alt="West Bekaa Country Club infinity lawn" loading="lazy">
+                  </figure>
+                  <div class="bekaa-venue-body">
+                    <p class="bekaa-venue-region">Khyara • West Bekaa</p>
+                    <h3>West Bekaa Country Club</h3>
+                    <p class="bekaa-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      A resort-scale plateau with cedar-lined aisles, private villas, and a reflective lake ideal for fireworks over the valley.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="bekaa-venue-card">
+                  <figure>
+                    <img src="images/venues/Phoenicia Hotel Grand Ballroom2.avif" alt="Grand Kadri Hotel ballroom" loading="lazy">
+                  </figure>
+                  <div class="bekaa-venue-body">
+                    <p class="bekaa-venue-region">Zahle • Historic Bekaa</p>
+                    <h3>Grand Kadri Hotel</h3>
+                    <p class="bekaa-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      A 19th-century palace reinvented by Radisson Blu—arched salons, marble corridors, and turnkey hospitality for grand guestlists.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="bekaa-venue-card">
+                  <figure>
+                    <img src="images/venues/Chateau Kefraya Terraces1.jpeg" alt="Sunset over Chateau Kefraya vineyards" loading="lazy">
+                  </figure>
+                  <div class="bekaa-venue-body">
+                    <p class="bekaa-venue-region">Kefraya • Wine Route</p>
+                    <h3>Chateau Kefraya Terraces</h3>
+                    <p class="bekaa-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      Ceremony decks tucked between vines, candlelit barrel halls, and farm-to-table menus inspired by the estate’s vintages.
+                    </p>
+                  </div>
+                </article>
+              </div>
+              <button class="bekaa-slider-control next" type="button" aria-label="Next Bekaa venue" data-bekaa-next="">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <article class="venue-card" data-region="south" data-budget="38000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Janna Sur Mer1.jpg" alt="Janna Sur Mer resort">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Janna Sur Mer</h3>
+                  <p>Damour, South Coast</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">South</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-water"></i>5-star beachfront resort</li>
+                <li><i class="fa-solid fa-utensils"></i>Multiple pool decks &amp; restaurants</li>
+                <li><i class="fa-solid fa-bed"></i>Onsite boutique hotel suites</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc lists Janna Sur Mer for its three ceremony pads, Jacuzzi bar and Mediterranean sunsets that carry guests late into the night.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="south" data-budget="24000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Vows1.jpg" alt="Vows venue">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Vows</h3>
+                  <p>Ebel El Saqi, South</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">South</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-tree"></i>Clifftop lawns within wild forest</li>
+                <li><i class="fa-solid fa-sparkles"></i>Sculpted art installations</li>
+                <li><i class="fa-solid fa-dove"></i>Quiet, nature-first ambience</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc calls Vows “a masterpiece of art and nature” for South Lebanon couples chasing cinematic sunsets.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="south" data-budget="26000" data-setting="indoor">
+            <div class="venue-card-media">
+              <img src="images/venues/La Salle1.jpg" alt="La Salle Rmeileh">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>La Salle</h3>
+                  <p>Rmeileh, South</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">South</span>
+                  <span class="venue-setting-tag">Indoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-plane-up"></i>20 min from BEY airport</li>
+                <li><i class="fa-solid fa-city"></i>Hybrid arena for shows &amp; galas</li>
+                <li><i class="fa-solid fa-calendar-check"></i>Concert, exhibition &amp; wedding ready</li>
+              </ul>
+              <p class="venue-note">
+                Oreblanc features La Salle for its expansive ballroom complex that effortlessly hosts large southern guestlists and destination-friendly events.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="south" data-budget="26000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Prime Valley Resort1.jpg" alt="Prime Valley Resort pool">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Prime Valley Resort</h3>
+                  <p>Nabea Al Safa, Chouf</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Chouf</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-person-swimming"></i>Signature poolside aisle</li>
+                <li><i class="fa-solid fa-tents"></i>Weekend lodge stays</li>
+                <li><i class="fa-solid fa-tree"></i>Pine forest surround</li>
+              </ul>
+              <p class="venue-note">
+                Resort-style escape highlighted by Oreblanc for its relaxed pool, cabanas, and laid-back Chouf energy.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="40000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Domaine De Zekrit1.jpg" alt="Domaine De Zekrit stone arches">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Domaine De Zekrit</h3>
+                  <p>Zekrit, Metn</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-landmark"></i>Phoenician-era ruins onsite</li>
+                <li><i class="fa-solid fa-fireworks"></i>Firework-friendly skyline</li>
+                <li><i class="fa-solid fa-route"></i>Multi-terrace layouts</li>
+              </ul>
+              <p class="venue-note">
+                Historic stone domain curated for couples wanting dramatic arches and layered processions.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="north" data-budget="35000" data-setting="indoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Orizon Byblos1.jpeg" alt="Orizon Byblos resort">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Orizon Byblos</h3>
+                  <p>Hboub, Jbeil</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Byblos Coast</span>
+                  <span class="venue-setting-tag">Indoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-house-chimney"></i>Indoor halls + rooftop garden</li>
+                <li><i class="fa-solid fa-panorama"></i>Wide Mediterranean vistas</li>
+                <li><i class="fa-solid fa-sparkles"></i>Resort-managed production</li>
+              </ul>
+              <p class="venue-note">
+                Romantic resort minutes from Byblos souks, blending deluxe indoor salons with cascading outdoor decks.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="37000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Swanlake1.jpeg" alt="Swanlake venue">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Swanlake</h3>
+                  <p>Mar Moussa, Al Douar</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-water"></i>10,000 m² lakefront forest</li>
+                <li><i class="fa-solid fa-dove"></i>Resident swans &amp; flamingos</li>
+                <li><i class="fa-solid fa-earth-europe"></i>Wild, untouched landscaping</li>
+              </ul>
+              <p class="venue-note">
+                A favorite from Oreblanc’s guide—cliffside lake with natural wildlife and immersive greenery for ceremonies.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="beirut" data-budget="45000" data-setting="indoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Phoenicia Hotel Grand Ballroom1.jpeg" alt="Phoenicia Hotel Grand Ballroom">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Phoenicia Hotel Grand Ballroom</h3>
+                  <p>Minet el Hosn, Beirut</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Beirut &amp; Coast</span>
+                  <span class="venue-setting-tag">Indoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>Up to 700 banquet</li>
+                <li><i class="fa-solid fa-hotel"></i>Five-star hospitality</li>
+                <li><i class="fa-solid fa-dollar-sign"></i>Starting investment: $45,000</li>
+              </ul>
+              <p class="venue-note">
+                Iconic ballroom with 7-meter ceilings, crystal chandeliers, and integrated AV for black-tie celebrations.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="mount" data-budget="40000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Chateau Rweiss1.jpg" alt="Cheteau Rweiss terrace">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Chateau Rweiss</h3>
+                  <p>Ghedras, Keserwan</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Mount Lebanon</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>Up to 650 seated</li>
+                <li><i class="fa-solid fa-mountain"></i>Panoramic mountain view</li>
+                <li><i class="fa-solid fa-dollar-sign"></i>Starting investment: $40,000</li>
+              </ul>
+              <p class="venue-note">
+                Restored castle overlooking Jounieh Bay with terraced levels, perfect for ceremony flips and firework finales.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="south" data-budget="18000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/La Maison de la Foret1.jpeg" alt="La Maison de la Foret">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>La Maison de la Foret</h3>
+                  <p>Bkassine, Jezzine District</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">South &amp; Shouf</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>Up to 220 seated</li>
+                <li><i class="fa-solid fa-tree"></i>Pine forest platforms + cabanas</li>
+                <li><i class="fa-solid fa-dollar-sign"></i>Starting investment: $18,000</li>
+              </ul>
+              <p class="venue-note">
+                Eco-retreat tucked in the Bkassine forest favored for boho weddings, daytime brunches, and creative retreats.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="north" data-budget="32000" data-setting="indoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Orizon Byblos1.jpeg" alt="Orizon Byblos rooftop">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>ORIZON Byblos</h3>
+                  <p>Amchit, North Coast</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">North</span>
+                  <span class="venue-setting-tag">Indoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>Up to 500 seated</li>
+                <li><i class="fa-solid fa-water"></i>Cliffside infinity terrace</li>
+                <li><i class="fa-solid fa-dollar-sign"></i>Starting investment: $32,000</li>
+              </ul>
+              <p class="venue-note">
+                Contemporary venue overlooking the Mediterranean with modular indoor hall, rooftop garden, and helipad access.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <article class="venue-card" data-region="bekaa" data-budget="15000" data-setting="outdoor">
+            <div class="venue-card-media">
+              <img src="images/venues/Taanayel Ecolodge2.jpg" alt="Taanayel Ecolodge lake">
+            </div>
+            <div class="venue-card-body">
+              <div class="venue-card-head">
+                <div>
+                  <h3>Taanayel Ecolodge</h3>
+                  <p>Taanayel, Bekaa Valley</p>
+                </div>
+                <div class="venue-card-tags">
+                  <span class="venue-region">Bekaa</span>
+                  <span class="venue-setting-tag">Outdoor</span>
+                </div>
+              </div>
+              <ul class="venue-meta">
+                <li><i class="fa-solid fa-users"></i>Up to 280 seated</li>
+                <li><i class="fa-solid fa-leaf"></i>Lakeside lawns + adobe halls</li>
+                <li><i class="fa-solid fa-dollar-sign"></i>Starting investment: $15,000</li>
+              </ul>
+              <p class="venue-note">
+                Rustic-chic property run by arcenciel with organic cuisine, biking trails, and overnight lodges for immersive weekends.
+              </p>
+            </div>
+            <a href="plan-event.html" class="venue-card-cta">View details</a>
+          </article>
+
+          <div class="south-elite" aria-label="South Lebanon five-star venues">
+            <div class="south-elite-head">
+              <p class="venue-eyebrow">Southern Icons</p>
+              <h2>Five-star escapes in the South.</h2>
+              <p>
+                Handpicked resort venues from Oreblanc's index—each offering elevated service, stylish architecture, and unforgettable sea or forest settings.
+              </p>
+            </div>
+            <div class="south-elite-shell" data-south-slider="">
+              <button class="south-slider-control prev" type="button" aria-label="Previous south venue" data-south-prev="">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <div class="south-elite-track" data-south-track="">
+                <article class="south-venue-card">
+                  <figure>
+                    <img src="images/venues/Janna Sur Mer2.jpg" alt="Janna Sur Mer resort in Damour" loading="lazy">
+                  </figure>
+                  <div class="south-venue-body">
+                    <p class="south-venue-region">Damour</p>
+                    <h3>Janna Sur Mer</h3>
+                    <p class="south-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      5-star beachfront resort with boutique hotel suites, three ceremony pads, and sunset-ready pools for immersive coastal celebrations.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="south-venue-card">
+                  <figure>
+                    <img src="images/venues/Palagio Resort2.jpg" alt="Palagio Resort Tyre" loading="lazy">
+                  </figure>
+                  <div class="south-venue-body">
+                    <p class="south-venue-region">Tyre</p>
+                    <h3>Palagio Resort</h3>
+                    <p class="south-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      Beachfront aisle with sweeping sea views, palm-lined pool deck, and sensational approach drive perfect for grand coastal entrances.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="south-venue-card">
+                  <figure>
+                    <img src="images/venues/Life Venue2.jpg" alt="Life Venue Jiyeh" loading="lazy">
+                  </figure>
+                  <div class="south-venue-body">
+                    <p class="south-venue-region">Jiyeh Coast</p>
+                    <h3>Life Venue</h3>
+                    <p class="south-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      Adaptable indoor-outdoor plates, tailor-made planning, and easy Beirut access make Life Venue a versatile five-star canvas.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="south-venue-card">
+                  <figure>
+                    <img src="images/venues/La Salle2.jpeg" alt="La Salle Rmeileh ballroom" loading="lazy">
+                  </figure>
+                  <div class="south-venue-body">
+                    <p class="south-venue-region">Rmeileh</p>
+                    <h3>La Salle</h3>
+                    <p class="south-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      Multipurpose indoor complex with soaring ceilings, flawless technical production, and a prime location between Beirut and the South.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="south-venue-card">
+                  <figure>
+                    <img src="images/venues/Vows2.jpg" alt="Vows venue Ebel El Saqi" loading="lazy">
+                  </figure>
+                  <div class="south-venue-body">
+                    <p class="south-venue-region">Ebel El Saqi</p>
+                    <h3>Vows</h3>
+                    <p class="south-venue-stars" aria-label="5 star venue">
+                      <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </p>
+                    <p>
+                      Cliffside lawns wrapped in wild forest, designer art installations, and cinematic sunsets for couples wanting pure nature drama.
+                    </p>
+                  </div>
+                </article>
+          </div>
+          <button class="south-slider-control next" type="button" aria-label="Next south venue" data-south-next="">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+          <section class="venue-social-proof" aria-label="Couples booking with Planity">
+            <div class="social-proof-head">
+              <p class="venue-eyebrow">Couples this season</p>
+              <h3>52 celebrations confirmed with Planity scouts in the last 90 days.</h3>
+            </div>
+            <div class="social-proof-grid">
+              <article>
+                <p class="quote-mark">“</p>
+                <p>
+                  Planity lined up three Bekaa venues with budgets in hand. We toured on Saturday and signed by Monday.
+                </p>
+                <span>— Racha &amp; Karim, Zahle vineyard wedding</span>
+              </article>
+              <article>
+                <h4><i class="fa-solid fa-chart-line"></i> Fast-track stats</h4>
+                <ul>
+                  <li><strong>24hrs</strong> average intro to venue host</li>
+                  <li><strong>8</strong> new indoor/outdoor combos this month</li>
+                  <li><strong>96%</strong> of couples shortlist within 3 venues</li>
+                </ul>
+              </article>
+              <article>
+                <h4><i class="fa-solid fa-handshake-angle"></i> Planner tip</h4>
+                <p>
+                  Share your guest count + season and we’ll prep hold requests before you even visit, so your preferred date doesn’t slip away.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          
+          
+        </div>
+      </section>
+
+      <section class="venue-spotlight" aria-label="Planity venue highlights">
+        <div class="venue-spotlight-carousel" data-venue-carousel="">
+          <button class="venue-carousel-control prev" type="button" aria-label="Previous slide" data-carousel-prev="">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="venue-carousel-track" data-carousel-track="">
+            <figure class="venue-carousel-slide is-active">
+              <img src="images/venues/venue4.jpeg" alt="Terraced venue with string lights in the mountains">
+              <figcaption>
+                
+                <p class="slide-eyebrow">Keserwan Terraces</p>
+                <h2>Al fresco vows above the Cedars</h2>
+                <span>Sunset-ready decks for 320 seated guests.</span>
+              </figcaption>
+            </figure>
+            <figure class="venue-carousel-slide">
+              <img src="images/venues/venue3.jpeg" alt="Elegant ballroom draped in white florals" loading="lazy">
+              <figcaption>
+                
+                <p class="slide-eyebrow">Beirut Ballrooms</p>
+                <h2>Crystal chandeliers &amp; 7m ceilings</h2>
+                <span>Downtown grand ballrooms tailored for black-tie nights.</span>
+              </figcaption>
+            </figure>
+            <figure class="venue-carousel-slide">
+              <img src="images/venues/Vows3.jpg" alt="Garden reception with long banquet tables" loading="lazy">
+              <figcaption>
+                
+                <p class="slide-eyebrow">Garden Revelry</p>
+                <h2>Botanical courtyards for brunch receptions</h2>
+                <span>Verdant estates framed by hundred-year-old palms.</span>
+              </figcaption>
+            </figure>
+            <figure class="venue-carousel-slide">
+              <img src="images/venues/Bustan Zarife3.jpeg.jpg" alt="Lakeside venue with mountain backdrop" loading="lazy">
+              <figcaption>
+                
+                <p class="slide-eyebrow">North Hideaways</p>
+                <h2>Mirror lake reflections at blue hour</h2>
+                <span>Private estates with on-site suites and helipad access.</span>
+              </figcaption>
+            </figure>
+          </div>
+          <button class="venue-carousel-control next" type="button" aria-label="Next slide" data-carousel-next="">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <div class="venue-carousel-dots" data-carousel-dots=""></div>
+        </div>
+        <div class="carousel-cta help-actions">
+          <a href="plan-event.html" class="help-btn primary">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            Share my shortlist
+          </a>
+          <a href="tel:+96112345678" class="help-btn ghost">
+            <i class="fa-solid fa-phone-volume"></i>
+            Call a planner
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-left">
+        <img src="images/logo.png" alt="Planity Logo" class="footer-logo">
+      </div>
+      <div class="footer-center">
+        <div class="footer-sentence">We Turn Moments Into Memories.</div>
+        <div class="footer-copyright">
+          © 2026 Planity. All rights reserved.
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span class="text-col">Lebanon</span>
+        </div>
+        <a href="tel:+96112345678" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span class="text-col">+961 12345678</span>
+        </a>
+        <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-brands fa-instagram"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+        <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-brands fa-facebook-f"></i>
+          </span>
+          <span class="text-col">Planity Events</span>
+        </a>
+      </div>
+    </footer>
+
+    <script src="js/app.js" defer=""></script>
+    <script src="js/venue-listing.js" defer></script>
+  
+
+
+
+
+</body></html>

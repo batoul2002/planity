@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Planity Logo" class="logo" />
+      </div>
+
+      <!-- Navigation Bar -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+
+          <!-- Events Dropdown -->
+          <li class="dropdown">
+            <a href="event-type.html" class="dropbtn">Event Type ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Wedding & Engagement</a></li>
+              <li><a href="#">Birthday</a></li>
+              <li><a href="#">Graduation</a></li>
+              <li><a href="#">Gender Reveal</a></li>
+              <li><a href="#">Madeef Ashouraii</a></li>
+              <li><a href="#">Ramadan Gathering</a></li>
+            </ul>
+          </li>
+
+          <!-- Services Dropdown -->
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Services ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="invitation-cards.html">Venue</a></li>
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
+              <li><a href="#">DJ</a></li>
+              <li><a href="invitation-cards.html">Invitation Card</a></li>
+            </ul>
+          </li>
+
+          <li><a href="plan-event.html">Plan Event</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="login.html">Log In</a></li>
+        </ul>
+        <ul class="nav-icons">
+          <li>
+            <a href="favorites.html" class="icon-link"
+              ><i class="fa-solid fa-heart"></i
+            ></a>
+          </li>
+          <li>
+            <a href="account.html" class="icon-link"
+              ><i class="fa-solid fa-user"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section id="register-section">
+      <h1>Register</h1>
+      <div id="register-form">
+        <!--form will go here-->
+        <form id="registerForm" action="#" method="POST">
+          <!--Form fields will go here-->
+
+          <label for="name"> Full Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+
+          <label for="email"> Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+          <label for="phone">Phone Number:</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value="+961 "
+            pattern="^\+961[\\s\\-]?(?:03|3|71|76|78|81)([\\s\\-]?\\d){6}$"
+            required
+            title="Please enter a valid Lebanese number (e.g., +961 70 123456)"
+          />
+
+          <label for="password"> Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password "
+            required
+          />
+
+          <button type="submit">Register</button>
+        </form>
+      </div>
+
+      <p>
+        Already have an account ?
+        <a href="login.html">Login here</a>
+      </p>
+    </section>
+    <script src="js/app.js" defer></script>
+
+    <footer class="main-footer">
+      <div class="footer-left">
+        <img src="images/logo.png" alt="Planity Logo" class="footer-logo" />
+      </div>
+      <div class="footer-center">
+        <div class="footer-sentence">We Turn Moments Into Memories.</div>
+        <div class="footer-copyright">
+          &copy; 2026 Planity. All rights reserved.
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span class="text-col">Lebanon</span>
+        </div>
+        <a href="tel:+96112345678" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span class="text-col">+961 12345678</span>
+        </a>
+        <a
+          href="https://www.instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="icon-col">
+            <i class="fa-brands fa-instagram"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+        <a
+          href="https://www.facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="icon-col">
+            <i class="fa-brands fa-facebook-f"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+      </div>
+          
+    </footer>
+  </body>
+</html>

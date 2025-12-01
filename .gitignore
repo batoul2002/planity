@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Builds / coverage / logs
+dist/
+build/
+coverage/
+*.log
+*.tmp
+
+# Uploads and temp artifacts
+uploads/
+temp_patch.diff
+post536.json

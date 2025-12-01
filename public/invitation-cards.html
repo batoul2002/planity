@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planity | Invitation Cards</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="invitation-page">
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Planity Logo" class="logo">
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="event-type.html" class="dropbtn">Event Type ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Wedding &amp; Engagement</a></li>
+            <li><a href="#">Birthday</a></li>
+            <li><a href="#">Graduation</a></li>
+            <li><a href="#">Gender Reveal</a></li>
+            <li><a href="#">Madeef Ashouraii</a></li>
+            <li><a href="#">Ramadan Gathering</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="services.html" class="dropbtn active">Services ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="venue.html">Venue</a></li>
+            <li><a href="#">Decoration</a></li>
+            <li><a href="#">Catering</a></li>
+            <li><a href="#">Photographer</a></li>
+            <li><a href="#">DJ</a></li>
+            <li><a href="invitation-cards.html" class="active-sub">Invitation Card</a></li>
+          </ul>
+        </li>
+        <li><a href="plan-event.html">Plan Event</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="login.html">Log In</a></li>
+      </ul>
+      <ul class="nav-icons">
+        <li>
+          <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
+        </li>
+        <li>
+          <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="invite-hero" aria-label="Invitation boutique hero">
+      <div class="invite-hero-text">
+        <p class="invite-eyebrow">Invitation Boutique</p>
+        <h1>Curated, design-led invitations ready to personalize</h1>
+        <p class="invite-lede">Choose a style, explore foil-friendly palettes, and request samples without leaving the page.</p>
+        <div class="invite-event-row" aria-label="Select invitation event">
+          <span class="invite-subheading">Event</span>
+          <div class="invite-event-chips">
+            <button class="event-chip is-active" data-event="wedding">Wedding</button>
+            <button class="event-chip" data-event="graduation">Graduation</button>
+            <button class="event-chip" data-event="birthday">Birthday</button>
+            <button class="event-chip" data-event="gender">Gender Reveal</button>
+            <button class="event-chip" data-event="ramadan">Ramadan Gathering</button>
+          </div>
+        </div>
+      </div>
+      <div class="invite-hero-visual">
+        <div class="invite-preview-card">
+          <div class="preview-slider" data-hero-slider>
+            <div class="preview-image" data-hero-image style="background-image:url('images/bohemian cards/bohemian green/bohemian green1.jpg');"></div>
+            <div class="hero-slider-nav">
+              <button class="slider-btn" type="button" aria-label="Previous invitation" data-hero-prev><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="slider-dots" data-hero-dots></div>
+              <button class="slider-btn" type="button" aria-label="Next invitation" data-hero-next><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+          <div class="preview-meta">
+            <p class="preview-eyebrow" data-hero-eyebrow>Featured | Botanical Foil</p>
+            <h3 data-hero-title>Shining Greenery</h3>
+            <div class="preview-price">
+              <span class="old" data-hero-old>$2.29</span>
+              <span class="new" data-hero-new>$1.60 ea.</span>
+              <span class="note">(100 qty)</span>
+            </div>
+            <a class="preview-cta" href="#collection">Browse collection</a>
+          </div>
+        </div>
+        <div class="invite-preview-note">
+          <span>Studio curated</span>
+          <p>Foil-pressed, textured papers, and matching envelopes included with every sample kit.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="collection" class="invite-collection" aria-label="Invitation catalog with filters">
+      <div class="invite-toolbar">
+        <div class="toolbar-left">
+          <button class="pill solid" data-filter-toggle><i class="fa-solid fa-sliders"></i> Filters</button>
+          <div class="selected-filters">
+            <span class="pill ghost">Rustic</span>
+            <span class="pill ghost">Foil</span>
+            <span class="pill ghost">Under $2.50</span>
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <div class="view-toggle" role="group" aria-label="View options">
+            <button class="is-active" type="button" data-view="grid" aria-label="Grid view"><i class="fa-solid fa-border-all"></i></button>
+            <button type="button" data-view="list" aria-label="List view"><i class="fa-solid fa-list"></i></button>
+          </div>
+          <label class="sort-select">
+            <span>Sort</span>
+            <select data-sort>
+              <option value="editors">Editor's picks</option>
+              <option value="low">Lowest price</option>
+              <option value="high">Highest price</option>
+              <option value="newest">Newest</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="invite-shell">
+        <aside class="invite-filter-panel">
+          <div class="filter-panel-head">
+            <div>
+              <p class="invite-eyebrow">Filter</p>
+              <h3>Refine by mood</h3>
+            </div>
+            <button class="close-filter" data-filter-close aria-label="Close filters"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <details open>
+            <summary>Design Style</summary>
+            <div class="filter-options" data-design-container></div>
+          </details>
+
+          <details open>
+            <summary>Colors</summary>
+            <div class="filter-swatches" data-color-container></div>
+            <p class="filter-note" data-color-note></p>
+          </details>
+
+          <details open>
+            <summary>Price Range</summary>
+            <div class="range-grid">
+              <label class="filter-check"><input type="checkbox" data-price-min="1.49" data-price-max="1.99"> $1.49 - $1.99</label>
+              <label class="filter-check"><input type="checkbox" data-price-min="2.00" data-price-max="2.49"> $2.00 - $2.49</label>
+              <label class="filter-check"><input type="checkbox" data-price-min="2.50" data-price-max="2.99"> $2.50 - $2.99</label>
+              <div class="range-inputs">
+                <input type="number" step="0.01" placeholder="Min" data-price-min-input>
+                <span>-</span>
+                <input type="number" step="0.01" placeholder="Max" data-price-max-input>
+              </div>
+            </div>
+          </details>
+
+          <button class="apply-filters">Apply filters</button>
+        </aside>
+
+        <div class="invite-filter-overlay" data-filter-close></div>
+
+        <div class="invite-results">
+          <div class="invite-style-scroller" aria-label="Featured styles">
+            <button class="style-chip is-active">New</button>
+            <button class="style-chip">Floral</button>
+            <button class="style-chip">Rustic</button>
+            <button class="style-chip">Simple</button>
+            <button class="style-chip">Classic</button>
+            <button class="style-chip">Vintage</button>
+            <button class="style-chip">Regency</button>
+            <button class="style-chip">Modern</button>
+            <button class="style-chip">Destination</button>
+            <button class="style-chip">Bohemian</button>
+          </div>
+
+          <div class="invite-grid" data-grid>
+          </div>
+
+          <div class="invite-pagination"></div>
+        </div>
+      </section>
+  </main>
+
+  <div class="invite-chat-bubble" role="button" aria-label="Open chat">
+    <i class="fa-regular fa-comment"></i>
+  </div>
+
+  <footer class="main-footer">
+    <div class="footer-left">
+      <img src="images/logo.png" alt="Planity Logo" class="footer-logo">
+    </div>
+    <div class="footer-center">
+      <div class="footer-sentence">We Turn Moments Into Memories.</div>
+      <div class="footer-copyright">
+        &copy; 2026 Planity. All rights reserved.
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="contact-item">
+        <span class="icon-col">
+          <i class="fa-solid fa-location-dot"></i>
+        </span>
+        <span class="text-col">Lebanon</span>
+      </div>
+      <a href="tel:+96112345678" class="contact-item">
+        <span class="icon-col">
+          <i class="fa-solid fa-phone"></i>
+        </span>
+        <span class="text-col">+961 12345678</span>
+      </a>
+      <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <span class="icon-col">
+          <i class="fa-brands fa-instagram"></i>
+        </span>
+        <span class="text-col">Planity.lb</span>
+      </a>
+      <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <span class="icon-col">
+          <i class="fa-brands fa-facebook-f"></i>
+        </span>
+        <span class="text-col">Planity.lb</span>
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/invitation.js" defer></script>
+</body>
+</html>

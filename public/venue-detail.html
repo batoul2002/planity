@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planity | Venue Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/venue-detail.css" />
+  </head>
+  <body class="venue-detail-page">
+    <header>
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Planity Logo" class="logo">
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="event-type.html" class="dropbtn">Event Type ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Wedding &amp; Engagement</a></li>
+              <li><a href="#">Birthday</a></li>
+              <li><a href="#">Graduation</a></li>
+              <li><a href="#">Gender Reveal</a></li>
+              <li><a href="#">Madeef Ashouraii</a></li>
+              <li><a href="#">Ramadan Gathering</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="services.html" class="dropbtn active">Services ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="venue.html" class="active">Venue</a></li>
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
+              <li><a href="#">DJ</a></li>
+              <li><a href="invitation-cards.html">Invitation Card</a></li>
+            </ul>
+          </li>
+          <li><a href="plan-event.html">Plan Event</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="login.html">Log In</a></li>
+        </ul>
+        <ul class="nav-icons">
+          <li>
+            <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
+          </li>
+          <li>
+            <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="venue-detail-shell">
+      <section class="venue-hero" data-venue-hero>
+        <img src="images/venues/venue2 (2).jpeg" alt="Grand ballroom adorned with luxury chandeliers" class="hero-photo" data-venue-image />
+        <div class="hero-overlay reveal-item">
+          <div class="hero-nav">
+            <a href="venue.html" class="back-link">
+              <i class="fa-solid fa-arrow-left-long" aria-hidden="true"></i>
+              Back to Venues
+            </a>
+          </div>
+          <div class="hero-chip-row">
+            <span class="hero-chip">
+              <i class="fa-solid fa-crown" aria-hidden="true"></i>
+              <span data-venue-type>Indoor</span>
+            </span>
+          </div>
+          <h1 data-venue-title>Grand Ballroom Elegance</h1>
+          <div class="hero-meta">
+            <span class="hero-rating">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <strong data-venue-rating>4.9</strong>
+              <span data-venue-reviews>(127 reviews)</span>
+            </span>
+            <span class="hero-location">
+              <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+              <span data-venue-location>Lebanon</span>
+            </span>
+          </div>
+          <p class="hero-summary" data-venue-summary>
+            A palatial ballroom featuring soaring ceilings adorned with crystal chandeliers, marble floors, and floor-to-ceiling windows that bathe the space in natural light.
+          </p>
+        </div>
+      </section>
+
+      <section class="detail-layout">
+        <article class="detail-copy-card reveal-item" id="about" data-section-target="about">
+          <div class="overview-actions">
+            <button class="detail-icon" type="button" aria-label="Share this venue" data-share-trigger>
+              <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+              <span class="detail-icon-label">Share</span>
+            </button>
+            <button class="detail-icon" type="button" aria-label="Add to favorites" data-favorite-trigger>
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
+              <span class="detail-icon-label">Save</span>
+            </button>
+          </div>
+          <div class="section-eyebrow">About This Venue</div>
+          <h2>Venue Overview</h2>
+          <div class="about-body" data-about-text>
+            <p>Planity scouts are preparing the full story for this venue.</p>
+          </div>
+          <p class="source-note">
+            Data verified via <a href="https://oreblanc.com" target="_blank" rel="noopener" data-source-link>Oreblanc Wedding Venues</a>.
+          </p>
+        </article>
+
+        <section class="spec-card reveal-item" aria-label="Capacity and pricing" data-section-target="highlights">
+          <div class="spec-pill">
+            <div class="spec-icon">
+              <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+            </div>
+            <div>
+              <p class="spec-label">Capacity</p>
+              <strong data-capacity-value>200-500 guests</strong>
+            </div>
+          </div>
+          <div class="spec-pill">
+            <div class="spec-icon gold">
+              <i class="fa-solid fa-sack-dollar" aria-hidden="true"></i>
+            </div>
+            <div>
+              <p class="spec-label">Price Range</p>
+              <strong data-price-range>$8,000 - $15,000</strong>
+              <span class="pill-tag" data-price-tier>Premium tier</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-section reveal-item" id="highlights" data-section-target="highlights">
+          <div class="section-header">
+            <div>
+              <p class="section-eyebrow">Highlights</p>
+              <h3>Key Features</h3>
+            </div>
+            <p class="section-subhead">What guests love about this venue.</p>
+          </div>
+          <div class="feature-grid" data-highlights-list>
+            <div class="feature-card">
+              <i class="fa-solid fa-check"></i>
+              <span>Crystal chandeliers &amp; ambient lighting</span>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-check"></i>
+              <span>Professional sound system</span>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-check"></i>
+              <span>Climate controlled environment</span>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-check"></i>
+              <span>Bridal suite &amp; groom's room</span>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-check"></i>
+              <span>Dedicated event coordinator</span>
+            </div>
+            <div class="feature-card">
+              <i class="fa-solid fa-check"></i>
+              <span>Full catering kitchen access</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="amenities-section reveal-item" id="amenities" data-section-target="amenities" data-amenities-section>
+          <div class="section-header">
+            <div>
+              <p class="section-eyebrow">Amenities</p>
+              <h3>Amenities &amp; Services</h3>
+            </div>
+          </div>
+          <ul class="amenities-list" data-amenities-list>
+            <li>Complimentary valet parking</li>
+            <li>Premium WiFi connectivity</li>
+            <li>Backup power generator</li>
+            <li>Professional photography lighting</li>
+            <li>Wheelchair accessible throughout</li>
+            <li>Private cocktail lounge area</li>
+          </ul>
+        </section>
+
+        <section class="gallery-section reveal-item" id="gallery" data-section-target="gallery" data-gallery-section>
+          <div class="section-header">
+            <div>
+              <p class="section-eyebrow">Gallery</p>
+              <h3>Venue Gallery</h3>
+            </div>
+          </div>
+          <div class="gallery-grid" data-gallery-grid>
+            <figure class="reveal-item">
+              <img src="images/venues/venue2 (2).jpeg" alt="Grand Ballroom Elegance panorama" />
+            </figure>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-left">
+        <img src="images/logo.png" alt="Planity Logo" class="footer-logo" />
+      </div>
+      <div class="footer-center">
+        <div class="footer-sentence">We Turn Moments Into Memories.</div>
+        <div class="footer-copyright">
+          &copy; 2026 Planity. All rights reserved.
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span class="text-col">Lebanon</span>
+        </div>
+        <a href="tel:+96112345678" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span class="text-col">+961 12345678</span>
+        </a>
+        <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-brands fa-instagram"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+        <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-brands fa-facebook-f"></i>
+          </span>
+          <span class="text-col">Planity Events</span>
+        </a>
+      </div>
+    </footer>
+
+    <script src="js/app.js" defer></script>
+    <script src="js/venue-detail.js" defer></script>
+
+    <div class="gallery-lightbox" data-lightbox>
+      <div class="lightbox-backdrop" data-lightbox-close></div>
+      <div class="lightbox-content">
+        <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close gallery">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button class="lightbox-nav prev" type="button" data-lightbox-prev aria-label="Previous image">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <img src="" alt="Expanded gallery view" data-lightbox-img />
+        <button class="lightbox-nav next" type="button" data-lightbox-next aria-label="Next image">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <p class="lightbox-caption" data-lightbox-caption></p>
+      </div>
+    </div>
+  </body>
+</html>

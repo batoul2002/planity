@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planity | Favorites</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/favorites.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body class="favorites-page">
+    <header>
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Planity Logo" class="logo" />
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="event-type.html" class="dropbtn">Event Type ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Wedding &amp; Engagement</a></li>
+              <li><a href="#">Birthday</a></li>
+              <li><a href="#">Graduation</a></li>
+              <li><a href="#">Gender Reveal</a></li>
+              <li><a href="#">Madeef Ashouraii</a></li>
+              <li><a href="#">Ramadan Gathering</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="services.html" class="dropbtn">Services ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="venue.html" class="active">Venue</a></li>
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
+              <li><a href="#">DJ</a></li>
+              <li><a href="invitation-cards.html">Invitation Card</a></li>
+            </ul>
+          </li>
+          <li><a href="plan-event.html">Plan Event</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="login.html">Log In</a></li>
+        </ul>
+        <ul class="nav-icons">
+          <li>
+            <a href="favorites.html" class="icon-link active"><i class="fa-solid fa-heart"></i></a>
+          </li>
+          <li>
+            <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="favorites-hero">
+      <h1>Saved Venues</h1>
+      <p>Quickly revisit venues you love, compare options, and keep planning momentum with your curated shortlist.</p>
+      <div class="favorites-meta">
+        <i class="fa-solid fa-heart"></i>
+        <span data-favorites-count>0</span>
+        <span>favorites</span>
+      </div>
+    </section>
+
+    <main class="favorites-shell">
+      <div class="empty-state" data-empty-state>
+        <strong>No favorites yet</strong>
+        <p>Tap the heart on any venue to save it here for later.</p>
+        <a class="favorite-link" href="venue.html">Browse venues <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <section class="favorites-grid" data-favorites-list></section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-left">
+        <img src="images/logo.png" alt="Planity Logo" class="footer-logo" />
+      </div>
+      <div class="footer-center">
+        <div class="footer-sentence">We Turn Moments Into Memories.</div>
+        <div class="footer-copyright">
+          &copy; 2026 Planity. All rights reserved.
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span class="text-col">Lebanon</span>
+        </div>
+        <a href="tel:+96112345678" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span class="text-col">+961 12345678</span>
+        </a>
+        <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-brands fa-instagram"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+        <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-brands fa-facebook-f"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+      </div>
+    </footer>
+
+    <script src="js/app.js" defer></script>
+    <script src="js/favorites.js" defer></script>
+  </body>
+</html>
