@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planity | Invitation Cards</title>
+  <title>Services | Invitation Cards</title>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
@@ -18,24 +18,25 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li class="dropdown">
-          <a href="event-type.html" class="dropbtn">Event Type ▾</a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Wedding &amp; Engagement</a></li>
-            <li><a href="#">Birthday</a></li>
-            <li><a href="#">Graduation</a></li>
-            <li><a href="#">Gender Reveal</a></li>
-            <li><a href="#">Madeef Ashouraii</a></li>
-            <li><a href="#">Ramadan Gathering</a></li>
-          </ul>
+          <a href="event-type.html" class="dropbtn">Event Type â–¾</a>
+            <ul class="dropdown-menu">
+              <li><a href="wedding-engagement.html">Wedding &amp; Engagement</a></li>
+              <li><a href="birthday.html">Birthday</a></li>
+              <li><a href="graduation.html">Graduation</a></li>
+              <li><a href="gender-reveal.html">Gender Reveal</a></li>
+              <li><a href="ramadan.html">Ramadan Gathering</a></li>
+              <li><a href="madeef.html">Other</a></li>
+              
+            </ul>
         </li>
         <li class="dropdown">
-          <a href="services.html" class="dropbtn active">Services ▾</a>
+          <a href="services.html" class="dropbtn active">Services &#9662;</a>
           <ul class="dropdown-menu">
             <li><a href="venue.html">Venue</a></li>
             <li><a href="#">Decoration</a></li>
             <li><a href="#">Catering</a></li>
             <li><a href="#">Photographer</a></li>
-            <li><a href="#">DJ</a></li>
+            <li><a href="#">DJ & Lighting System</a></li>
             <li><a href="invitation-cards.html" class="active-sub">Invitation Card</a></li>
           </ul>
         </li>
@@ -183,6 +184,11 @@
           <div class="invite-grid" data-grid>
           </div>
 
+          <div class="invite-empty" hidden>
+            <h4>We couldn't load invitations</h4>
+            <p>Please check your connection or open this page via http(s) instead of the file system.</p>
+          </div>
+
           <div class="invite-pagination"></div>
         </div>
       </section>
@@ -230,6 +236,14 @@
     </div>
   </footer>
 
+  <script src="data/invitations-manifest.js" defer></script>
   <script src="js/invitation.js" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+

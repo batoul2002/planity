@@ -1,46 +1,51 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Planity | Venue Detail</title>
+    <title>Services | Venue Detail</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Space+Grotesk:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/venue-detail.css" />
   </head>
   <body class="venue-detail-page">
     <header>
       <div class="logo-container">
-        <img src="images/logo.png" alt="Planity Logo" class="logo">
+        <img src="images/logo.png" alt="Planity Logo" class="logo" />
       </div>
       <nav>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="dropdown">
-            <a href="event-type.html" class="dropbtn">Event Type ▾</a>
+            <a href="event-type.html" class="dropbtn">Event Types &#9662;</a>
             <ul class="dropdown-menu">
-              <li><a href="#">Wedding &amp; Engagement</a></li>
-              <li><a href="#">Birthday</a></li>
-              <li><a href="#">Graduation</a></li>
-              <li><a href="#">Gender Reveal</a></li>
-              <li><a href="#">Madeef Ashouraii</a></li>
-              <li><a href="#">Ramadan Gathering</a></li>
+              <li>
+                <a href="wedding-engagement.html">Wedding &amp; Engagement</a>
+              </li>
+              <li><a href="birthday.html">Birthday</a></li>
+              <li><a href="graduation.html">Graduation</a></li>
+              <li><a href="gender-reveal.html">Gender Reveal</a></li>
+              <li><a href="ramadan.html">Ramadan Gathering</a></li>
+              <li><a href="madeef.html">Other</a></li>
             </ul>
           </li>
           <li class="dropdown">
-            <a href="services.html" class="dropbtn active">Services ▾</a>
+            <a href="services.html" class="dropbtn active">Services &#9662;</a>
             <ul class="dropdown-menu">
               <li><a href="venue.html" class="active">Venue</a></li>
               <li><a href="#">Decoration</a></li>
               <li><a href="#">Catering</a></li>
               <li><a href="#">Photographer</a></li>
-              <li><a href="#">DJ</a></li>
+              <li><a href="#">DJ & Lighting System</a></li>
               <li><a href="invitation-cards.html">Invitation Card</a></li>
             </ul>
           </li>
@@ -50,10 +55,14 @@
         </ul>
         <ul class="nav-icons">
           <li>
-            <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
+            <a href="favorites.html" class="icon-link"
+              ><i class="fa-solid fa-heart"></i
+            ></a>
           </li>
           <li>
-            <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+            <a href="account.html" class="icon-link"
+              ><i class="fa-solid fa-user"></i
+            ></a>
           </li>
         </ul>
       </nav>
@@ -61,7 +70,12 @@
 
     <main class="venue-detail-shell">
       <section class="venue-hero" data-venue-hero>
-        <img src="images/venues/venue2 (2).jpeg" alt="Grand ballroom adorned with luxury chandeliers" class="hero-photo" data-venue-image />
+        <img
+          src="images/venues/venue2 (2).jpeg"
+          alt="Grand ballroom adorned with luxury chandeliers"
+          class="hero-photo"
+          data-venue-image
+        />
         <div class="hero-overlay reveal-item">
           <div class="hero-nav">
             <a href="venue.html" class="back-link">
@@ -88,19 +102,35 @@
             </span>
           </div>
           <p class="hero-summary" data-venue-summary>
-            A palatial ballroom featuring soaring ceilings adorned with crystal chandeliers, marble floors, and floor-to-ceiling windows that bathe the space in natural light.
+            A palatial ballroom featuring soaring ceilings adorned with crystal
+            chandeliers, marble floors, and floor-to-ceiling windows that bathe
+            the space in natural light.
           </p>
         </div>
       </section>
 
       <section class="detail-layout">
-        <article class="detail-copy-card reveal-item" id="about" data-section-target="about">
+        <article
+          class="detail-copy-card reveal-item"
+          id="about"
+          data-section-target="about"
+        >
           <div class="overview-actions">
-            <button class="detail-icon" type="button" aria-label="Share this venue" data-share-trigger>
+            <button
+              class="detail-icon"
+              type="button"
+              aria-label="Share this venue"
+              data-share-trigger
+            >
               <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
               <span class="detail-icon-label">Share</span>
             </button>
-            <button class="detail-icon" type="button" aria-label="Add to favorites" data-favorite-trigger>
+            <button
+              class="detail-icon"
+              type="button"
+              aria-label="Add to favorites"
+              data-favorite-trigger
+            >
               <i class="fa-solid fa-heart" aria-hidden="true"></i>
               <span class="detail-icon-label">Save</span>
             </button>
@@ -111,11 +141,22 @@
             <p>Planity scouts are preparing the full story for this venue.</p>
           </div>
           <p class="source-note">
-            Data verified via <a href="https://oreblanc.com" target="_blank" rel="noopener" data-source-link>Oreblanc Wedding Venues</a>.
+            Data verified via
+            <a
+              href="https://oreblanc.com"
+              target="_blank"
+              rel="noopener"
+              data-source-link
+              >Oreblanc Wedding Venues</a
+            >.
           </p>
         </article>
 
-        <section class="spec-card reveal-item" aria-label="Capacity and pricing" data-section-target="highlights">
+        <section
+          class="spec-card reveal-item"
+          aria-label="Capacity and pricing"
+          data-section-target="highlights"
+        >
           <div class="spec-pill">
             <div class="spec-icon">
               <i class="fa-solid fa-user-group" aria-hidden="true"></i>
@@ -137,7 +178,11 @@
           </div>
         </section>
 
-        <section class="feature-section reveal-item" id="highlights" data-section-target="highlights">
+        <section
+          class="feature-section reveal-item"
+          id="highlights"
+          data-section-target="highlights"
+        >
           <div class="section-header">
             <div>
               <p class="section-eyebrow">Highlights</p>
@@ -173,7 +218,12 @@
           </div>
         </section>
 
-        <section class="amenities-section reveal-item" id="amenities" data-section-target="amenities" data-amenities-section>
+        <section
+          class="amenities-section reveal-item"
+          id="amenities"
+          data-section-target="amenities"
+          data-amenities-section
+        >
           <div class="section-header">
             <div>
               <p class="section-eyebrow">Amenities</p>
@@ -190,7 +240,12 @@
           </ul>
         </section>
 
-        <section class="gallery-section reveal-item" id="gallery" data-section-target="gallery" data-gallery-section>
+        <section
+          class="gallery-section reveal-item"
+          id="gallery"
+          data-section-target="gallery"
+          data-gallery-section
+        >
           <div class="section-header">
             <div>
               <p class="section-eyebrow">Gallery</p>
@@ -199,7 +254,10 @@
           </div>
           <div class="gallery-grid" data-gallery-grid>
             <figure class="reveal-item">
-              <img src="images/venues/venue2 (2).jpeg" alt="Grand Ballroom Elegance panorama" />
+              <img
+                src="images/venues/venue2 (2).jpeg"
+                alt="Grand Ballroom Elegance panorama"
+              />
             </figure>
           </div>
         </section>
@@ -229,13 +287,23 @@
           </span>
           <span class="text-col">+961 12345678</span>
         </a>
-        <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <a
+          href="https://www.instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
           <span class="icon-col">
             <i class="fa-brands fa-instagram"></i>
           </span>
           <span class="text-col">Planity.lb</span>
         </a>
-        <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <a
+          href="https://www.facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
           <span class="icon-col">
             <i class="fa-brands fa-facebook-f"></i>
           </span>
@@ -250,14 +318,29 @@
     <div class="gallery-lightbox" data-lightbox>
       <div class="lightbox-backdrop" data-lightbox-close></div>
       <div class="lightbox-content">
-        <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close gallery">
+        <button
+          class="lightbox-close"
+          type="button"
+          data-lightbox-close
+          aria-label="Close gallery"
+        >
           <i class="fa-solid fa-xmark"></i>
         </button>
-        <button class="lightbox-nav prev" type="button" data-lightbox-prev aria-label="Previous image">
+        <button
+          class="lightbox-nav prev"
+          type="button"
+          data-lightbox-prev
+          aria-label="Previous image"
+        >
           <i class="fa-solid fa-chevron-left"></i>
         </button>
         <img src="" alt="Expanded gallery view" data-lightbox-img />
-        <button class="lightbox-nav next" type="button" data-lightbox-next aria-label="Next image">
+        <button
+          class="lightbox-nav next"
+          type="button"
+          data-lightbox-next
+          aria-label="Next image"
+        >
           <i class="fa-solid fa-chevron-right"></i>
         </button>
         <p class="lightbox-caption" data-lightbox-caption></p>

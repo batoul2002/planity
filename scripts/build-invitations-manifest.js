@@ -79,3 +79,9 @@ const outPath = path.join(publicDir, 'data', 'invitations.json');
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, JSON.stringify(manifest, null, 2));
 console.log(`Wrote ${manifest.length} invitation items to ${path.relative(process.cwd(), outPath)}`);
+
+// Also emit a JS fallback so the gallery can work even when fetch() to the JSON is blocked
+const jsOutPath = path.join(publicDir, 'data', 'invitations-manifest.js');
+const jsContent = `window.INVITATION_MANIFEST = ${JSON.stringify(manifest)};`;
+fs.writeFileSync(jsOutPath, jsContent);
+console.log(`Wrote invitation manifest fallback to ${path.relative(process.cwd(), jsOutPath)}`);
