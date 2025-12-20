@@ -35,12 +35,24 @@ const eventSchema = new mongoose.Schema(
     budgetItems: [budgetItemSchema],
     budgetItemsTotal: { type: Number, default: 0 },
     notes: { type: String },
+    favoritesSnapshot: [
+      {
+        vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'Vendor' },
+        name: { type: String },
+        category: { type: String },
+        city: { type: String },
+        slug: { type: String },
+        photo: { type: String }
+      }
+    ],
+    assignedByAdmin: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    lastActivityAt: { type: Date },
     planningStep: { type: Number, default: 1, min: 1 },
     statusHistory: [
       {
         status: {
           type: String,
-          enum: ['draft', 'planning', 'confirmed', 'completed', 'cancelled'],
+          enum: ['pending_assignment', 'assigned', 'draft', 'planning', 'confirmed', 'completed', 'cancelled'],
           required: true
         },
         changedAt: { type: Date, default: Date.now },
@@ -49,8 +61,8 @@ const eventSchema = new mongoose.Schema(
     ],
     status: {
       type: String,
-      enum: ['draft', 'planning', 'confirmed', 'completed', 'cancelled'],
-      default: 'draft'
+      enum: ['pending_assignment', 'assigned', 'draft', 'planning', 'confirmed', 'completed', 'cancelled'],
+      default: 'pending_assignment'
     },
     isPaid: { type: Boolean, default: false }
   },
@@ -59,7 +71,7 @@ const eventSchema = new mongoose.Schema(
 
 eventSchema.pre('save', function (next) {
   if (this.isNew && this.statusHistory.length === 0) {
-    this.statusHistory.push({ status: this.status || 'draft' });
+    this.statusHistory.push({ status: this.status || 'pending_assignment' });
   }
   if (Array.isArray(this.budgetItems)) {
     this.budgetItemsTotal = this.budgetItems.reduce((sum, item) => sum + (item.amount || 0), 0);

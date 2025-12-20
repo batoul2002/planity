@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   locale: { type: String, enum: ['en', 'ar'], default: 'en' },
   isVerified: { type: Boolean, default: false },
   isActive: { type: Boolean, default: true },
+  deletedAt: { type: Date },
   statusUpdatedAt: { type: Date },
   statusUpdatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   roleUpdatedAt: { type: Date },

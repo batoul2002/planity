@@ -76,7 +76,7 @@ const eventAssignPlannerSchema = Joi.object({
 
 const eventStatusSchema = Joi.object({
   status: Joi.string()
-    .valid('draft', 'planning', 'confirmed', 'completed', 'cancelled')
+    .valid('pending_assignment', 'assigned', 'draft', 'planning', 'confirmed', 'completed', 'cancelled')
     .required()
 });
 
@@ -133,6 +133,28 @@ const adminUpdateUserStatusSchema = Joi.object({
 });
 
 const adminUpdateVendorStatusSchema = Joi.object({
+  isActive: Joi.boolean().required()
+});
+
+const adminAssignPlannerSchema = Joi.object({
+  plannerId: objectId().required()
+});
+
+const adminCreatePlannerSchema = Joi.object({
+  name: Joi.string().min(2).max(50).required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required(),
+  phone: Joi.string().allow('', null),
+  isActive: Joi.boolean().optional()
+});
+
+const adminUpdatePlannerSchema = Joi.object({
+  name: Joi.string().min(2).max(50),
+  email: Joi.string().email(),
+  phone: Joi.string().allow('', null)
+}).min(1);
+
+const adminPlannerStatusSchema = Joi.object({
   isActive: Joi.boolean().required()
 });
 
@@ -210,6 +232,50 @@ const metaOptionListSchema = Joi.object({
   category: Joi.string().valid('event-type', 'service-category').optional()
 });
 
+const plannerItemCreateSchema = Joi.object({
+  title: Joi.string().min(2).max(120).required(),
+  service: Joi.string().min(2).max(120).required(),
+  eventType: Joi.string().allow('', null),
+  category: Joi.string().allow('', null),
+  clientKey: Joi.string().max(200).allow('', null),
+  priceMin: Joi.number().min(0).optional(),
+  priceMax: Joi.number().min(0).optional(),
+  image: Joi.string().allow('', null),
+  description: Joi.string().allow('', null),
+  status: Joi.string().valid('pending', 'approved', 'rejected', 'deleted').optional(),
+  source: Joi.string().allow('', null)
+});
+
+const plannerItemUpdateSchema = Joi.object({
+  title: Joi.string().min(2).max(120),
+  service: Joi.string().min(2).max(120),
+  eventType: Joi.string().allow('', null),
+  category: Joi.string().allow('', null),
+  clientKey: Joi.string().max(200).allow('', null),
+  priceMin: Joi.number().min(0),
+  priceMax: Joi.number().min(0),
+  image: Joi.string().allow('', null),
+  description: Joi.string().allow('', null),
+  status: Joi.string().valid('pending', 'approved', 'rejected', 'deleted')
+}).min(1);
+
+const plannerItemChangeCreateSchema = Joi.object({
+  action: Joi.string().valid('create', 'update', 'delete').required(),
+  itemId: objectId().optional(),
+  clientKey: Joi.string().max(200).optional(),
+  itemData: Joi.object().when('action', { is: Joi.valid('create', 'update'), then: Joi.required(), otherwise: Joi.optional() }),
+  note: Joi.string().allow('', null)
+}).custom((value, helpers) => {
+  if ((value.action === 'update' || value.action === 'delete') && !value.itemId && !value.clientKey) {
+    return helpers.error('any.custom', { message: 'itemId or clientKey is required for update/delete' });
+  }
+  return value;
+});
+
+const plannerItemChangeDecisionSchema = Joi.object({
+  note: Joi.string().allow('', null)
+});
+
 // Add other schemas similarly...
 
 module.exports = {
@@ -233,6 +299,10 @@ module.exports = {
   adminVerifyVendorSchema,
   adminUpdateUserStatusSchema,
   adminUpdateVendorStatusSchema,
+  adminAssignPlannerSchema,
+  adminCreatePlannerSchema,
+  adminUpdatePlannerSchema,
+  adminPlannerStatusSchema,
   contractCreateSchema,
   contractQuerySchema,
   paymentIntentSchema,
@@ -243,5 +313,9 @@ module.exports = {
   metaOptionCreateSchema,
   metaOptionUpdateSchema,
   metaOptionListSchema,
+  plannerItemCreateSchema,
+  plannerItemUpdateSchema,
+  plannerItemChangeCreateSchema,
+  plannerItemChangeDecisionSchema,
   // other schemas...
 };

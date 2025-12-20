@@ -1,5 +1,5 @@
 const dataUrl = 'data/venue-details.json';
-const defaultSlug = 'lancaster-eden-bay-beirut';
+const defaultSlug = 'lancaster-eden-bay';
 
 const slugify = (value = '') =>
   value
@@ -82,6 +82,7 @@ const shareButtons = document.querySelectorAll('[data-share-trigger]');
 let currentVendorId = /^[a-fA-F0-9]{24}$/.test(requestedVendorIdParam || '') ? requestedVendorIdParam : '';
 let lastRenderedVenue = null;
 let favoriteHandlersAttached = false;
+let vendorCache = null;
 
 const favoriteButtons = document.querySelectorAll('[data-favorite-trigger]');
 
@@ -117,6 +118,7 @@ const handleFavoriteClick = async () => {
   if (!currentVendorId) {
     await resolveVendorIdFromApi(lastRenderedVenue);
   }
+  const heroPhoto = lastRenderedVenue?.heroImage || lastRenderedVenue?.gallery?.[0] || '';
   if (!currentVendorId) {
     alert('This venue is missing a vendorId. Pass ?vendorId=<id> in the URL or add vendorId to the data.');
     return;
@@ -131,7 +133,9 @@ const handleFavoriteClick = async () => {
       body: JSON.stringify({
         vendorId: currentVendorId,
         vendorSlug: slugify(lastRenderedVenue?.slug || lastRenderedVenue?.title || ''),
-        vendorName: lastRenderedVenue?.title || ''
+        vendorName: lastRenderedVenue?.title || '',
+        vendorPhoto: heroPhoto,
+        vendorCategory: 'venue'
       })
     });
     if (res?.vendorId) {
@@ -152,6 +156,44 @@ const initFavoriteButtons = () => {
   favoriteHandlersAttached = true;
 };
 
+const loadVenueVendors = async () => {
+  if (vendorCache) return vendorCache;
+  try {
+    const res = await apiFetch('/vendors?limit=200&category=venue&includeInactive=true', { method: 'GET' });
+    vendorCache = Array.isArray(res.data) ? res.data : [];
+  } catch (err) {
+    console.warn('Unable to load venue vendors', err.message || err);
+    vendorCache = [];
+  }
+  return vendorCache;
+};
+
+const buildVenueFromVendor = (vendor) => {
+  if (!vendor) return null;
+  const photos = Array.isArray(vendor.photos) ? vendor.photos.filter(Boolean) : [];
+  const slug = slugify(vendor.slug || vendor.name || '');
+  const price = vendor.pricing?.amount
+    ? `${vendor.pricing.type === 'per-person' ? 'Per person' : 'Package'} at $${vendor.pricing.amount}`
+    : 'Contact for pricing';
+  return {
+    slug,
+    title: vendor.name || 'Venue',
+    location: vendor.city || 'Lebanon',
+    region: vendor.city || vendor.category || 'Venue',
+    type: 'Venue',
+    summary: vendor.description || '',
+    description: vendor.description || '',
+    priceRange: price,
+    priceTier: vendor.pricing?.type || '',
+    amenities: vendor.amenities || [],
+    highlights: vendor.amenities || [],
+    gallery: photos,
+    heroImage: photos[0],
+    vendorId: vendor._id,
+    source: vendor.website || ''
+  };
+};
+
 const resolveVendorIdFromApi = async (venue) => {
   if (currentVendorId || !venue?.title) return;
   const candidates = [
@@ -163,8 +205,7 @@ const resolveVendorIdFromApi = async (venue) => {
     .filter(Boolean)
     .reduce((acc, item) => (acc.includes(item) ? acc : acc.concat(item)), []);
   try {
-    const res = await apiFetch('/vendors?limit=100&category=venue', { method: 'GET' });
-    const vendors = Array.isArray(res.data) ? res.data : [];
+    const vendors = await loadVenueVendors();
     const match = vendors.find((v) => {
       const vs = slugify(v.name || '');
       return candidates.some((c) => vs === c || vs.includes(c) || c.includes(vs));
@@ -457,6 +498,33 @@ const renderVenue = (venue, { showFallbackNotice } = {}) => {
 setupRevealObserver();
 setupSectionObserver();
 
+const mergeVenueWithVendor = (venue, vendorVenue) => {
+  if (!vendorVenue) return venue;
+  return {
+    ...venue,
+    vendorId: vendorVenue.vendorId || venue.vendorId,
+    heroImage: venue.heroImage || vendorVenue.heroImage,
+    gallery: Array.isArray(venue.gallery) && venue.gallery.length ? venue.gallery : vendorVenue.gallery,
+    priceRange: venue.priceRange || vendorVenue.priceRange,
+    priceTier: venue.priceTier || vendorVenue.priceTier,
+    amenities: Array.isArray(venue.amenities) && venue.amenities.length ? venue.amenities : vendorVenue.amenities,
+    highlights: Array.isArray(venue.highlights) && venue.highlights.length ? venue.highlights : vendorVenue.highlights,
+    summary: venue.summary || vendorVenue.summary,
+    description: venue.description || vendorVenue.description,
+    location: venue.location || vendorVenue.location,
+    region: venue.region || vendorVenue.region,
+    type: venue.type || vendorVenue.type,
+    source: venue.source || vendorVenue.source
+  };
+};
+
+const loadVenueFromApi = async (slug) => {
+  const vendors = await loadVenueVendors();
+  if (!vendors.length) return null;
+  const target = vendors.find((v) => slugify(v.slug || v.name || '') === slug);
+  return buildVenueFromVendor(target);
+};
+
 const openLightbox = (index) => {
   if (!galleryImages.length || !refs.lightboxImg) return;
   currentGalleryIndex = (index + galleryImages.length) % galleryImages.length;
@@ -485,23 +553,41 @@ refs.lightbox?.querySelectorAll('[data-lightbox-close]').forEach((button) => {
   button.addEventListener('click', closeLightbox);
 });
 
-fetch(dataUrl)
-  .then((res) => {
+const initVenuePage = async () => {
+  const normalizedSlug = requestedSlug ? slugify(requestedSlug) : defaultSlug;
+  try {
+    const res = await fetch(dataUrl);
     if (!res.ok) throw new Error('Unable to load venue data');
-    return res.json();
-  })
-  .then((venues) => {
+    const venues = await res.json();
     if (!Array.isArray(venues) || !venues.length) {
       throw new Error('Venue dataset is empty');
     }
 
-    const normalizedSlug = requestedSlug ? slugify(requestedSlug) : defaultSlug;
     const venueMatch = venues.find((v) => v.slug === normalizedSlug);
     const fallback = venues.find((v) => v.slug === defaultSlug) || venues[0];
-    renderVenue(venueMatch || fallback, { showFallbackNotice: !venueMatch });
-  })
-  .catch((error) => {
-    console.error(error);
-    renderVenue(null);
-  });
 
+    if (!venueMatch) {
+      const apiVenue = await loadVenueFromApi(normalizedSlug);
+      if (apiVenue) {
+        renderVenue(apiVenue, { showFallbackNotice: true });
+        return;
+      }
+      renderVenue(fallback, { showFallbackNotice: true });
+      return;
+    }
+
+    const apiVenue = await loadVenueFromApi(slugify(venueMatch.slug || venueMatch.title || normalizedSlug));
+    const hydrated = mergeVenueWithVendor(venueMatch, apiVenue);
+    renderVenue(hydrated, { showFallbackNotice: false });
+  } catch (error) {
+    console.error(error);
+    const apiVenue = await loadVenueFromApi(normalizedSlug);
+    if (apiVenue) {
+      renderVenue(apiVenue, { showFallbackNotice: true });
+    } else {
+      renderVenue(null);
+    }
+  }
+};
+
+initVenuePage();
