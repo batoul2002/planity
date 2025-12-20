@@ -9,10 +9,6 @@ const {
   adminVerifyVendorSchema,
   adminUpdateUserStatusSchema,
   adminUpdateVendorStatusSchema,
-  adminAssignPlannerSchema,
-  adminCreatePlannerSchema,
-  adminUpdatePlannerSchema,
-  adminPlannerStatusSchema,
   disputeCreateSchema,
   disputeUpdateSchema,
   metaOptionCreateSchema,
@@ -45,31 +41,7 @@ router.patch(
   catchAsync(adminController.updateVendorStatus)
 );
 router.get('/vendors/pending', catchAsync(adminController.getPendingVendors));
-router.get('/event-requests', catchAsync(adminController.getEventRequests));
-router.post(
-  '/events/:eventId/assign',
-  validateRequest(adminAssignPlannerSchema),
-  catchAsync(adminController.assignPlannerToEvent)
-);
 router.get('/events', catchAsync(adminController.getEventsOverview));
-router.get('/events/:eventId', catchAsync(adminController.getEventDetailReadOnly));
-router.get('/planners', catchAsync(adminController.getPlanners));
-router.post(
-  '/planners',
-  validateRequest(adminCreatePlannerSchema),
-  catchAsync(adminController.createPlanner)
-);
-router.patch(
-  '/planners/:plannerId',
-  validateRequest(adminUpdatePlannerSchema),
-  catchAsync(adminController.updatePlanner)
-);
-router.patch(
-  '/planners/:plannerId/status',
-  validateRequest(adminPlannerStatusSchema),
-  catchAsync(adminController.setPlannerStatus)
-);
-router.delete('/planners/:plannerId', catchAsync(adminController.softDeletePlanner));
 router.get('/disputes', catchAsync(adminController.getDisputes));
 router.post(
   '/disputes',

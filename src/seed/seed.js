@@ -62,125 +62,16 @@ const seed = async () => {
       verified: true,
       averageRating: 4.8,
       ratingCount: 15
-    },
-    {
-      name: 'Al Jawad Restaurant',
-      category: 'catering',
-      pricing: { type: 'package', amount: 500 },
-      city: 'Beirut',
-      amenities: ['Delivery', 'Live stations'],
-      styles: ['Lebanese'],
-      cuisines: ['Lebanese'],
-      dietaryOptions: ['Vegetarian'],
-      photos: ['/images/catering/aljawad/aljawadCatering.png'],
-      verified: true
-    },
-    {
-      name: 'Cremino Patisserie',
-      category: 'catering',
-      pricing: { type: 'per-person', amount: 8 },
-      city: 'Beirut',
-      amenities: ['Desserts', 'Delivery'],
-      styles: ['Patisserie'],
-      cuisines: ['Desserts'],
-      dietaryOptions: [],
-      photos: ['/images/catering/cremino/creminoPatisserie.jpeg'],
-      verified: true
-    },
-    {
-      name: 'Tasty Bees',
-      category: 'catering',
-      pricing: { type: 'per-person', amount: 7 },
-      city: 'Beirut',
-      amenities: ['Desserts', 'Delivery'],
-      styles: ['Lebanese'],
-      cuisines: ['Desserts'],
-      dietaryOptions: [],
-      photos: ['/images/catering/tastyBees/tastybeesCatering.jpeg'],
-      verified: true
-    },
-    {
-      name: 'Al Sultan Sweets',
-      category: 'catering',
-      pricing: { type: 'per-person', amount: 9 },
-      city: 'Beirut',
-      amenities: ['Desserts', 'Delivery'],
-      styles: ['Lebanese'],
-      cuisines: ['Desserts'],
-      dietaryOptions: [],
-      photos: ['/images/catering/alsultan/alsultan.jpg'],
-      verified: true
-    },
-    {
-      name: 'Al Shareq Sweets',
-      category: 'catering',
-      pricing: { type: 'per-person', amount: 8 },
-      city: 'Beirut',
-      amenities: ['Desserts', 'Delivery'],
-      styles: ['Lebanese'],
-      cuisines: ['Desserts'],
-      dietaryOptions: [],
-      photos: ['/images/catering/alshareq/alshareq.png'],
-      verified: true
-    },
-    {
-      name: 'Al Bohsali 1870',
-      category: 'catering',
-      pricing: { type: 'per-person', amount: 10 },
-      city: 'Beirut',
-      amenities: ['Desserts', 'Delivery'],
-      styles: ['Lebanese'],
-      cuisines: ['Desserts'],
-      dietaryOptions: [],
-      photos: ['/images/catering/albohsali/albohsali.png'],
-      verified: true
-    },
-    {
-      name: 'Daze Sweets',
-      category: 'catering',
-      pricing: { type: 'per-person', amount: 8 },
-      city: 'Beirut',
-      amenities: ['Desserts', 'Delivery'],
-      styles: ['Patisserie'],
-      cuisines: ['Desserts'],
-      dietaryOptions: [],
-      photos: ['/images/catering/daze/daze.jpeg'],
-      verified: true
-    },
-    {
-      name: 'Al Baba Sweets',
-      category: 'catering',
-      pricing: { type: 'per-person', amount: 8 },
-      city: 'Khalde',
-      amenities: ['Desserts', 'Delivery'],
-      styles: ['Lebanese'],
-      cuisines: ['Desserts'],
-      dietaryOptions: [],
-      photos: ['/images/catering/albaba/albaba.png'],
-      verified: true
-    },
-    {
-      name: 'Alabdallah Restaurant',
-      category: 'catering',
-      pricing: { type: 'package', amount: 450 },
-      city: 'Beirut',
-      amenities: ['Delivery', 'Platters'],
-      styles: ['Lebanese'],
-      cuisines: ['Lebanese'],
-      dietaryOptions: ['Vegetarian'],
-      photos: ['/images/catering/alabdalla/alabdullahRest.png'],
-      verified: true
     }
   ];
 
   await Vendor.insertMany(vendors);
 
   await MetaOption.insertMany([
-    { category: 'event-type', key: 'wedding', labels: { en: 'Wedding', ar: 'Wedding' }, order: 1 },
-    { category: 'event-type', key: 'corporate', labels: { en: 'Corporate', ar: 'Corporate' }, order: 2 },
-    { category: 'service-category', key: 'venue', labels: { en: 'Venue', ar: 'Venue' }, order: 1 },
-    { category: 'service-category', key: 'photographer', labels: { en: 'Photographer', ar: 'Photographer' }, order: 2 },
-    { category: 'service-category', key: 'catering', labels: { en: 'Catering', ar: 'Catering' }, order: 3 }
+    { category: 'event-type', key: 'wedding', labels: { en: 'Wedding', ar: 'حفل زفاف' }, order: 1 },
+    { category: 'event-type', key: 'corporate', labels: { en: 'Corporate', ar: 'فعالية شركات' }, order: 2 },
+    { category: 'service-category', key: 'venue', labels: { en: 'Venue', ar: 'قاعة' }, order: 1 },
+    { category: 'service-category', key: 'photographer', labels: { en: 'Photographer', ar: 'مصور' }, order: 2 }
   ]);
 
   console.log('Seed done!');

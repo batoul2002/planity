@@ -12,18 +12,6 @@ const slugify = (value = '') =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
-const normalizeCategory = (category = '') => {
-  const map = {
-    decoration: 'decorator',
-    decor: 'decorator'
-  };
-  const normalized = map[category.toLowerCase()] || category?.toLowerCase?.() || '';
-  const allowed = ['venue', 'photographer', 'catering', 'decorator', 'dj', 'invitation'];
-  return allowed.includes(normalized) ? normalized : 'venue';
-};
-
-const stripImageKey = (slug = '') => slug.replace(/-img-[^-]+$/, '').replace(/-img-\d+$/, '');
-
 exports.toggleFavorite = async (req, res) => {
   const { vendorId, vendorSlug, vendorName, vendorPhoto, vendorCategory } = req.body;
   if (!vendorId && !vendorSlug && !vendorName) throw new ApiError(400, 'Vendor identifier is required');
@@ -36,21 +24,16 @@ exports.toggleFavorite = async (req, res) => {
 
   if (!vendorDoc && (vendorSlug || vendorName)) {
     const slug = slugify(vendorSlug || vendorName || '');
-    const altSlug = stripImageKey(slug);
-    // If a slug is provided, require slug match; try image-less variant as fallback for legacy saves
-    if (slug) {
-      vendorDoc = await Vendor.findOne({ slug }) || (altSlug && await Vendor.findOne({ slug: altSlug }));
-    } else if (vendorName) {
-      vendorDoc = await Vendor.findOne({ name: new RegExp(`^${vendorName}$`, 'i') });
-    }
+    vendorDoc =
+      (slug && (await Vendor.findOne({ slug }))) ||
+      (vendorName && (await Vendor.findOne({ name: new RegExp(`^${vendorName}$`, 'i') })));
 
     if (!vendorDoc) {
       const fallbackName = vendorName || vendorSlug || 'Venue';
-      const category = normalizeCategory(vendorCategory);
       vendorDoc = new Vendor({
         name: fallbackName,
         slug,
-        category,
+        category: vendorCategory || 'venue',
         pricing: { type: 'package', amount: 0 },
         city: 'Lebanon',
         amenities: [],

@@ -1,34 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Planity | Favorites</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/favorites.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   </head>
   <body class="favorites-page">
-    <div class="floating-hearts" aria-hidden="true">
-      <span style="--x: 6%; --y: 18%; --delay: 0s; --scale: 0.9"></span>
-      <span style="--x: 18%; --y: 42%; --delay: 2s; --scale: 0.85"></span>
-      <span style="--x: 32%; --y: 20%; --delay: 4s; --scale: 0.95"></span>
-      <span style="--x: 52%; --y: 10%; --delay: 1s; --scale: 1"></span>
-      <span style="--x: 68%; --y: 26%; --delay: 3s; --scale: 0.8"></span>
-      <span style="--x: 82%; --y: 18%; --delay: 5s; --scale: 0.9"></span>
-      <span style="--x: 14%; --y: 68%; --delay: 1.3s; --scale: 0.8"></span>
-      <span style="--x: 38%; --y: 62%; --delay: 2.6s; --scale: 1"></span>
-      <span style="--x: 58%; --y: 70%; --delay: 0.8s; --scale: 0.85"></span>
-      <span style="--x: 76%; --y: 62%; --delay: 1.8s; --scale: 0.95"></span>
-      <span style="--x: 88%; --y: 72%; --delay: 2.4s; --scale: 0.9"></span>
-    </div>
-
     <header>
       <div class="logo-container">
         <img src="images/logo.png" alt="Planity Logo" class="logo" />
@@ -37,7 +17,7 @@
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="dropdown">
-            <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
+            <a href="event-type.html" class="dropbtn">Event Type ▾</a>
             <ul class="dropdown-menu">
               <li><a href="#">Wedding &amp; Engagement</a></li>
               <li><a href="#">Birthday</a></li>
@@ -48,13 +28,12 @@
             </ul>
           </li>
           <li class="dropdown">
-            <a href="services.html" class="dropbtn">Services &#9662;</a>
+            <a href="services.html" class="dropbtn">Services ▾</a>
             <ul class="dropdown-menu">
               <li><a href="venue.html" class="active">Venue</a></li>
-              <li><a href="decoration.html">Decoration</a></li>
-              <li><a href="catering.html">Catering</a></li>
-
-              <li><a href="photographer.html">Photographer</a></li>
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
               <li><a href="#">DJ</a></li>
               <li><a href="invitation-cards.html">Invitation Card</a></li>
             </ul>
@@ -74,61 +53,50 @@
       </nav>
     </header>
 
-    <main class="favorite-experience">
-      <section class="fav-hero">
-        <div class="fav-hero-icon">
-          <i class="fa-solid fa-ring"></i>
-        </div>
-        <p class="fav-total" data-fav-total>0 favorites saved</p>
-        <p class="fav-eyebrow">Favorites</p>
-        <h1 class="fav-title">My Favorites</h1>
-        <p class="fav-subtitle">Your curated collection of saved vendors and inspiration</p>
-      </section>
+    <section class="favorites-hero">
+      <h1>Favorites</h1>
+      <p>Revisit your saved venues and invitation cards in one place.</p>
+    </section>
 
-      <section class="fav-panel" data-view="services">
-        <div class="fav-panel-head">
+    <main class="favorites-shell">
+      <section class="favorites-section">
+        <div class="favorites-section-header">
           <div>
-            <h2>Pick a service</h2>
-            <p class="fav-muted">Browse your saved Venues, Decorations, Catering, Invitations, and Photographers.</p>
+            <h2>Saved Venues</h2>
+            <p class="favorites-note">Tap the heart on any venue to keep it here.</p>
+          </div>
+          <div class="favorites-meta">
+            <i class="fa-solid fa-heart"></i>
+            <span data-favorites-count>0</span>
+            <span>favorites</span>
           </div>
         </div>
-        <div class="fav-grid service-grid" data-service-grid></div>
+        <div class="empty-state" data-empty-venues>
+          <strong>No venues yet</strong>
+          <p>Tap the heart on any venue to save it here for later.</p>
+          <a class="favorite-link" href="venue.html">Browse venues <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <section class="favorites-grid" data-venues-list></section>
       </section>
 
-      <section class="fav-panel is-hidden" data-view="categories">
-        <div class="fav-panel-head">
+      <section class="favorites-section">
+        <div class="favorites-section-header">
           <div>
-            <h2>Saved collections</h2>
-            <p class="fav-muted">Open a category to see the pieces you loved.</p>
+            <h2>Saved Invitation Cards</h2>
+            <p class="favorites-note">Hearts you tap on invitation cards show up here.</p>
+          </div>
+          <div class="favorites-meta">
+            <i class="fa-solid fa-heart"></i>
+            <span data-invite-count>0</span>
+            <span>favorites</span>
           </div>
         </div>
-        <div class="fav-grid category-grid" data-category-grid></div>
-      </section>
-
-      <section class="fav-panel is-hidden" data-view="subcategories">
-        <div class="fav-breadcrumb" data-breadcrumb-sub></div>
-        <div class="fav-collection-header" data-collection-header>
-          <div class="collection-icon" data-collection-icon></div>
-          <div>
-            <h2 class="fav-collection-title" data-collection-title>Wedding Decoration</h2>
-            <p class="fav-collection-sub" data-collection-sub>Elegant arrangements for your special day</p>
-            <div class="fav-count-pill" data-collection-count>0 items saved</div>
-          </div>
+        <div class="empty-state" data-empty-invites>
+          <strong>No cards yet</strong>
+          <p>Tap the heart on any invitation to save it here for later.</p>
+          <a class="favorite-link" href="invitation-cards.html">Browse invitations <i class="fa-solid fa-arrow-right"></i></a>
         </div>
-        <div class="fav-grid subcategory-grid" data-subcategory-grid></div>
-      </section>
-
-      <section class="fav-panel is-hidden" data-view="items">
-        <div class="fav-breadcrumb" data-breadcrumb-items></div>
-        <div class="fav-collection-header" data-item-header>
-          <div class="collection-icon" data-item-icon></div>
-          <div>
-            <h2 class="fav-collection-title" data-item-title>Saved items</h2>
-            <p class="fav-collection-sub" data-item-sub></p>
-            <div class="fav-count-pill" data-item-count>0 saved items</div>
-          </div>
-        </div>
-        <div class="fav-grid item-grid" data-item-grid></div>
+        <section class="favorites-grid" data-invite-list></section>
       </section>
     </main>
 
@@ -174,7 +142,3 @@
     <script src="js/favorites.js" defer></script>
   </body>
 </html>
-
-
-
-

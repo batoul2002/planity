@@ -4,8 +4,6 @@ const Event = require('../models/Event');
 const Contract = require('../models/Contract');
 const Dispute = require('../models/Dispute');
 const MetaOption = require('../models/MetaOption');
-const Message = require('../models/Message');
-const ChatRoom = require('../models/ChatRoom');
 const ApiError = require('../utils/ApiError');
 
 const toCsv = (rows, columns) => {
@@ -87,165 +85,13 @@ exports.getPendingVendors = async (req, res) => {
   res.json({ success: true, data: vendors });
 };
 
-exports.getEventRequests = async (req, res) => {
-  const events = await Event.find({ status: 'pending_assignment' })
-    .populate('client', 'name email phone')
-    .populate('planner', 'name email')
-    .select('type theme date status budget guests location notes favoritesSnapshot createdAt statusHistory');
-
-  res.json({ success: true, data: events });
-};
-
 exports.getEventsOverview = async (req, res) => {
   const events = await Event.find()
     .populate('client', 'name email')
     .populate('planner', 'name email')
-    .select('type date status budget budgetItemsTotal planner client createdAt lastActivityAt');
+    .select('type date status budget budgetItemsTotal planner client createdAt');
 
   res.json({ success: true, data: events });
-};
-
-exports.getEventDetailReadOnly = async (req, res, next) => {
-  const event = await Event.findById(req.params.eventId)
-    .populate('client', 'name email phone')
-    .populate('planner', 'name email phone')
-    .populate('vendors', 'name category city pricing')
-    .populate('tasks.assignedTo', 'name email');
-  if (!event) return next(new ApiError(404, 'Event not found'));
-
-  const messages = await Message.find({ event: event._id })
-    .sort('-createdAt')
-    .limit(50)
-    .populate('sender', 'name role email');
-
-  res.json({
-    success: true,
-    data: {
-      event,
-      messages
-    }
-  });
-};
-
-exports.assignPlannerToEvent = async (req, res, next) => {
-  const { eventId } = req.params;
-  const { plannerId } = req.body;
-
-  const [event, planner] = await Promise.all([
-    Event.findById(eventId),
-    User.findOne({ _id: plannerId, role: 'planner', isActive: true, deletedAt: { $exists: false } })
-  ]);
-
-  if (!event) return next(new ApiError(404, 'Event not found'));
-  if (!planner) return next(new ApiError(404, 'Planner not found or inactive'));
-  if (event.planner && event.planner.toString() !== plannerId) {
-    return next(new ApiError(400, 'Event already has a planner'));
-  }
-
-  event.planner = plannerId;
-  event.assignedByAdmin = req.user._id;
-  event.status = 'assigned';
-  event.lastActivityAt = new Date();
-  event.statusHistory.push({ status: 'assigned', changedAt: new Date(), changedBy: req.user._id });
-  await event.save();
-
-  const populated = await event.populate('client planner', 'name email role phone');
-
-  let chat = await ChatRoom.findOne({ event: event._id });
-  if (!chat) {
-    chat = await ChatRoom.create({
-      event: event._id,
-      participants: [event.client, plannerId],
-      createdBy: req.user._id
-    });
-  }
-
-  await Message.create({
-    event: event._id,
-    sender: req.user._id,
-    content: 'A planner has been assigned to your event.'
-  });
-
-  res.json({ success: true, data: { event: populated, chatRoomId: chat._id } });
-};
-
-exports.getPlanners = async (req, res) => {
-  const planners = await User.find({ role: 'planner' }).select('name email phone isActive deletedAt createdAt');
-  res.json({ success: true, data: planners });
-};
-
-exports.createPlanner = async (req, res, next) => {
-  const existing = await User.findOne({ email: req.body.email });
-  if (existing) return next(new ApiError(400, 'Email already in use'));
-
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    phone: req.body.phone,
-    role: 'planner',
-    isActive: typeof req.body.isActive === 'boolean' ? req.body.isActive : true,
-    isVerified: true
-  });
-  await user.save();
-
-  res.status(201).json({
-    success: true,
-    data: {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      role: user.role,
-      isActive: user.isActive
-    }
-  });
-};
-
-exports.updatePlanner = async (req, res, next) => {
-  const planner = await User.findOne({ _id: req.params.plannerId, role: 'planner' });
-  if (!planner) return next(new ApiError(404, 'Planner not found'));
-
-  if (req.body.email && req.body.email !== planner.email) {
-    const exists = await User.findOne({ email: req.body.email });
-    if (exists) return next(new ApiError(400, 'Email already in use'));
-    planner.email = req.body.email;
-  }
-  if (req.body.name) planner.name = req.body.name;
-  if (typeof req.body.phone !== 'undefined') planner.phone = req.body.phone;
-
-  await planner.save();
-  res.json({
-    success: true,
-    data: {
-      id: planner._id,
-      name: planner.name,
-      email: planner.email,
-      phone: planner.phone,
-      isActive: planner.isActive
-    }
-  });
-};
-
-exports.setPlannerStatus = async (req, res, next) => {
-  const planner = await User.findOne({ _id: req.params.plannerId, role: 'planner' });
-  if (!planner) return next(new ApiError(404, 'Planner not found'));
-
-  planner.isActive = req.body.isActive;
-  planner.statusUpdatedAt = new Date();
-  planner.statusUpdatedBy = req.user._id;
-  await planner.save();
-
-  res.json({ success: true, data: { id: planner._id, isActive: planner.isActive } });
-};
-
-exports.softDeletePlanner = async (req, res, next) => {
-  const planner = await User.findOne({ _id: req.params.plannerId, role: 'planner' });
-  if (!planner) return next(new ApiError(404, 'Planner not found'));
-  planner.isActive = false;
-  planner.deletedAt = new Date();
-  await planner.save();
-  res.json({ success: true });
 };
 
 exports.createDispute = async (req, res, next) => {

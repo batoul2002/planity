@@ -81,9 +81,6 @@ const io = new Server(server, {
 const authVerify = require('./src/routes/authVerify');
 const authRoutes = require('./src/routes/auth');
 const stripeWebhookHandler = require('./src/routes/stripeWebhook');
-const plannerItemsRoutes = require('./src/routes/plannerItems');
-const plannerItemChangesRoutes = require('./src/routes/plannerItemChanges');
-const publicCatalogRoutes = require('./src/routes/publicCatalog');
 
 // Connect to DB
 connectDB();
@@ -105,12 +102,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 100,
-//   message: { error: 'Too many requests, please try again later.' }
-// });
-// app.use(limiter);
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: { error: 'Too many requests, please try again later.' }
+});
+app.use(limiter);
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -136,30 +133,6 @@ app.get('/reset-password', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'reset-password.html'));
 });
 
-// Friendly routes for planner pages (without .html)
-app.get(['/planner', '/planner-dashboard'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'planner-dashboard.html'));
-});
-app.get(['/planner/event', '/event-workspace'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'event-workspace.html'));
-});
-
-// Friendly routes for admin pages (without .html)
-app.get(['/admin', '/admin-dashboard'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin-dashboard.html'));
-});
-app.get(['/admin/event', '/admin-event'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin-event.html'));
-});
-
-// Explicit .html admin routes
-app.get('/admin-dashboard.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin-dashboard.html'));
-});
-app.get('/admin-event.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin-event.html'));
-});
-
 // Routes
 app.use('/api/v1/auth', authVerify);
 app.use('/api/v1/auth', authLimiter, authRoutes);
@@ -173,9 +146,6 @@ app.use('/api/v1/admin', require('./src/routes/admin'));
 app.use('/api/v1/upload', require('./src/routes/upload'));
 app.use('/api/v1/payments', require('./src/routes/payments'));
 app.use('/api/v1/meta', require('./src/routes/meta'));
-app.use('/api/v1/planner/items', plannerItemsRoutes);
-app.use('/api/v1/planner/item-requests', plannerItemChangesRoutes);
-app.use('/api/v1/public', publicCatalogRoutes);
 // Health check
 app.get('/health', (req, res) => {
   res.json({

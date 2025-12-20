@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const heroSlides = [
     {
-      image: 'images/bohemian cards/bohemian green/bohemian green4.jpg',
+      image: 'images/bohemian cards/bohemian green/bohemian green1.jpg',
       eyebrow: 'Featured | Botanical Foil',
       title: 'Shining Greenery',
       oldPrice: 2.29,
