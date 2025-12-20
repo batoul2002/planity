@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plan Event</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body class="plan-event-page">
+    <header>
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Planity Logo" class="logo">
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Wedding &amp; Engagement</a></li>
+              <li><a href="#">Birthday</a></li>
+              <li><a href="#">Graduation</a></li>
+              <li><a href="#">Gender Reveal</a></li>
+              <li><a href="#">Madeef Ashouraii</a></li>
+              <li><a href="#">Ramadan Gathering</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="services.html" class="dropbtn">Services &#9662;</a>
+            <ul class="dropdown-menu">
+              <li><a href="venue.html">Venue</a></li>
+              <li><a href="decoration.html">Decoration</a></li>
+              <li><a href="catering.html">Catering</a></li>
+
+              <li><a href="photographer.html">Photographer</a></li>
+              <li><a href="#">DJ</a></li>
+              <li><a href="invitation-cards.html">Invitation Card</a></li>
+            </ul>
+          </li>
+          <li><a class="active" href="plan-event.html">Plan Event</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="login.html">Log In</a></li>
+        </ul>
+        <ul class="nav-icons">
+          <li>
+            <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
+          </li>
+          <li>
+            <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="plan-event">
+      <div class="plan-event-hero">
+        <p class="plan-eyebrow">Planity Planner</p>
+        <h1>Plan your next event with us</h1>
+        <p class="plan-lead">
+          Share client and event details so a planner can prepare a tailored proposal for you.
+        </p>
+        <div class="plan-auth-notice hidden" id="planAuthNotice">
+          <i class="fa-solid fa-lock"></i>
+          <span>Log in so we can save and track this request for you.</span>
+          <a href="login.html" class="plan-auth-link" id="planAuthAction">Log In</a>
+        </div>
+      </div>
+
+      <form id="planEventForm" class="plan-event-form">
+        <div class="plan-stepper" aria-label="Event plan progress">
+          <div class="plan-stepper-item is-active" data-step-dot="0">
+            <span class="plan-step-dot">1</span>
+            <div>
+              <p class="plan-stepper-label">Client</p>
+              <p class="plan-stepper-sub">Contact &amp; upload</p>
+            </div>
+          </div>
+          <div class="plan-stepper-item" data-step-dot="1">
+            <span class="plan-step-dot">2</span>
+            <div>
+              <p class="plan-stepper-label">Event</p>
+              <p class="plan-stepper-sub">Details &amp; seats</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="plan-step is-active" data-plan-step data-step-label="Client information">
+          <div class="plan-card">
+            <div class="plan-card-head">
+              <div class="plan-card-title">
+                <span class="plan-card-pill"></span>
+                <div>
+                  <h2>Client Information</h2>
+                  <p class="plan-card-sub">How can we reach you?</p>
+                </div>
+              </div>
+              <div class="plan-card-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+
+            <div class="plan-field">
+              <label for="clientName">Client Name</label>
+              <input
+                class="plan-input"
+                type="text"
+                id="clientName"
+                name="clientName"
+                placeholder="Client name"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="plan-field">
+              <label for="clientEmail">E-mail</label>
+              <input
+                class="plan-input"
+                type="email"
+                id="clientEmail"
+                name="clientEmail"
+                placeholder="Client email"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="plan-field">
+              <label for="clientPhone">Phone</label>
+              <input
+                class="plan-input"
+                type="tel"
+                id="clientPhone"
+                name="clientPhone"
+                placeholder="+961 70 000 000"
+                autocomplete="tel"
+                required
+              />
+            </div>
+
+            <div class="plan-field">
+              <label for="clientDesignation">Designation</label>
+              <input
+                class="plan-input"
+                type="text"
+                id="clientDesignation"
+                name="clientDesignation"
+                placeholder="Role or title"
+              />
+            </div>
+
+            <div class="plan-field">
+              <label for="clientUpload">Upload images (150x150)</label>
+              <div class="plan-file">
+                <input type="file" id="clientUpload" name="clientUpload" accept="image/*" multiple />
+                <span class="plan-file-label" id="clientUploadLabel">No file chosen</span>
+              </div>
+              <p class="plan-hint">You can add multiple square images; choose at least 150x150 for best display.</p>
+              <div class="plan-upload-preview" id="planUploadPreview" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plan-step" data-plan-step data-step-label="Event details">
+          <div class="plan-card">
+            <div class="plan-card-head">
+              <div class="plan-card-title">
+                <span class="plan-card-pill"></span>
+                <div>
+                  <h2>Event Information</h2>
+                  <p class="plan-card-sub">Tell us what you are planning.</p>
+                </div>
+              </div>
+              <div class="plan-card-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+
+            <div class="plan-field">
+              <label for="eventName">Event Name</label>
+              <input
+                class="plan-input"
+                type="text"
+                id="eventName"
+                name="eventName"
+                placeholder="e.g., Engagement night or Corporate meetup"
+              />
+            </div>
+
+            <div class="plan-field">
+              <label for="eventDetails">Event Details</label>
+              <textarea
+                class="plan-textarea"
+                id="eventDetails"
+                name="eventDetails"
+                placeholder="Theme, must-haves, style, or anything you want us to know"
+                rows="4"
+              ></textarea>
+            </div>
+
+            <div class="plan-row">
+              <div class="plan-field">
+                <label for="eventDate">Date</label>
+                <input class="plan-input" type="date" id="eventDate" name="eventDate" required />
+              </div>
+              <div class="plan-field">
+                <label for="eventTime">Time</label>
+                <input class="plan-input" type="time" id="eventTime" name="eventTime" />
+              </div>
+            </div>
+
+            <div class="plan-field">
+              <label for="venueName">Venue Name</label>
+              <div class="plan-input-icon">
+                <input
+                  class="plan-input"
+                  type="text"
+                  id="venueName"
+                  name="venueName"
+                  placeholder="Venue name or city"
+                  required
+                />
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+            </div>
+
+            <div class="plan-row">
+              <div class="plan-field">
+                <label for="eventType">Event Type</label>
+                <select class="plan-select" id="eventType" name="eventType" required>
+                  <option value="" disabled selected>Select type</option>
+                  <option value="Wedding">Wedding &amp; Engagement</option>
+                  <option value="Birthday">Birthday</option>
+                  <option value="Graduation">Graduation</option>
+                  <option value="Corporate">Corporate / Conference</option>
+                  <option value="Private">Private / Family</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="plan-field">
+                <label for="totalSeat">Total Seat</label>
+                <input
+                  class="plan-input"
+                  type="number"
+                  id="totalSeat"
+                  name="totalSeat"
+                  placeholder="e.g., 120"
+                  min="1"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="plan-row">
+              <div class="plan-field">
+                <label for="ticketPrice">Ticket Price</label>
+                <input
+                  class="plan-input"
+                  type="number"
+                  id="ticketPrice"
+                  name="ticketPrice"
+                  placeholder="$0.00"
+                  min="1"
+                  step="0.01"
+                  required
+                />
+              </div>
+              <div class="plan-field">
+                <label for="eventStatus">Event Status</label>
+                <select class="plan-select" id="eventStatus" name="eventStatus">
+                  <option value="draft" selected>Draft</option>
+                  <option value="planning">Planning</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plan-actions">
+          <div class="plan-actions-nav">
+            <button type="button" class="plan-nav-btn ghost" id="planPrevBtn" disabled>Previous</button>
+            <div class="plan-step-hint" id="planStepHint" aria-live="polite">Step 1 of 2</div>
+            <button type="button" class="plan-nav-btn" id="planNextBtn">Next: Event</button>
+          </div>
+          <button type="submit" class="plan-submit hidden" id="planSubmitBtn">Create Event Now</button>
+          <p class="plan-hint">We will confirm details with you shortly after you submit.</p>
+          <div id="planEventMessage" class="plan-event-message" role="status"></div>
+        </div>
+      </form>
+    </section>
+
+    <script src="js/app.js" defer></script>
+    <script src="js/plan-event.js" defer></script>
+
+    <footer class="main-footer">
+      <div class="footer-left">
+        <img src="images/logo.png" alt="Planity Logo" class="footer-logo" />
+      </div>
+      <div class="footer-center">
+        <div class="footer-sentence">We Turn Moments Into Memories.</div>
+        <div class="footer-copyright">
+          &copy; 2026 Planity. All rights reserved.
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span class="text-col">Lebanon</span>
+        </div>
+        <a href="tel:+96112345678" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span class="text-col">+961 12345678</span>
+        </a>
+        <a
+          href="https://www.instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="icon-col">
+            <i class="fa-brands fa-instagram"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+        <a
+          href="https://www.facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="icon-col">
+            <i class="fa-brands fa-facebook-f"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+      </div>
+      AÿAÿAÿAÿ
+    </footer>
+  </body>
+</html>
