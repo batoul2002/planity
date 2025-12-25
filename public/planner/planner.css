@@ -61,15 +61,12 @@ a {
   overflow: hidden;
 }
 
-<<<<<<< HEAD
 .sidebar nav {
   overflow-y: auto;
   padding-right: 6px;
   margin-right: -6px;
 }
 
-=======
->>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
 .brand {
   display: flex;
   align-items: center;
@@ -467,16 +464,10 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-<<<<<<< HEAD
   padding: 9px 16px;
   border-radius: 999px;
   font-weight: 700;
   white-space: nowrap;
-=======
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-weight: 700;
->>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
   border: 1px solid transparent;
   background: rgba(193, 202, 195, 0.24);
   color: #1e8a5b;
@@ -520,10 +511,7 @@ a {
   color: #9aa4a0;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
 .empty {
   text-align: center;
   padding: 20px;
@@ -1195,3 +1183,4 @@ a {
     transform: scale(1);
   }
 }
+
