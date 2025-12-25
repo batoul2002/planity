@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account</title>
+    <title>Planity | Account</title>
     <link rel="stylesheet" href="css/style.css" />
     <link
       rel="stylesheet"
@@ -13,32 +13,46 @@
   <body class="account-page">
     <header>
       <div class="logo-container">
-        <img src="images/logo.png" alt="Planity Logo" class="logo">
+        <img src="images/logo.png" alt="Planity Logo" class="logo" />
       </div>
 
       <nav>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="dropdown">
+<<<<<<< HEAD
             <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
+=======
+            <a href="event-type.html" class="dropbtn">Event Type â–¾</a>
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
             <ul class="dropdown-menu">
-              <li><a href="#">Wedding &amp; Engagement</a></li>
-              <li><a href="#">Birthday</a></li>
-              <li><a href="#">Graduation</a></li>
-              <li><a href="#">Gender Reveal</a></li>
-              <li><a href="#">Madeef Ashouraii</a></li>
-              <li><a href="#">Ramadan Gathering</a></li>
+              <li>
+                <a href="wedding-engagement.html">Wedding &amp; Engagement</a>
+              </li>
+              <li><a href="birthday.html">Birthday</a></li>
+              <li><a href="graduation.html">Graduation</a></li>
+              <li><a href="gender-reveal.html">Gender Reveal</a></li>
+              <li><a href="ramadan.html">Ramadan Gathering</a></li>
+              <li><a href="madeef.html">Other</a></li>
+              
             </ul>
           </li>
           <li class="dropdown">
             <a href="services.html" class="dropbtn">Services &#9662;</a>
             <ul class="dropdown-menu">
               <li><a href="venue.html">Venue</a></li>
+<<<<<<< HEAD
               <li><a href="decoration.html">Decoration</a></li>
               <li><a href="catering.html">Catering</a></li>
 
               <li><a href="photographer.html">Photographer</a></li>
               <li><a href="#">DJ</a></li>
+=======
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
+              <li><a href="#">DJ & Lighting System</a></li>
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
               <li><a href="invitation-cards.html">Invitation Card</a></li>
             </ul>
           </li>
@@ -48,10 +62,14 @@
         </ul>
         <ul class="nav-icons">
           <li>
-            <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
+            <a href="favorites.html" class="icon-link"
+              ><i class="fa-solid fa-heart"></i
+            ></a>
           </li>
           <li>
-            <a href="account.html" class="icon-link active"><i class="fa-solid fa-user"></i></a>
+            <a href="account.html" class="icon-link active"
+              ><i class="fa-solid fa-user"></i
+            ></a>
           </li>
         </ul>
       </nav>
@@ -71,8 +89,12 @@
             </div>
           </div>
           <div class="account-actions">
-            <button class="btn-outline" id="editProfileBtn" type="button">Edit Profile</button>
-            <button class="btn-danger" id="logoutBtn" type="button">Logout</button>
+            <button class="btn-outline" id="editProfileBtn" type="button">
+              Edit Profile
+            </button>
+            <button class="btn-danger" id="logoutBtn" type="button">
+              Logout
+            </button>
           </div>
         </div>
 
@@ -83,21 +105,40 @@
           </div>
 
           <div id="editProfileWrap" class="edit-profile-wrap hidden">
-            <h2 class="section-heading" style="margin-top:18px;">Edit Profile</h2>
+            <h2 class="section-heading" style="margin-top: 18px">
+              Edit Profile
+            </h2>
             <form id="editProfileForm">
               <div class="form-grid">
                 <div class="form-field">
                   <label for="ep_name">Full Name</label>
-                  <input type="text" id="ep_name" name="name" placeholder="Your name" required />
+                  <input
+                    type="text"
+                    id="ep_name"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                  />
                 </div>
                 <div class="form-field">
                   <label for="ep_phone">Phone</label>
-                  <input type="tel" id="ep_phone" name="phone" placeholder="+961 ..." />
+                  <input
+                    type="tel"
+                    id="ep_phone"
+                    name="phone"
+                    placeholder="+961 ..."
+                  />
                 </div>
               </div>
 
               <div class="form-actions">
-                <button type="button" class="btn-outline" id="editProfileCancel">Cancel</button>
+                <button
+                  type="button"
+                  class="btn-outline"
+                  id="editProfileCancel"
+                >
+                  Cancel
+                </button>
                 <button type="submit">Save Changes</button>
               </div>
             </form>
@@ -127,11 +168,21 @@
           <span class="icon-col"><i class="fa-solid fa-phone"></i></span>
           <span class="text-col">+961 12345678</span>
         </a>
-        <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <a
+          href="https://www.instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
           <span class="icon-col"><i class="fa-brands fa-instagram"></i></span>
           <span class="text-col">Planity.lb</span>
         </a>
-        <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <a
+          href="https://www.facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
           <span class="icon-col"><i class="fa-brands fa-facebook-f"></i></span>
           <span class="text-col">Planity.lb</span>
         </a>
@@ -140,7 +191,13 @@
 
     <script src="js/app.js" defer></script>
   </body>
+<<<<<<< HEAD
   </html>
+=======
+</html>
+
+
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
 
 
 

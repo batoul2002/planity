@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planity</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Editorial card fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body class="home-page">
+    <!-- Header Section -->
+    <header>
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Planity Logo" class="logo" />
+      </div>
+
+      <!-- Navigation Bar -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+
+          <!-- Events Dropdown -->
+          <li class="dropdown">
+            <a href="event-type.html" class="dropbtn">Event Types &#9662;</a>
+            <ul class="dropdown-menu">
+              <li><a href="wedding-engagement.html">Wedding &amp; Engagement</a></li>
+              <li><a href="birthday.html">Birthday</a></li>
+              <li><a href="graduation.html">Graduation</a></li>
+              <li><a href="gender-reveal.html">Gender Reveal</a></li>
+              <li><a href="ramadan.html">Ramadan Gathering</a></li>
+              <li><a href="madeef.html">Madeef Ashouraii</a></li>
+              
+            </ul>
+          </li>
+
+          <!-- Services Dropdown -->
+          <li class="dropdown">
+            <a href="services.html" class="dropbtn">Services &#9662;</a>
+            <ul class="dropdown-menu">
+              <li><a href="venue.html">Venue</a></li>
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
+              <li><a href="#">DJ & Lighting System</a></li>
+              <li><a href="invitation-cards.html">Invitation Card</a></li>
+            </ul>
+          </li>
+
+          <li><a href="plan-event.html">Plan Event</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="login.html">Log In</a></li>
+        </ul>
+        <ul class="nav-icons">
+          <li>
+            <a href="favorites.html" class="icon-link"
+              ><i class="fa-solid fa-heart"></i
+            ></a>
+          </li>
+          <li>
+            <a href="account.html" class="icon-link"
+              ><i class="fa-solid fa-user"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="intro">
+      <div class="intro-container">
+        <!-- Left side: Image Grid -->
+
+        <div class="intro-images">
+          <img id="intro-img-1" src="images/image1.jpg" alt="Event Image 1" />
+          <img id="intro-img-2" src="images/image2.jpg" alt="Event Image 2" />
+          <img id="intro-img-3" src="images/image3.jpg" alt="Event Image 3" />
+        </div>
+
+        <!-- Right side: Content -->
+        <div class="intro-content">
+          <h1 class="intro-title">Planity</h1>
+          <h2 class="intro-subtitle">Plan it masterfully</h2>
+          <p class="intro-text">
+            Welcome to a world of elegance where every celebration becomes a
+            masterpiece. We craft extraordinary experiences designed to reflect
+            your vision and style – flawlessly and effortlessly, where you and
+            your guests are treated like royalty.
+          </p>
+          <p class="intro-text">
+            At <span class="special-word">Planity</span>,we believe every event
+            should be as unique and memorable as you are. With creativity,
+            precision, and a passion for perfection, we organize your perfect
+            event with our expert guidance. Step by step, we insure that every
+            element is seamlessly managed from concept to completion – creating
+            moments that last a lifetime.
+          </p>
+          <a href="plan-event.html">
+            <button class="intro-button">GET STARTED</button>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event types quick view -->
+    <section id="event-preview" aria-labelledby="event-preview-title">
+      <div class="event-preview-inner">
+        <div class="event-preview-copy">
+          <h2 id="event-preview-title" class="ep-title">
+            What We Bring to Life
+          </h2>
+          <p class="ep-eyebrow">
+            Whatever you imagine, we make it happen
+          </p>
+          <ul class="ep-list" aria-label="Event types we plan">
+            <li><i class="fa-solid fa-check"></i>Wedding &amp; Engagement</li>
+            <li><i class="fa-solid fa-check"></i>Birthday</li>
+            <li><i class="fa-solid fa-check"></i>Graduation</li>
+            <li><i class="fa-solid fa-check"></i>Gender Reveal</li>
+            <li><i class="fa-solid fa-check"></i>Madeef Ashouraii</li>
+            <li><i class="fa-solid fa-check"></i>Ramadan Gathering</li>
+          </ul>
+          <a class="ep-button" href="event-type.html">View Details</a>
+        </div>
+        <div class="event-preview-media">
+          <div class="ep-frame">
+            <img src="images/events.jpg" alt="Styled decor vignette" class="ep-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services preview -->
+    <section id="services-preview" aria-labelledby="services-preview-title">
+      <div class="event-preview-inner services-preview-inner">
+        <div class="event-preview-media">
+          <div class="ep-frame">
+            <img
+              src="images/services-preview.jpg"
+              alt="Services collage"
+              class="ep-image"
+            />
+          </div>
+        </div>
+        <div class="event-preview-copy">
+          <h2 id="services-preview-title" class="ep-title">
+            Signature Services
+          </h2>
+          <p class="ep-eyebrow">
+            Crafted to elevate every celebration
+          </p>
+          <ul class="ep-list" aria-label="Services we provide">
+            <li><i class="fa-solid fa-check"></i>Venue</li>
+            <li><i class="fa-solid fa-check"></i>Decoration</li>
+            <li><i class="fa-solid fa-check"></i>Catering</li>
+            <li><i class="fa-solid fa-check"></i>Photographer</li>
+            <li><i class="fa-solid fa-check"></i>DJ & Lighting System</li>
+            <li><i class="fa-solid fa-check"></i>Invitation Card</li>
+          </ul>
+          <a class="ep-button" href="services.html">View Services</a>
+        </div>
+      </div>
+    </section>
+
+    <script src="js/app.js" defer></script>
+
+    <footer class="main-footer">
+      <div class="footer-left">
+        <img src="images/logo.png" alt="Planity Logo" class="footer-logo" />
+      </div>
+      <div class="footer-center">
+        <div class="footer-sentence">We Turn Moments Into Memories.</div>
+        <div class="footer-copyright">
+          &copy; 2026 Planity. All rights reserved.
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span class="text-col">Lebanon</span>
+        </div>
+        <a href="tel:+96112345678" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span class="text-col">+961 12345678</span>
+        </a>
+        <a
+          href="https://www.instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="icon-col">
+            <i class="fa-brands fa-instagram"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+        <a
+          href="https://www.facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="icon-col">
+            <i class="fa-brands fa-facebook-f"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+
+
+
+
+

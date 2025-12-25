@@ -12,7 +12,10 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/favorites.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body class="favorites-page">
     <div class="floating-hearts" aria-hidden="true">
@@ -39,23 +42,32 @@
           <li class="dropdown">
             <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
             <ul class="dropdown-menu">
-              <li><a href="#">Wedding &amp; Engagement</a></li>
-              <li><a href="#">Birthday</a></li>
-              <li><a href="#">Graduation</a></li>
-              <li><a href="#">Gender Reveal</a></li>
-              <li><a href="#">Madeef Ashouraii</a></li>
-              <li><a href="#">Ramadan Gathering</a></li>
+              <li>
+                <a href="wedding-engagement.html">Wedding &amp; Engagement</a>
+              </li>
+              <li><a href="birthday.html">Birthday</a></li>
+              <li><a href="graduation.html">Graduation</a></li>
+              <li><a href="gender-reveal.html">Gender Reveal</a></li>
+              <li><a href="madeef.html">Madeef Ashouraii</a></li>
+              <li><a href="ramadan.html">Ramadan Gathering</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <a href="services.html" class="dropbtn">Services &#9662;</a>
             <ul class="dropdown-menu">
               <li><a href="venue.html" class="active">Venue</a></li>
+<<<<<<< HEAD
               <li><a href="decoration.html">Decoration</a></li>
               <li><a href="catering.html">Catering</a></li>
 
               <li><a href="photographer.html">Photographer</a></li>
               <li><a href="#">DJ</a></li>
+=======
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
+              <li><a href="#">DJ & Lighting System</a></li>
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
               <li><a href="invitation-cards.html">Invitation Card</a></li>
             </ul>
           </li>
@@ -65,15 +77,20 @@
         </ul>
         <ul class="nav-icons">
           <li>
-            <a href="favorites.html" class="icon-link active"><i class="fa-solid fa-heart"></i></a>
+            <a href="favorites.html" class="icon-link active"
+              ><i class="fa-solid fa-heart"></i
+            ></a>
           </li>
           <li>
-            <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+            <a href="account.html" class="icon-link"
+              ><i class="fa-solid fa-user"></i
+            ></a>
           </li>
         </ul>
       </nav>
     </header>
 
+<<<<<<< HEAD
     <main class="favorite-experience">
       <section class="fav-hero">
         <div class="fav-hero-icon">
@@ -83,11 +100,42 @@
         <p class="fav-eyebrow">Favorites</p>
         <h1 class="fav-title">My Favorites</h1>
         <p class="fav-subtitle">Your curated collection of saved vendors and inspiration</p>
+=======
+    <section class="favorites-hero">
+      <h1>Favorites</h1>
+      <p>Revisit your saved venues and invitation cards in one place.</p>
+    </section>
+
+    <main class="favorites-shell">
+      <section class="favorites-section">
+        <div class="favorites-section-header">
+          <div>
+            <h2>Saved Venues</h2>
+            <p class="favorites-note">
+              Tap the heart on any venue to keep it here.
+            </p>
+          </div>
+          <div class="favorites-meta">
+            <i class="fa-solid fa-heart"></i>
+            <span data-favorites-count>0</span>
+            <span>favorites</span>
+          </div>
+        </div>
+        <div class="empty-state" data-empty-venues>
+          <strong>No venues yet</strong>
+          <p>Tap the heart on any venue to save it here for later.</p>
+          <a class="favorite-link" href="venue.html"
+            >Browse venues <i class="fa-solid fa-arrow-right"></i
+          ></a>
+        </div>
+        <section class="favorites-grid" data-venues-list></section>
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
       </section>
 
       <section class="fav-panel" data-view="services">
         <div class="fav-panel-head">
           <div>
+<<<<<<< HEAD
             <h2>Pick a service</h2>
             <p class="fav-muted">Browse your saved Venues, Decorations, Catering, Invitations, and Photographers.</p>
           </div>
@@ -101,6 +149,25 @@
             <h2>Saved collections</h2>
             <p class="fav-muted">Open a category to see the pieces you loved.</p>
           </div>
+=======
+            <h2>Saved Invitation Cards</h2>
+            <p class="favorites-note">
+              Hearts you tap on invitation cards show up here.
+            </p>
+          </div>
+          <div class="favorites-meta">
+            <i class="fa-solid fa-heart"></i>
+            <span data-invite-count>0</span>
+            <span>favorites</span>
+          </div>
+        </div>
+        <div class="empty-state" data-empty-invites>
+          <strong>No cards yet</strong>
+          <p>Tap the heart on any invitation to save it here for later.</p>
+          <a class="favorite-link" href="invitation-cards.html"
+            >Browse invitations <i class="fa-solid fa-arrow-right"></i
+          ></a>
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
         </div>
         <div class="fav-grid category-grid" data-category-grid></div>
       </section>
@@ -155,13 +222,23 @@
           </span>
           <span class="text-col">+961 12345678</span>
         </a>
-        <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <a
+          href="https://www.instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
           <span class="icon-col">
             <i class="fa-brands fa-instagram"></i>
           </span>
           <span class="text-col">Planity.lb</span>
         </a>
-        <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <a
+          href="https://www.facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
           <span class="icon-col">
             <i class="fa-brands fa-facebook-f"></i>
           </span>

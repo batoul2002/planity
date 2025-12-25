@@ -112,6 +112,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const getHashSlug = () =>
     window.location.hash ? window.location.hash.replace('#', '').replace(/^invite-/, '') : '';
 
+  const loadManifest = async () => {
+    try {
+      const res = await fetch('data/invitations.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+      return await res.json();
+    } catch (err) {
+      if (Array.isArray(window.INVITATION_MANIFEST)) {
+        console.warn('Falling back to inline invitation manifest', err);
+        return window.INVITATION_MANIFEST;
+      }
+      throw err;
+    }
+  };
+
   const apiFetch = async (path, options = {}) => {
     const headers = options.headers ? { ...options.headers } : {};
     headers['Content-Type'] = headers['Content-Type'] || 'application/json';
@@ -653,7 +667,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildDesignFilters(state.event);
   buildColorFilters(state.event);
   syncStyleTokens();
-  Promise.all([loadFavoriteSlugs(), fetch('data/invitations.json').then((res) => res.json())])
+  Promise.all([loadFavoriteSlugs(), loadManifest()])
     .then(([, data]) => {
       manifest = data.map((item, idx) => ({ ...item, __idx: idx }));
       alignFiltersToHashTarget();
@@ -662,6 +676,11 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((err) => {
       console.error('Failed to load invitations manifest', err);
       if (emptyState) emptyState.hidden = false;
+      const emptyMsg = emptyState?.querySelector('p');
+      if (emptyMsg) {
+        emptyMsg.textContent =
+          'Unable to load the invitation catalog. Please check your connection or open this page via http(s).';
+      }
     });
 
   window.addEventListener('hashchange', () => {

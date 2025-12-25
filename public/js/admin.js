@@ -16,6 +16,7 @@
 
   const safeFetch = async (path, opts = {}) => {
     if (typeof apiFetch !== 'function') throw new Error('API not ready');
+<<<<<<< HEAD
     const normalize = (p) => {
       if (!p) return '/';
       if (p.startsWith('http')) return p; // allow absolute URLs if ever needed
@@ -23,6 +24,9 @@
       return trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
     };
     return apiFetch(normalize(path), opts);
+=======
+    return apiFetch(path, opts);
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
   };
 
   const renderStats = (stats) => {
@@ -213,6 +217,7 @@
     }
     const notesEl = document.getElementById('admNotes');
     if (notesEl) {
+<<<<<<< HEAD
       const scrubNotes = (text) => {
         if (!text) return '';
         const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
@@ -266,6 +271,13 @@
     if (favGrid) {
       const favs = Array.isArray(payload?.favorites) && payload.favorites.length ? payload.favorites : event.favoritesSnapshot || [];
       favGrid.innerHTML = favs.map(f => `
+=======
+      notesEl.textContent = event.notes || 'No notes';
+    }
+    const favGrid = document.getElementById('admFavGrid');
+    if (favGrid) {
+      favGrid.innerHTML = (event.favoritesSnapshot || []).map(f => `
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
         <article class="ws-card">
           <div class="ws-card-img" style="background-image:url('${f.photo || ''}')"></div>
           <div class="ws-card-body">

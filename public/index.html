@@ -3,17 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Planity</title>
+    <title>Planity | Home</title>
     <link rel="stylesheet" href="css/style.css" />
     <!-- Editorial card fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Font Awesome for icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
   </head>
-  <body>
+  <body class="home-page">
     <!-- Header Section -->
     <header>
       <div class="logo-container">
@@ -29,12 +32,14 @@
           <li class="dropdown">
             <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
             <ul class="dropdown-menu">
-              <li><a href="#">Wedding & Engagement</a></li>
-              <li><a href="#">Birthday</a></li>
-              <li><a href="#">Graduation</a></li>
-              <li><a href="#">Gender Reveal</a></li>
-              <li><a href="#">Madeef Ashouraii</a></li>
-              <li><a href="#">Ramadan Gathering</a></li>
+              <li>
+                <a href="wedding-engagement.html">Wedding &amp; Engagement</a>
+              </li>
+              <li><a href="birthday.html">Birthday</a></li>
+              <li><a href="graduation.html">Graduation</a></li>
+              <li><a href="gender-reveal.html">Gender Reveal</a></li>
+              <li><a href="ramadan.html">Ramadan Gathering</a></li>
+              <li><a href="madeef.html">Other (custom events like proposals, corporate, more)</a></li>
             </ul>
           </li>
 
@@ -43,11 +48,18 @@
             <a href="services.html" class="dropbtn">Services &#9662;</a>
             <ul class="dropdown-menu">
               <li><a href="venue.html">Venue</a></li>
+<<<<<<< HEAD
               <li><a href="decoration.html">Decoration</a></li>
               <li><a href="catering.html">Catering</a></li>
 
               <li><a href="photographer.html">Photographer</a></li>
               <li><a href="#">DJ</a></li>
+=======
+              <li><a href="#">Decoration</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Photographer</a></li>
+              <li><a href="#">DJ & Lighting System</a></li>
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
               <li><a href="invitation-cards.html">Invitation Card</a></li>
             </ul>
           </li>
@@ -84,7 +96,7 @@
         <!-- Right side: Content -->
         <div class="intro-content">
           <h1 class="intro-title">Planity</h1>
-          <h2 class="intro-subtitle">PLAN IT MASTERFULLY!</h2>
+          <h2 class="intro-subtitle">Plan it masterfully</h2>
           <p class="intro-text">
             Welcome to a world of elegance where every celebration becomes a
             masterpiece. We craft extraordinary experiences designed to reflect
@@ -105,14 +117,8 @@
         </div>
       </div>
     </section>
-    
-        <!-- Explore Services intro block above the cards -->
-    <section id="guest-intro" aria-labelledby="guest-intro-title">
-      <h2 id="guest-intro-title" class="gi-serif">EXPLORE OUR</h2>
-      <p class="gi-script">Events</p>
-      <p class="gi-copy">Join us and let your worries fade away. We invite you to relax and enjoy, while we handle every detail with meticulous care. Your next extraordinary event starts here.</p>
-    </section>
 
+<<<<<<< HEAD
         <!-- Event Types: Be Our Guest style (3-column rows, overlay section) -->
     <section id="guest-section" aria-labelledby="guest-section-title">
       <h2 id="guest-section-title" class="visually-hidden">Event Type &#9662;</h2>
@@ -153,9 +159,68 @@
             <h3 class="guest-title">Ramadan Gathering</h3>
             <p class="guest-desc">VIEW DETAILS</p>
           </article>
+=======
+    <!-- Event types quick view -->
+    <section id="event-preview" aria-labelledby="event-preview-title">
+      <div class="event-preview-inner">
+        <div class="event-preview-copy">
+          <h2 id="event-preview-title" class="ep-title">
+            What We Bring to Life
+          </h2>
+          <p class="ep-eyebrow">Whatever you imagine, we make it happen</p>
+          <ul class="ep-list" aria-label="Event types we plan">
+            <li><i class="fa-solid fa-check"></i>Wedding &amp; Engagement</li>
+            <li><i class="fa-solid fa-check"></i>Birthday</li>
+            <li><i class="fa-solid fa-check"></i>Graduation</li>
+            <li><i class="fa-solid fa-check"></i>Gender Reveal</li>
+            <li><i class="fa-solid fa-check"></i>Ramadan Gathering</li>
+            <li><i class="fa-solid fa-check"></i>Other (custom events like proposals, corporate, more)</li>
+          </ul>
+          <a class="ep-button" href="event-type.html">View Details</a>
+        </div>
+        <div class="event-preview-media">
+          <div class="ep-frame">
+            <img
+              src="images/events.jpg"
+              alt="Styled decor vignette"
+              class="ep-image"
+            />
+          </div>
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
         </div>
       </div>
     </section>
+
+    <!-- Services preview -->
+    <section id="services-preview" aria-labelledby="services-preview-title">
+      <div class="event-preview-inner services-preview-inner">
+        <div class="event-preview-media">
+          <div class="ep-frame">
+            <img
+              src="images/services-preview.jpg"
+              alt="Services collage"
+              class="ep-image"
+            />
+          </div>
+        </div>
+        <div class="event-preview-copy">
+          <h2 id="services-preview-title" class="ep-title">
+            Signature Services
+          </h2>
+          <p class="ep-eyebrow">Crafted to elevate every celebration</p>
+          <ul class="ep-list" aria-label="Services we provide">
+            <li><i class="fa-solid fa-check"></i>Venue</li>
+            <li><i class="fa-solid fa-check"></i>Decoration</li>
+            <li><i class="fa-solid fa-check"></i>Catering</li>
+            <li><i class="fa-solid fa-check"></i>Photographer</li>
+            <li><i class="fa-solid fa-check"></i>DJ & Lighting System</li>
+            <li><i class="fa-solid fa-check"></i>Invitation Card</li>
+          </ul>
+          <a class="ep-button" href="services.html">View Services</a>
+        </div>
+      </div>
+    </section>
+
     <script src="js/app.js" defer></script>
 
     <footer class="main-footer">
@@ -206,8 +271,12 @@
       </div>
     </footer>
   </body>
+<<<<<<< HEAD
   </html>
 
 
 
 
+=======
+</html>
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd

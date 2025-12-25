@@ -949,8 +949,11 @@
 
     previewItems = filtered;
 
+<<<<<<< HEAD
     const showActions = isMyItemsPage();
 
+=======
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
     filtered.forEach((item) => {
       const card = document.createElement("div");
       card.className = "card catalog-card";
@@ -961,7 +964,11 @@
       card.dataset.image = item.image || "";
       card.dataset.title = item.title || "";
       card.dataset.itemId = itemId;
+<<<<<<< HEAD
       const actions = showActions
+=======
+      const actions = canModifyCatalog()
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
         ? `<div class="card-actions">
             <button class="link-btn" data-edit="${itemId}"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="link-btn danger" data-delete="${itemId}"><i class="fa-solid fa-trash"></i>Delete</button>
@@ -992,7 +999,11 @@
       });
     });
 
+<<<<<<< HEAD
     if (showActions) {
+=======
+    if (canModifyCatalog()) {
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
       grid.querySelectorAll("[data-delete]").forEach((btn) =>
         btn.addEventListener("click", () => markPending(btn.dataset.delete, "delete")),
       );

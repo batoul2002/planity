@@ -265,7 +265,20 @@
       return;
     }
 
+<<<<<<< HEAD
     const notesText = (eventDetails || '').trim();
+=======
+    const notesBlocks = [];
+    if (eventDetails) notesBlocks.push(eventDetails);
+    const contactLines = [
+      clientName ? `Client: ${clientName}` : '',
+      clientEmail ? `Email: ${clientEmail}` : '',
+      clientPhone ? `Phone: ${clientPhone}` : '',
+      clientDesignation ? `Designation: ${clientDesignation}` : '',
+      eventStatus ? `Requested status: ${eventStatus}` : ''
+    ].filter(Boolean);
+    if (contactLines.length) notesBlocks.push(contactLines.join('\n'));
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
 
     const selectedFiles = Array.from(fileQueue);
     let uploadedPaths = [];
@@ -273,12 +286,17 @@
       setMessage('Uploading your images...', 'info');
       try {
         uploadedPaths = await uploadImages(selectedFiles);
+<<<<<<< HEAD
+=======
+        if (uploadedPaths.length) notesBlocks.push(`Client images: ${uploadedPaths.join(', ')}`);
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
       } catch (err) {
         // keep going but surface the warning
         setMessage(err?.message || 'Image upload failed; submitting without images.', 'warn');
       }
     }
 
+<<<<<<< HEAD
     const submission = {
       name: clientName || undefined,
       email: clientEmail || undefined,
@@ -289,6 +307,8 @@
     };
     const cleanedSubmission = Object.fromEntries(Object.entries(submission).filter(([, v]) => (Array.isArray(v) ? v.length : v)));
 
+=======
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
     const payload = {
       type: eventType,
       theme: eventName || undefined,
@@ -296,8 +316,12 @@
       budget,
       guests,
       location: venueName,
+<<<<<<< HEAD
       notes: notesText || undefined,
       clientSubmission: Object.keys(cleanedSubmission).length ? cleanedSubmission : undefined
+=======
+      notes: notesBlocks.join('\n\n') || undefined
+>>>>>>> 467a23f603492cb7700581e4b9e5a52ef0f517fd
     };
 
     setMessage('Saving your event request...', 'info');
