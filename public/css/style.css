@@ -4782,18 +4782,68 @@ html.admin-event-page {
 }
 
 .ws-tab-btn {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #e4e7ef;
-  background: #f8f9fb;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #c8d2dd;
+  background: linear-gradient(180deg, #f4f7fa 0%, #e9eef3 100%);
+  color: #3a4658;
   cursor: pointer;
   font-weight: 700;
 }
 
 .ws-tab-btn.active {
-  border-color: var(--color-logo);
+  border-color: #3d6a54;
+  color: #1f3b2d;
+  background: #d8e6dd;
+  box-shadow: 0 10px 26px rgba(61, 106, 84, 0.14);
+}
+
+.admin-event-page {
+  --ae-green: #4c7c65;
+  --ae-ink: var(--color-logo);
+  --ae-soft: #f4f7f4;
+  --ae-border: #d5dfd8;
+  --ae-muted: var(--color-logo);
+}
+
+.admin-event-page .workspace-top {
+  background: linear-gradient(135deg, #f9fbf9, #f1f5f1);
+  border-color: var(--ae-border);
+  box-shadow: 0 14px 36px rgba(37, 53, 45, 0.12);
+  color: var(--ae-ink);
+}
+
+.admin-event-page .workspace-tabs {
+  padding: 4px 0;
+}
+
+.admin-event-page .ws-tab-btn {
+  background: linear-gradient(180deg, #f6faf7 0%, #eaf2ec 100%);
+  border: 1px solid var(--ae-border);
   color: var(--color-logo);
-  background: #eef3ef;
+}
+
+.admin-event-page .ws-tab-btn.active {
+  background: #e2ede7;
+  color: var(--color-logo);
+  border-color: var(--color-logo);
+  box-shadow: 0 12px 30px rgba(60, 107, 86, 0.12);
+}
+
+.admin-event-page .planner-card,
+.admin-event-page .ws-panel .planner-card {
+  border-color: var(--ae-border);
+  color: var(--ae-ink);
+}
+
+.admin-event-page h1,
+.admin-event-page h2,
+.admin-event-page h3,
+.admin-event-page h4,
+.admin-event-page p,
+.admin-event-page .ws-list-row span,
+.admin-event-page .planner-card {
+  color: var(--color-logo);
 }
 
 .workspace-panels {

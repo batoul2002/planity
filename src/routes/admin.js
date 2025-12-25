@@ -103,5 +103,7 @@ router.delete(
   '/content/meta-options/:optionId',
   catchAsync(adminController.deleteMetaOption)
 );
+router.get('/ui/overview', catchAsync(adminController.getUiOverview));
+router.post('/events/:eventId/remind', catchAsync(adminController.sendReminder));
 
 module.exports = router;

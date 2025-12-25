@@ -265,16 +265,7 @@
       return;
     }
 
-    const notesBlocks = [];
-    if (eventDetails) notesBlocks.push(eventDetails);
-    const contactLines = [
-      clientName ? `Client: ${clientName}` : '',
-      clientEmail ? `Email: ${clientEmail}` : '',
-      clientPhone ? `Phone: ${clientPhone}` : '',
-      clientDesignation ? `Designation: ${clientDesignation}` : '',
-      eventStatus ? `Requested status: ${eventStatus}` : ''
-    ].filter(Boolean);
-    if (contactLines.length) notesBlocks.push(contactLines.join('\n'));
+    const notesText = (eventDetails || '').trim();
 
     const selectedFiles = Array.from(fileQueue);
     let uploadedPaths = [];
@@ -282,12 +273,21 @@
       setMessage('Uploading your images...', 'info');
       try {
         uploadedPaths = await uploadImages(selectedFiles);
-        if (uploadedPaths.length) notesBlocks.push(`Client images: ${uploadedPaths.join(', ')}`);
       } catch (err) {
         // keep going but surface the warning
         setMessage(err?.message || 'Image upload failed; submitting without images.', 'warn');
       }
     }
+
+    const submission = {
+      name: clientName || undefined,
+      email: clientEmail || undefined,
+      phone: clientPhone || undefined,
+      designation: clientDesignation || undefined,
+      requestedStatus: eventStatus || undefined,
+      uploads: uploadedPaths.length ? uploadedPaths : undefined
+    };
+    const cleanedSubmission = Object.fromEntries(Object.entries(submission).filter(([, v]) => (Array.isArray(v) ? v.length : v)));
 
     const payload = {
       type: eventType,
@@ -296,7 +296,8 @@
       budget,
       guests,
       location: venueName,
-      notes: notesBlocks.join('\n\n') || undefined
+      notes: notesText || undefined,
+      clientSubmission: Object.keys(cleanedSubmission).length ? cleanedSubmission : undefined
     };
 
     setMessage('Saving your event request...', 'info');

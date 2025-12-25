@@ -71,7 +71,7 @@
       setAuth(data.token, data.user);
       const role = (data.user && data.user.role) || 'client';
       if (role === 'admin') {
-        window.location.href = 'admin-dashboard.html';
+        window.location.href = 'admin/dashboard.html';
       } else if (role === 'planner') {
         window.location.href = 'planner/dashboard.html';
       } else {

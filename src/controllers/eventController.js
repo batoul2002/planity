@@ -50,7 +50,8 @@ exports.createEvent = async (req, res, next) => {
     location,
     notes,
     plannerId,
-    vendors = []
+    vendors = [],
+    clientSubmission
   } = req.body;
 
   let favoritesSnapshot = [];
@@ -83,6 +84,15 @@ exports.createEvent = async (req, res, next) => {
     status: 'pending_assignment',
     lastActivityAt: new Date()
   };
+  if (clientSubmission && typeof clientSubmission === 'object') {
+    const uploads = Array.isArray(clientSubmission.uploads) ? clientSubmission.uploads.filter(Boolean) : [];
+    const cleaned = ['name', 'email', 'phone', 'designation', 'requestedStatus'].reduce((acc, key) => {
+      if (clientSubmission[key]) acc[key] = clientSubmission[key];
+      return acc;
+    }, {});
+    if (uploads.length) cleaned.uploads = uploads;
+    if (Object.keys(cleaned).length) eventData.clientSubmission = cleaned;
+  }
 
   if (plannerId) {
     if (!mongoose.Types.ObjectId.isValid(plannerId)) {

@@ -1,0 +1,204 @@
+erDiagram
+    User {
+        string _id
+        string name
+        string email
+        string password
+        string role
+        string avatar
+        string phone
+        string locale
+        boolean isVerified
+        boolean isActive
+        date createdAt
+        date updatedAt
+    }
+
+    Event {
+        string _id
+        objectId client
+        objectId planner
+        string type
+        string theme
+        date date
+        number budget
+        number guests
+        string location
+        objectId[] vendors
+        array tasks
+        array budgetItems
+        number budgetItemsTotal
+        string notes
+        object clientSubmission
+        objectId assignedByAdmin
+        date lastActivityAt
+        number planningStep
+        string status
+        array statusHistory
+        boolean isPaid
+        date createdAt
+        date updatedAt
+    }
+
+    Vendor {
+        string _id
+        string slug
+        string name
+        string category
+        object pricing
+        string city
+        string[] amenities
+        string[] styles
+        string[] cuisines
+        string[] dietaryOptions
+        string[] photos
+        boolean verified
+        boolean isActive
+        number averageRating
+        number ratingCount
+        date createdAt
+        date updatedAt
+    }
+
+    Contract {
+        string _id
+        objectId event
+        objectId vendor
+        objectId[] parties
+        string text
+        string status
+        date signedAt
+        boolean isPaid
+        date createdAt
+        date updatedAt
+    }
+
+    Message {
+        string _id
+        objectId event
+        objectId sender
+        string content
+        array attachments
+        array reads
+        date createdAt
+        date updatedAt
+    }
+
+    Review {
+        string _id
+        objectId author
+        objectId vendor
+        number rating
+        string comment
+        date createdAt
+        date updatedAt
+    }
+
+    Favorite {
+        string _id
+        objectId user
+        objectId vendor
+        date createdAt
+        date updatedAt
+    }
+
+    MetaOption {
+        string _id
+        string category
+        string key
+        object labels
+        number order
+        boolean isActive
+        date createdAt
+        date updatedAt
+    }
+
+    Dispute {
+        string _id
+        string title
+        string description
+        string status
+        objectId event
+        objectId contract
+        objectId raisedBy
+        objectId against
+        string resolutionNotes
+        date createdAt
+        date updatedAt
+    }
+
+    PlannerItem {
+        string _id
+        string title
+        string service
+        string eventType
+        string category
+        number priceMin
+        number priceMax
+        string image
+        string description
+        string clientKey
+        string status
+        string source
+        objectId owner
+        date createdAt
+        date updatedAt
+    }
+
+    PlannerItemChange {
+        string _id
+        string action
+        object itemData
+        objectId itemId
+        string clientKey
+        string status
+        objectId createdBy
+        objectId reviewedBy
+        date reviewedAt
+        string note
+        date createdAt
+        date updatedAt
+    }
+
+    ChatRoom {
+        string _id
+        objectId event
+        objectId[] participants
+        objectId createdBy
+        date createdAt
+        date updatedAt
+    }
+
+    User ||--o{ Event : "client"
+    User ||--o{ Event : "planner"
+    User ||--o{ Event : "assignedByAdmin"
+    User ||--o{ Event : "statusHistory.changedBy"
+    User ||--o{ Event : "tasks.assignedTo"
+
+    Event ||--o{ Message : "has"
+    User ||--o{ Message : "sender"
+
+    Event ||--o{ Contract : "has"
+    Vendor ||--o{ Contract : "optional"
+    User }o--o{ Contract : "parties"
+
+    Event }o--o{ Vendor : "vendors/budgetItems"
+
+    Vendor ||--o{ Review : "reviews"
+    User ||--o{ Review : "author"
+
+    User ||--o{ Favorite : "favorites"
+    Vendor ||--o{ Favorite : "favorited"
+
+    Event ||--o{ Dispute : "disputes"
+    Contract ||--o{ Dispute : "relatedTo"
+    User ||--o{ Dispute : "raisedBy"
+    User ||--o{ Dispute : "against"
+
+    Event ||--|| ChatRoom : "chatRoom"
+    User }o--o{ ChatRoom : "participants"
+
+    User ||--o{ PlannerItem : "owner"
+    PlannerItem ||--o{ PlannerItemChange : "changes"
+    User ||--o{ PlannerItemChange : "createdBy"
+    User ||--o{ PlannerItemChange : "reviewedBy"

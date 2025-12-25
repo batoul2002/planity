@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body data-page="dashboard">
+    <div class="planner-shell admin-shell">
+      <aside class="sidebar admin-sidebar">
+        <div class="brand">
+          <img class="brand-logo" src="../images/logo.original.png" alt="Admin logo" />
+          <div>
+            <strong>EventPro</strong>
+            <p class="muted small">Admin Panel</p>
+          </div>
+        </div>
+        <nav class="nav admin-nav">
+          <a href="dashboard.html" data-nav="dashboard">
+            <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+            <span class="nav-label">Dashboard</span>
+            <span class="nav-count"></span>
+          </a>
+          <a href="event-requests.html" data-nav="requests">
+            <span class="nav-icon"><i class="fa-solid fa-calendar-plus"></i></span>
+            <span class="nav-label">Event Requests</span>
+            <span class="nav-count" data-count-for="requests"></span>
+          </a>
+          <a href="assignment.html" data-nav="assignment">
+            <span class="nav-icon"><i class="fa-solid fa-user-check"></i></span>
+            <span class="nav-label">Planner Assignment</span>
+            <span class="nav-count" data-count-for="assignment"></span>
+          </a>
+          <a href="events-monitoring.html" data-nav="events">
+            <span class="nav-icon"><i class="fa-solid fa-eye"></i></span>
+            <span class="nav-label">Events Monitoring</span>
+            <span class="nav-count" data-count-for="events"></span>
+          </a>
+          <a href="planners.html" data-nav="planners">
+            <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+            <span class="nav-label">Planners</span>
+            <span class="nav-count" data-count-for="planners"></span>
+          </a>
+          <a href="catalog.html" data-nav="catalog">
+            <span class="nav-icon"><i class="fa-solid fa-book-open"></i></span>
+            <span class="nav-label">Catalog</span>
+            <span class="nav-count" data-count-for="catalog"></span>
+          </a>
+          <a href="approvals.html" data-nav="approvals">
+            <span class="nav-icon"><i class="fa-solid fa-check-to-slot"></i></span>
+            <span class="nav-label">Approvals</span>
+            <span class="nav-count" data-count-for="approvals"></span>
+          </a>
+          <a href="payments.html" data-nav="payments">
+            <span class="nav-icon"><i class="fa-solid fa-file-contract"></i></span>
+            <span class="nav-label">Payments & Contracts</span>
+            <span class="nav-count" data-count-for="payments"></span>
+          </a>
+          <a href="notifications.html" data-nav="notifications">
+            <span class="nav-icon"><i class="fa-solid fa-bell"></i></span>
+            <span class="nav-label">Notifications</span>
+            <span class="nav-count" data-count-for="notifications"></span>
+          </a>
+        </nav>
+        <footer>
+          Signed in as admin<br />
+          <small>Control, approvals, monitoring</small>
+        </footer>
+      </aside>
+
+      <div class="content-area admin-content">
+        <div class="topbar">
+          <div class="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Search admin workspace" />
+          </div>
+          <span class="pill soft">Admin view</span>
+        </div>
+
+        <main class="page dashboard">
+          <header class="page-hero">
+            <p class="eyebrow">Overview</p>
+            <h1>Dashboard</h1>
+            <p class="muted">
+              The admin panel centralizes control over event assignment, catalog moderation, planner management, and system monitoring to ensure quality and consistency.
+            </p>
+          </header>
+
+          <section class="stat-grid">
+            <div class="stat-card gold">
+              <div class="stat-top">
+                <div class="stat-icon gold"><i class="fa-solid fa-calendar-check"></i></div>
+                <div>
+                  <small>Active Events</small>
+                  <strong id="statActive">0</strong>
+                </div>
+              </div>
+              <span class="stat-trend">+12% from last week</span>
+            </div>
+            <div class="stat-card green">
+              <div class="stat-top">
+                <div class="stat-icon green"><i class="fa-solid fa-user-check"></i></div>
+                <div>
+                  <small>Waiting for Assignment</small>
+                  <strong id="statPendingAssign">0</strong>
+                </div>
+              </div>
+              <span class="muted small">Gatekeeper stage</span>
+            </div>
+            <div class="stat-card teal">
+              <div class="stat-top">
+                <div class="stat-icon teal"><i class="fa-solid fa-comments"></i></div>
+                <div>
+                  <small>In Progress</small>
+                  <strong id="statInProgress">0</strong>
+                </div>
+              </div>
+              <span class="muted small">Planner + client in chat</span>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top">
+                <div class="stat-icon gold"><i class="fa-solid fa-clipboard-check"></i></div>
+                <div>
+                  <small>Pending Approvals</small>
+                  <strong id="statApprovals">0</strong>
+                </div>
+              </div>
+              <span class="muted small">Items, edits, deletions</span>
+            </div>
+            <div class="stat-card rose">
+              <div class="stat-top">
+                <div class="stat-icon rose"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div>
+                  <small>Late / Overdue</small>
+                  <strong id="statOverdue">0</strong>
+                </div>
+              </div>
+              <span class="muted small">Follow up now</span>
+            </div>
+          </section>
+
+          <section class="panel highlight">
+            <div class="panel-head">
+              <div>
+                <h3>Needs Your Attention</h3>
+                <p class="muted small">What requires action right now</p>
+              </div>
+              <a class="link-btn" href="notifications.html"><i class="fa-solid fa-bell"></i> View alerts</a>
+            </div>
+            <div id="dashboardAttention"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>Event Requests</h3>
+                <p class="muted small">Before assignment</p>
+              </div>
+              <a class="link-btn" href="event-requests.html"><i class="fa-solid fa-arrow-right"></i> Go to requests</a>
+            </div>
+            <div id="dashboardRequests"></div>
+          </section>
+
+          <section class="panel subtle">
+            <div class="panel-head">
+              <h3>Guardrails</h3>
+              <span class="pill warn">Admin = control, not execution</span>
+            </div>
+            <div class="hero-guardrails">
+              <span class="tag"><i class="fa-solid fa-ban"></i> No planning / chat like planner</span>
+              <span class="tag"><i class="fa-solid fa-check-to-slot"></i> Don’t bypass approvals</span>
+              <span class="tag"><i class="fa-solid fa-file-contract"></i> Don’t modify confirmed contracts</span>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

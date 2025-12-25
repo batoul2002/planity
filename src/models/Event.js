@@ -45,6 +45,14 @@ const eventSchema = new mongoose.Schema(
         photo: { type: String }
       }
     ],
+    clientSubmission: {
+      name: { type: String },
+      email: { type: String },
+      phone: { type: String },
+      designation: { type: String },
+      requestedStatus: { type: String },
+      uploads: [{ type: String }]
+    },
     assignedByAdmin: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     lastActivityAt: { type: Date },
     planningStep: { type: Number, default: 1, min: 1 },
