@@ -949,6 +949,8 @@
 
     previewItems = filtered;
 
+    const showActions = canModifyCatalog();
+
     filtered.forEach((item) => {
       const card = document.createElement("div");
       card.className = "card catalog-card";
@@ -959,7 +961,7 @@
       card.dataset.image = item.image || "";
       card.dataset.title = item.title || "";
       card.dataset.itemId = itemId;
-      const actions = canModifyCatalog()
+      const actions = showActions
         ? `<div class="card-actions">
             <button class="link-btn" data-edit="${itemId}"><i class="fa-solid fa-pen"></i>Edit</button>
             <button class="link-btn danger" data-delete="${itemId}"><i class="fa-solid fa-trash"></i>Delete</button>
@@ -990,7 +992,7 @@
       });
     });
 
-    if (canModifyCatalog()) {
+    if (showActions) {
       grid.querySelectorAll("[data-delete]").forEach((btn) =>
         btn.addEventListener("click", () => markPending(btn.dataset.delete, "delete")),
       );
@@ -1267,3 +1269,4 @@
     categorySelect.value = unique.includes(current) ? current : "all";
   }
 })();
+

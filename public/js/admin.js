@@ -16,7 +16,13 @@
 
   const safeFetch = async (path, opts = {}) => {
     if (typeof apiFetch !== 'function') throw new Error('API not ready');
-    return apiFetch(path, opts);
+    const normalize = (p) => {
+      if (!p) return '/';
+      if (p.startsWith('http')) return p; // allow absolute URLs if ever needed
+      const trimmed = p.startsWith('/api/v1') ? p.replace('/api/v1', '') : p;
+      return trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+    };
+    return apiFetch(normalize(path), opts);
   };
 
   const renderStats = (stats) => {
@@ -207,11 +213,59 @@
     }
     const notesEl = document.getElementById('admNotes');
     if (notesEl) {
-      notesEl.textContent = event.notes || 'No notes';
+      const scrubNotes = (text) => {
+        if (!text) return '';
+        const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+        const filtered = lines.filter((line) => {
+          const lower = line.toLowerCase();
+          return !lower.startsWith('client:') &&
+            !lower.startsWith('email:') &&
+            !lower.startsWith('phone:') &&
+            !lower.startsWith('designation:') &&
+            !lower.startsWith('requested status:') &&
+            !lower.startsWith('client images:');
+        });
+        return (filtered.join('\n') || '').trim();
+      };
+      const cleanedNotes = scrubNotes(event.notes);
+      notesEl.textContent = cleanedNotes || 'No notes';
+    }
+    const submissionEl = document.getElementById('admSubmission');
+    const submissionCard = document.getElementById('admSubmissionCard');
+    if (submissionEl) {
+      const sub = event.clientSubmission || {};
+      const rows = [];
+      const addRow = (label, value) => rows.push(`
+        <div class="ws-list-row">
+          <span>${label}</span>
+          <span class="muted">${value || '—'}</span>
+        </div>
+      `);
+      if (sub.designation) addRow('Designation', sub.designation);
+      if (sub.requestedStatus) addRow('Requested status', sub.requestedStatus);
+      if (sub.name) addRow('Submitted name', sub.name);
+      if (sub.email) addRow('Submitted email', sub.email);
+      if (sub.phone) addRow('Submitted phone', sub.phone);
+      if (Array.isArray(sub.uploads) && sub.uploads.length) {
+        rows.push(`
+          <div class="ws-list-row">
+            <span>Uploads</span>
+            <span class="muted">
+              ${sub.uploads
+                .map((u, idx) => `<a href="${u}" target="_blank" rel="noopener noreferrer">File ${idx + 1}</a>`)
+                .join(' • ')}
+            </span>
+          </div>
+        `);
+      }
+      const html = rows.join('');
+      submissionEl.innerHTML = html || '<p class="muted">No extra submission details.</p>';
+      if (submissionCard) submissionCard.style.display = html ? '' : 'none';
     }
     const favGrid = document.getElementById('admFavGrid');
     if (favGrid) {
-      favGrid.innerHTML = (event.favoritesSnapshot || []).map(f => `
+      const favs = Array.isArray(payload?.favorites) && payload.favorites.length ? payload.favorites : event.favoritesSnapshot || [];
+      favGrid.innerHTML = favs.map(f => `
         <article class="ws-card">
           <div class="ws-card-img" style="background-image:url('${f.photo || ''}')"></div>
           <div class="ws-card-body">
@@ -274,3 +328,4 @@
   if (isAdminDash) loadDashboard();
   if (isAdminEvent) loadEvent();
 })(); 
+

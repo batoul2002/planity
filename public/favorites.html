@@ -36,10 +36,11 @@
             <a href="services.html" class="dropbtn">Services &#9662;</a>
             <ul class="dropdown-menu">
               <li><a href="venue.html" class="active">Venue</a></li>
-              <li><a href="#">Decoration</a></li>
-              <li><a href="#">Catering</a></li>
-              <li><a href="#">Photographer</a></li>
-              <li><a href="#">DJ & Lighting System</a></li>
+              <li><a href="decoration.html">Decoration</a></li>
+              <li><a href="catering.html">Catering</a></li>
+
+              <li><a href="photographer.html">Photographer</a></li>
+              <li><a href="services.html">DJ</a></li>
               <li><a href="invitation-cards.html">Invitation Card</a></li>
             </ul>
           </li>
@@ -62,56 +63,33 @@
       </nav>
     </header>
 
-    <section class="favorites-hero">
-      <h1>Favorites</h1>
-      <p>Revisit your saved venues and invitation cards in one place.</p>
-    </section>
-
-    <main class="favorites-shell">
-      <section class="favorites-section">
-        <div class="favorites-section-header">
-          <div>
-            <h2>Saved Venues</h2>
-            <p class="favorites-note">
-              Tap the heart on any venue to keep it here.
-            </p>
-          </div>
-          <div class="favorites-meta">
-            <i class="fa-solid fa-heart"></i>
-            <span data-favorites-count>0</span>
-            <span>favorites</span>
-          </div>
+    <main class="favorite-experience">
+      <section class="fav-hero">
+        <div class="fav-hero-icon">
+          <i class="fa-solid fa-ring"></i>
         </div>
-        <div class="empty-state" data-empty-venues>
-          <strong>No venues yet</strong>
-          <p>Tap the heart on any venue to save it here for later.</p>
-          <a class="favorite-link" href="venue.html"
-            >Browse venues <i class="fa-solid fa-arrow-right"></i
-          ></a>
-        </div>
-        <section class="favorites-grid" data-venues-list></section>
+        <p class="fav-total" data-fav-total>0 favorites saved</p>
+        <p class="fav-eyebrow">Favorites</p>
+        <h1 class="fav-title">My Favorites</h1>
+        <p class="fav-subtitle">Your curated collection of saved vendors and inspiration</p>
       </section>
 
       <section class="favorites-section">
         <div class="favorites-section-header">
           <div>
-            <h2>Saved Invitation Cards</h2>
-            <p class="favorites-note">
-              Hearts you tap on invitation cards show up here.
-            </p>
-          </div>
-          <div class="favorites-meta">
-            <i class="fa-solid fa-heart"></i>
-            <span data-invite-count>0</span>
-            <span>favorites</span>
+            <h2>Pick a service</h2>
+            <p class="fav-muted">Browse your saved Venues, Decorations, Catering, Invitations, and Photographers.</p>
           </div>
         </div>
-        <div class="empty-state" data-empty-invites>
-          <strong>No cards yet</strong>
-          <p>Tap the heart on any invitation to save it here for later.</p>
-          <a class="favorite-link" href="invitation-cards.html"
-            >Browse invitations <i class="fa-solid fa-arrow-right"></i
-          ></a>
+        <div class="fav-grid service-grid" data-service-grid></div>
+      </section>
+
+      <section class="fav-panel is-hidden" data-view="categories">
+        <div class="fav-panel-head">
+          <div>
+            <h2>Saved collections</h2>
+            <p class="fav-muted">Open a category to see the pieces you loved.</p>
+          </div>
         </div>
         <section class="favorites-grid" data-invite-list></section>
       </section>
@@ -169,6 +147,8 @@
     <script src="js/favorites.js" defer></script>
   </body>
 </html>
+
+
 
 
 

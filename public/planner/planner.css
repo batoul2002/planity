@@ -61,6 +61,12 @@ a {
   overflow: hidden;
 }
 
+.sidebar nav {
+  overflow-y: auto;
+  padding-right: 6px;
+  margin-right: -6px;
+}
+
 .brand {
   display: flex;
   align-items: center;
@@ -458,9 +464,10 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 14px;
+  padding: 9px 16px;
   border-radius: 999px;
   font-weight: 700;
+  white-space: nowrap;
   border: 1px solid transparent;
   background: rgba(193, 202, 195, 0.24);
   color: #1e8a5b;
@@ -503,6 +510,7 @@ a {
 .status-row small {
   color: #9aa4a0;
 }
+
 
 .empty {
   text-align: center;
@@ -1175,3 +1183,4 @@ a {
     transform: scale(1);
   }
 }
+
