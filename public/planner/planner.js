@@ -135,6 +135,7 @@
   let imagePreviewNext;
   let previewItems = [];
   let previewIndex = -1;
+  let assignedFiltersBound = false;
   const isValidObjectId = (val) => typeof val === "string" && /^[a-fA-F0-9]{24}$/.test(val);
   const allowedItemFields = ["title", "service", "eventType", "category", "priceMin", "priceMax", "image", "description", "status", "source", "clientKey"];
   const slugifyValue = (value = "") =>
@@ -240,6 +241,7 @@
     updateCategoryOptions();
     if (document.body.dataset.page === "catalog" || document.body.dataset.page === "my-items") renderCatalog();
     if (document.body.dataset.page === "dashboard") renderDashboard();
+    if (document.body.dataset.page === "assigned") renderAssignedEvents();
   }
 
   function roleGuard() {
@@ -733,7 +735,7 @@
 
     renderUpcoming(data.upcoming);
     renderActivity(data.activity);
-    renderWorkflow(data.workflowStage);
+    renderWorkflow(data.workflowEvents);
   }
 
   function buildDashboardData(pendingCount, events = []) {
@@ -756,7 +758,7 @@
       completionTrend: 0,
             responseTime: activeEvents ? `${Math.max(1, Math.min(24, awaitingReply * 2 || 2))}h` : "0h",
       responseTrend: 0,
-      workflowStage: deriveWorkflowStage(approvedItems, awaitingItems, totalItems),
+      workflowEvents: events,
       upcoming: deriveUpcomingEvents(events),
       activity: deriveActivity(items),
     };
@@ -812,14 +814,334 @@
       .join("");
   }
 
-  function renderWorkflow(stageIndex = 0) {
-    const track = document.getElementById("workflowTrack");
-    if (!track) return;
-    const totalSteps = 5;
-    const steps = Array.from({ length: totalSteps });
-    track.innerHTML = steps
+  function clampWorkflowStage(value) {
+    return Math.min(4, Math.max(0, value));
+  }
+
+  function getWorkflowStage(event = {}) {
+    const step = Number(event.planningStep);
+    if (Number.isFinite(step) && step > 0) return clampWorkflowStage(step - 1);
+
+    const status = normalizeStatus(event.status || "");
+    const statusMap = {
+      pending_assignment: 0,
+      assigned: 0,
+      draft: 2,
+      planning: 1,
+      confirmed: 3,
+      completed: 4,
+      cancelled: 4,
+    };
+
+    if (status && Object.prototype.hasOwnProperty.call(statusMap, status)) return statusMap[status];
+    if (status.includes("proposal") || status.includes("draft")) return 2;
+    if (status.includes("approve") || status.includes("confirm")) return 3;
+    if (status.includes("complete") || status.includes("done") || status.includes("cancel")) return 4;
+    if (status.includes("chat") || status.includes("plan")) return 1;
+
+    return 0;
+  }
+
+  function formatEventDate(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function formatStatusLabel(status = "") {
+    if (!status) return "";
+    return capitalize(String(status).replace(/_/g, " "));
+  }
+
+  function formatWorkflowTitle(event = {}) {
+    return event.type || event.title || "Event";
+  }
+
+  function formatWorkflowSubtitle(event = {}) {
+    const parts = [];
+    const date = formatEventDate(event.date);
+    if (date) parts.push(date);
+    if (event.location) parts.push(event.location);
+    const statusLabel = formatStatusLabel(event.status);
+    if (statusLabel) parts.push(statusLabel);
+    return parts.join(" | ");
+  }
+
+  function renderWorkflow(events = []) {
+    const list = document.getElementById("workflowList");
+    if (!list) return;
+    if (!Array.isArray(events) || !events.length) {
+      list.innerHTML = `<div class="empty">No events assigned yet.</div>`;
+      return;
+    }
+
+    list.innerHTML = events
+      .map((event) => {
+        const stageIndex = getWorkflowStage(event);
+        const totalSteps = 5;
+        const steps = Array.from({ length: totalSteps })
+          .map((_, idx) => `<div class="workflow-step ${idx <= stageIndex ? "fill" : ""}"></div>`)
+          .join("");
+        const title = formatWorkflowTitle(event);
+        const subtitle = formatWorkflowSubtitle(event);
+
+        return `
+          <div class="workflow-row">
+            <div class="workflow-meta">
+              <strong>${title}</strong>
+              ${subtitle ? `<span class="muted small">${subtitle}</span>` : ""}
+            </div>
+            <div class="workflow-track">${steps}</div>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  /* Assigned Events */
+  const workflowStages = ["Assigned", "In Chat", "Proposal", "Approved", "Done"];
+
+  function renderAssignedEvents() {
+    renderAssignedSummary(store.events || []);
+    bindAssignedFilters();
+    updateAssignedList();
+  }
+
+  function renderAssignedSummary(events = []) {
+    const counts = [0, 0, 0, 0, 0];
+    (events || []).forEach((event) => {
+      const idx = getWorkflowStage(event);
+      counts[idx] += 1;
+    });
+
+    setText("assignedStage0", counts[0]);
+    setText("assignedStage1", counts[1]);
+    setText("assignedStage2", counts[2]);
+    setText("assignedStage3", counts[3]);
+    setText("assignedStage4", counts[4]);
+  }
+
+  function bindAssignedFilters() {
+    if (assignedFiltersBound) return;
+    const search = document.getElementById("assignedSearch");
+    const stage = document.getElementById("assignedStage");
+    const sort = document.getElementById("assignedSort");
+    const clear = document.getElementById("assignedClear");
+    if (search) search.addEventListener("input", updateAssignedList);
+    if (stage) stage.addEventListener("change", updateAssignedList);
+    if (sort) sort.addEventListener("change", updateAssignedList);
+    if (clear) {
+      clear.addEventListener("click", () => {
+        if (search) search.value = "";
+        if (stage) stage.value = "all";
+        if (sort) sort.value = "date";
+        updateAssignedList();
+      });
+    }
+    assignedFiltersBound = true;
+  }
+
+  function updateAssignedList() {
+    const list = document.getElementById("assignedEventList");
+    if (!list) return;
+    const count = document.getElementById("assignedCount");
+    const filtered = applyAssignedFilters(store.events || []);
+    if (count) count.textContent = `${filtered.length} event${filtered.length === 1 ? "" : "s"}`;
+    if (!filtered.length) {
+      list.innerHTML = `<div class="empty">No events match your filters.</div>`;
+      return;
+    }
+    list.innerHTML = filtered.map(buildAssignedCard).join("");
+    bindAssignedActions(list);
+  }
+
+  function getAssignedFilters() {
+    const query = (document.getElementById("assignedSearch")?.value || "").trim().toLowerCase();
+    const stage = document.getElementById("assignedStage")?.value || "all";
+    const sort = document.getElementById("assignedSort")?.value || "date";
+    return { query, stage, sort };
+  }
+
+  function applyAssignedFilters(events = []) {
+    const { query, stage, sort } = getAssignedFilters();
+    let result = Array.isArray(events) ? [...events] : [];
+    if (query) {
+      result = result.filter((event) => {
+        const client = formatClientLine(event.client);
+        const haystack = [
+          event.type,
+          event.theme,
+          event.location,
+          client,
+          getEventIdValue(event),
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        return haystack.includes(query);
+      });
+    }
+    if (stage !== "all") {
+      const stageIndex = Number(stage);
+      result = result.filter((event) => getWorkflowStage(event) === stageIndex);
+    }
+    return sortAssignedEvents(result, sort);
+  }
+
+  function sortAssignedEvents(events = [], sortKey = "date") {
+    const sorted = [...events];
+    if (sortKey === "recent") {
+      sorted.sort((a, b) => getActivityTime(b) - getActivityTime(a));
+      return sorted;
+    }
+    if (sortKey === "created") {
+      sorted.sort((a, b) => getCreatedTime(b) - getCreatedTime(a));
+      return sorted;
+    }
+    sorted.sort((a, b) => getEventTime(a) - getEventTime(b));
+    return sorted;
+  }
+
+  function getEventTime(event = {}) {
+    const time = new Date(event.date || 0).getTime();
+    return Number.isFinite(time) ? time : Number.POSITIVE_INFINITY;
+  }
+
+  function getActivityTime(event = {}) {
+    const time = new Date(event.lastActivityAt || event.updatedAt || event.createdAt || event.date || 0).getTime();
+    return Number.isFinite(time) ? time : 0;
+  }
+
+  function getCreatedTime(event = {}) {
+    const time = new Date(event.createdAt || event.date || 0).getTime();
+    return Number.isFinite(time) ? time : 0;
+  }
+
+  function buildAssignedCard(event = {}) {
+    const eventId = getEventIdValue(event);
+    const title = formatWorkflowTitle(event);
+    const statusLabel = formatStatusLabel(event.status || "pending_assignment");
+    const statusClass = getEventStatusClass(event.status);
+    const stageIndex = getWorkflowStage(event);
+    const stageLabel = getWorkflowStageLabel(stageIndex);
+    const dateLabel = formatEventDate(event.date);
+    const location = event.location || "Location TBD";
+    const clientLine = formatClientLine(event.client);
+    const metaParts = [dateLabel, location, eventId ? `#${String(eventId).slice(-6).toUpperCase()}` : ""].filter(Boolean);
+    const metaLine = metaParts.join(" | ");
+    const metaHtml = metaLine ? `<div class="assigned-sub">${metaLine}</div>` : "";
+    const tags = [];
+    if (Number.isFinite(Number(event.guests)) && Number(event.guests) > 0) tags.push(`Guests: ${event.guests}`);
+    const budgetLabel = formatBudget(event.budget);
+    if (budgetLabel) tags.push(`Budget: ${budgetLabel}`);
+    if (event.theme) tags.push(`Theme: ${event.theme}`);
+    const tagsHtml = tags.length ? tags.map((tag) => `<span class="pill">${tag}</span>`).join("") : `<span class="muted small">No extra details yet.</span>`;
+    const steps = Array.from({ length: 5 })
       .map((_, idx) => `<div class="workflow-step ${idx <= stageIndex ? "fill" : ""}"></div>`)
       .join("");
+    const chatHref = eventId ? `chat.html?eventId=${encodeURIComponent(eventId)}` : "chat.html";
+    const copyButton = eventId ? `<button type="button" class="btn-ghost" data-copy-id="${eventId}">Copy ID</button>` : "";
+
+    return `
+      <article class="assigned-card">
+        <div class="assigned-meta">
+          <div class="assigned-title-row">
+            <strong>${title}</strong>
+            <span class="event-status ${statusClass}">${statusLabel || "Pending Assignment"}</span>
+          </div>
+          <div class="assigned-sub">Client: ${clientLine}</div>
+          ${metaHtml}
+          <div class="assigned-tags">${tagsHtml}</div>
+        </div>
+        <div class="assigned-progress">
+          <div class="workflow-track">${steps}</div>
+          <span class="muted small">Stage: ${stageLabel}</span>
+        </div>
+        <div class="assigned-actions">
+          <a class="btn-outline" href="${chatHref}"><i class="fa-solid fa-comment-dots"></i> Open chat</a>
+          ${copyButton}
+        </div>
+      </article>
+    `;
+  }
+
+  function bindAssignedActions(list) {
+    list.querySelectorAll("[data-copy-id]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.copyId || "";
+        if (!id) return;
+        copyToClipboard(id).then((ok) => {
+          const original = btn.textContent;
+          btn.textContent = ok ? "Copied" : "Copy failed";
+          setTimeout(() => {
+            btn.textContent = original;
+          }, 1200);
+        });
+      });
+    });
+  }
+
+  function copyToClipboard(text) {
+    if (!text) return Promise.resolve(false);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard
+        .writeText(text)
+        .then(() => true)
+        .catch(() => fallbackCopy(text));
+    }
+    return Promise.resolve(fallbackCopy(text));
+  }
+
+  function fallbackCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "absolute";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(textarea);
+    return ok;
+  }
+
+  function getWorkflowStageLabel(index = 0) {
+    return workflowStages[index] || workflowStages[0];
+  }
+
+  function getEventStatusClass(status = "") {
+    const normalized = normalizeStatus(status);
+    if (!normalized || normalized === "pending_assignment") return "pending";
+    if (normalized === "assigned") return "assigned";
+    if (normalized === "planning") return "planning";
+    if (normalized === "draft") return "draft";
+    if (normalized === "confirmed") return "confirmed";
+    if (normalized === "completed") return "completed";
+    if (normalized === "cancelled") return "cancelled";
+    return "pending";
+  }
+
+  function getEventIdValue(event = {}) {
+    return event._id || event.id || "";
+  }
+
+  function formatClientLine(client) {
+    if (!client) return "TBD";
+    if (typeof client === "string") return client;
+    const name = client.name || "";
+    const email = client.email || "";
+    if (name && email) return `${name} (${email})`;
+    return name || email || "TBD";
+  }
+
+  function formatBudget(value) {
+    const amount = Number(value);
+    if (!Number.isFinite(amount) || amount <= 0) return "";
+    return `$${amount.toLocaleString()}`;
   }
 
   function setText(id, value) {
@@ -900,17 +1222,8 @@
       });
   }
 
-  function deriveWorkflowStage(approved, pending, total) {
-    if (!total) return 0;
-    const ratioApproved = approved / total;
-    if (ratioApproved > 0.7) return 4;
-    if (ratioApproved > 0.45) return 3;
-    if (pending / total > 0.4) return 1;
-    return 2;
-  }
-
   function normalizeStatus(status = "") {
-    return status.toLowerCase();
+    return String(status || "").toLowerCase();
   }
 
   /* Catalog */

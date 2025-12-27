@@ -44,6 +44,13 @@
 
   let data = { ...defaults };
   let catalogFiltersBound = false;
+  let previewItems = [];
+  let previewIndex = -1;
+  let imagePreview;
+  let imagePreviewImg;
+  let imagePreviewCaption;
+  let imagePreviewPrev;
+  let imagePreviewNext;
 
   const fmtMoney = (value) => `$${Number(value || 0).toLocaleString()}`;
   const uniqueList = (list = []) => Array.from(new Set(list.filter(Boolean).map((v) => v.toString().trim()))).sort((a, b) => a.localeCompare(b));
@@ -92,7 +99,7 @@
     return [];
   };
   const fallbackServices = ["Venue", "Decoration", "Catering", "Invitation Cards", "Photographer", "DJ & Lighting"];
-  const fallbackEvents = ["Wedding", "Birthday", "Graduation", "Ramadan", "Gender Reveal", "Engagement", "Madeef Ashouraii"];
+  const fallbackEvents = ["Wedding & Engagement", "Birthday", "Graduation", "Gender Reveal", "Ramadan Gathering", "Other"];
   const emptyState = (text) => `<div class="empty">${text}</div>`;
   const setText = (id, text) => {
     const el = document.getElementById(id);
@@ -119,8 +126,9 @@
   };
   const withClientKey = (item = {}) => ({ ...item, clientKey: item.clientKey || buildCatalogKey(item) });
   const buildCatalogKey = (item = {}) => {
+    const clientKey = (item.clientKey || "").toString().trim().toLowerCase();
+    if (clientKey) return clientKey;
     const parts = [
-      (item.clientKey || "").toString().trim().toLowerCase(),
       (item.title || item.name || "").toString().trim().toLowerCase(),
       (item.service || "").toString().trim().toLowerCase(),
       (item.eventType || item.event || "").toString().trim().toLowerCase(),
@@ -138,11 +146,100 @@
       .filter(Boolean)
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
       .join(" ");
+  const normalizeEventType = (value = "") => {
+    const raw = (value || "").toString().trim();
+    if (!raw) return "";
+    const normalized = raw.toLowerCase();
+    if (normalized.includes("wedding") || normalized.includes("engagement")) return "Wedding & Engagement";
+    if (normalized.includes("birthday")) return "Birthday";
+    if (normalized.includes("graduation")) return "Graduation";
+    if (normalized.includes("gender")) return "Gender Reveal";
+    if (normalized.includes("ramadan")) return "Ramadan Gathering";
+    if (normalized === "other") return "Other";
+    return "";
+  };
+  const isObjectId = (value = "") => /^[a-f0-9]{24}$/i.test(String(value).trim());
+  const buildCatalogItemData = (item = {}, clientKey = "") => ({
+    title: item.title || item.name || "Catalog item",
+    service: item.service || "",
+    eventType: item.eventType || "",
+    category: item.category || "",
+    priceMin: parsePriceValue(item.priceMin ?? item.price ?? 0),
+    priceMax: parsePriceValue(item.priceMax ?? item.price ?? 0),
+    image: item.image || "",
+    description: item.description || "",
+    clientKey: clientKey || item.clientKey || "",
+    source: item.source || "client"
+  });
   const parsePriceValue = (value) => {
     if (typeof value === "number" && Number.isFinite(value)) return value;
     if (!value) return 0;
     const numeric = Number(String(value).replace(/[^0-9.]/g, ""));
     return Number.isFinite(numeric) ? numeric : 0;
+  };
+  const initImagePreview = () => {
+    if (imagePreview) return;
+    imagePreview = document.createElement("div");
+    imagePreview.className = "image-preview";
+    imagePreview.innerHTML = `
+      <div class="image-preview__content">
+        <button type="button" class="image-preview__nav prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+        <button type="button" class="image-preview__close" aria-label="Close preview">&times;</button>
+        <img src="" alt="Preview" />
+        <div class="image-preview__caption"></div>
+        <button type="button" class="image-preview__nav next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    `;
+    document.body.appendChild(imagePreview);
+    imagePreviewImg = imagePreview.querySelector("img");
+    imagePreviewCaption = imagePreview.querySelector(".image-preview__caption");
+    imagePreviewPrev = imagePreview.querySelector(".image-preview__nav.prev");
+    imagePreviewNext = imagePreview.querySelector(".image-preview__nav.next");
+    const closeBtn = imagePreview.querySelector(".image-preview__close");
+    const close = () => imagePreview.classList.remove("open");
+    closeBtn.addEventListener("click", close);
+    imagePreview.addEventListener("click", (e) => {
+      if (e.target === imagePreview) close();
+    });
+    imagePreviewPrev.addEventListener("click", () => stepPreview(-1));
+    imagePreviewNext.addEventListener("click", () => stepPreview(1));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && imagePreview.classList.contains("open")) {
+        close();
+      }
+      if (imagePreview.classList.contains("open")) {
+        if (e.key === "ArrowLeft") stepPreview(-1);
+        if (e.key === "ArrowRight") stepPreview(1);
+      }
+    });
+  };
+  const renderPreview = () => {
+    const item = previewItems[previewIndex];
+    if (!item) return;
+    const src = item.image || "../images/logo.original.png";
+    imagePreviewImg.src = src;
+    imagePreviewImg.alt = item.title || item.name || "Preview";
+    imagePreviewCaption.textContent = item.title || item.name || "";
+    imagePreview.classList.add("open");
+    updatePreviewNav();
+  };
+  const stepPreview = (delta) => {
+    if (!previewItems.length) return;
+    previewIndex = (previewIndex + delta + previewItems.length) % previewItems.length;
+    renderPreview();
+  };
+  const updatePreviewNav = () => {
+    if (!imagePreviewPrev || !imagePreviewNext) return;
+    const hasMultiple = previewItems.length > 1;
+    imagePreviewPrev.style.display = hasMultiple ? "flex" : "none";
+    imagePreviewNext.style.display = hasMultiple ? "flex" : "none";
+  };
+  const openImagePreviewById = (id) => {
+    if (!previewItems.length) return;
+    const idx = previewItems.findIndex((i) => (i._id || i.id) === id);
+    previewIndex = idx >= 0 ? idx : 0;
+    initImagePreview();
+    renderPreview();
   };
   const normalizePlannerImagePath = (raw, fallback) => {
     const src = (typeof raw === "object" && raw !== null ? raw.src : raw) || fallback;
@@ -441,7 +538,7 @@
       id: `cater-${h.id || idx}`,
       title: h.name,
       service: "Catering",
-      eventType: "Wedding",
+      eventType: "",
       category: h.area || "Catering",
       priceMin: 600,
       priceMax: 1800,
@@ -920,17 +1017,21 @@
               .join(" | ");
             const detailItems = [
               { icon: "fa-calendar", label: fmtDate(req.date) },
-              { icon: "fa-location-dot", label: req.location || "Location TBD" },
-              { icon: "fa-dollar-sign", label: req.budget ? fmtMoney(req.budget) : "Budget TBD" }
+              { icon: "fa-dollar-sign", label: req.budget ? fmtMoney(req.budget) : "Budget TBD" },
+              { icon: "fa-location-dot", label: req.location || "Location TBD", wide: true }
             ];
             if (req.guests) detailItems.push({ icon: "fa-users", label: `${req.guests} guests` });
             if (req.theme) detailItems.push({ icon: "fa-palette", label: req.theme });
             if (submission.requestedStatus) detailItems.push({ icon: "fa-flag", label: submission.requestedStatus });
             if (submission.designation) detailItems.push({ icon: "fa-id-card", label: submission.designation });
             const detailsMarkup = detailItems
-              .map((item) => `<div class="assign-details-item"><i class="fa-solid ${item.icon}"></i> ${item.label}</div>`)
+              .map(
+                (item) =>
+                  `<div class="assign-details-item${item.wide ? " is-wide" : ""}"><i class="fa-solid ${item.icon}"></i> ${item.label}</div>`
+              )
               .join("");
             const note = stripAutoNote(req.note || req.notes || "");
+            const priorityMarkup = priorityKey ? priorityBadge(req.priority) : "";
             return `
         <div class="assign-card ${priorityClass}" data-req="${req._id || req.id}">
           <div class="assign-card-head">
@@ -941,10 +1042,10 @@
                 ${contactLine ? `<div class="muted small">${contactLine}</div>` : ""}
                 <div class="assign-card-tags">
                   <span class="assign-chip">${req.type || "Event"}</span>
-                  ${priorityBadge(req.priority)}
                 </div>
               </div>
             </div>
+            ${priorityMarkup}
           </div>
           <div class="assign-details">
             ${detailsMarkup}
@@ -1288,23 +1389,33 @@
     serviceSelect.value = services.includes(current.service) ? current.service : "all";
     const serviceValue = serviceSelect.value;
 
-    const events = uniqueList(
-      data.catalog.filter((c) => serviceValue === "all" || (c.service || "").toLowerCase() === serviceValue.toLowerCase()).map((c) => c.eventType || "")
-    );
+    const events = uniqueList([
+      ...data.catalog.filter((c) => serviceValue === "all" || (c.service || "").toLowerCase() === serviceValue.toLowerCase()).map((c) => c.eventType || ""),
+      ...fallbackEvents
+    ]);
     eventSelect.innerHTML = ['<option value="all">All Events</option>', ...events.map((ev) => `<option value="${ev}">${ev}</option>`)].join("");
     eventSelect.value = events.includes(current.eventType) ? current.eventType : "all";
     const eventValue = eventSelect.value;
     const ignoreEventFilter = (serviceValue || "").toLowerCase() === "catering";
 
-    const categories = uniqueList(
-      data.catalog
-        .filter((c) => {
-          if (serviceValue !== "all" && (c.service || "").toLowerCase() !== serviceValue.toLowerCase()) return false;
-          if (!ignoreEventFilter && eventValue !== "all" && (c.eventType || "").toLowerCase() !== eventValue.toLowerCase()) return false;
-          return true;
+    const serviceKey = (serviceValue || "").toLowerCase();
+    const isVenueOnly = serviceKey === "venue";
+    const filteredForCategories = data.catalog.filter((c) => {
+      if (serviceValue !== "all" && (c.service || "").toLowerCase() !== serviceKey) return false;
+      if (!ignoreEventFilter && eventValue !== "all" && (c.eventType || "").toLowerCase() !== eventValue.toLowerCase()) return false;
+      return true;
+    });
+    const hasVenue = filteredForCategories.some((c) => (c.service || "").toLowerCase() === "venue");
+    let categories = uniqueList(
+      filteredForCategories
+        .map((c) => {
+          if ((c.service || "").toLowerCase() === "venue") return normalizeVenueCategory(c);
+          return c.category || "";
         })
-        .map((c) => c.category || "")
+        .filter(Boolean)
     );
+    if (hasVenue) categories = uniqueList([...categories, "Indoor", "Outdoor"]);
+    if (isVenueOnly) categories = ["Indoor", "Outdoor"];
     categorySelect.innerHTML = ['<option value="all">All Categories</option>', ...categories.map((cat) => `<option value="${cat}">${cat}</option>`)].join("");
     categorySelect.value = categories.includes(current.category) ? current.category : "all";
   };
@@ -1351,13 +1462,20 @@
       if (status === "deleted") return false;
       if (service !== "all" && (item.service || "").toLowerCase() !== service.toLowerCase()) return false;
       if (!ignoreEventFilter && eventType !== "all" && (item.eventType || "").toLowerCase() !== eventType.toLowerCase()) return false;
-      if (category !== "all" && (item.category || "").toLowerCase() !== category.toLowerCase()) return false;
+      if (category !== "all") {
+        const isVenueItem = (item.service || "").toLowerCase() === "venue";
+        const itemCategory = isVenueItem ? normalizeVenueCategory(item) : item.category || "";
+        if (itemCategory.toLowerCase() !== category.toLowerCase()) return false;
+      }
       if (search) {
         const haystack = `${item.title || item.name || ""} ${item.service || ""} ${item.eventType || ""} ${item.category || ""}`.toLowerCase();
         if (!haystack.includes(search)) return false;
       }
       return true;
     });
+
+    previewItems = filtered;
+    previewIndex = -1;
 
     if (!filtered.length) {
       wrap.innerHTML = emptyState("No items found with current filters.");
@@ -1422,7 +1540,7 @@
             if (!title) return alert("Title is required");
             if (!service) return alert("Service is required");
             try {
-              await apiFetch("/planner-items", {
+              await apiFetch("/planner/items", {
                 method: "POST",
                 body: JSON.stringify({
                   title,
@@ -1451,6 +1569,7 @@
         if (typeof apiFetch !== "function") return alert("API not available.");
         const id = editBtn.dataset.catalogEdit;
         const item = data.catalog.find((c) => (c._id || c.id || "").toString() === id);
+        if (!item) return alert("Item not found.");
         const opts = (() => {
           const services = uniqueList([...data.catalog.map((c) => c.service || ""), ...fallbackServices, item?.service || ""]);
           const events = uniqueList([...data.catalog.map((c) => c.eventType || c.event || ""), ...fallbackEvents, item?.eventType || ""]);
@@ -1470,19 +1589,42 @@
           async ([title, service, eventType, category, price], close) => {
             if (!title) return alert("Title is required");
             if (!service) return alert("Service is required");
+            const basePayload = {
+              title,
+              service,
+              eventType,
+              category,
+              priceMin: Number(price) || 0,
+              priceMax: Number(price) || 0,
+              image: item?.image || "",
+              description: item?.description || ""
+            };
             try {
-              await apiFetch(`/planner-items/${id}`, {
-                method: "PATCH",
-                body: JSON.stringify({
-                  title,
-                  service,
-                  eventType,
-                  category,
-                  priceMin: Number(price) || 0,
-                  priceMax: Number(price) || 0,
-                  status: "approved"
-                })
+              if (isObjectId(id)) {
+                await apiFetch(`/planner/items/${id}`, {
+                  method: "PATCH",
+                  body: JSON.stringify({
+                    ...basePayload,
+                    status: "approved"
+                  })
+                });
+                close();
+                loadData();
+                return;
+              }
+              const clientKey = item?.clientKey || id;
+              const itemData = buildCatalogItemData({ ...item, ...basePayload }, clientKey);
+              const changeRes = await apiFetch("/planner/item-requests", {
+                method: "POST",
+                body: JSON.stringify({ action: "update", clientKey, itemData })
               });
+              const changeId = changeRes?.data?._id || changeRes?.data?.id;
+              if (changeId) {
+                await apiFetch(`/planner/item-requests/${changeId}/approve`, {
+                  method: "PATCH",
+                  body: JSON.stringify({ note: "" })
+                });
+              }
               close();
               loadData();
             } catch (err) {
@@ -1490,18 +1632,54 @@
             }
           }
         );
+        return;
       }
       if (deactBtn) {
         if (typeof apiFetch !== "function") return alert("API not available.");
         const id = deactBtn.dataset.catalogDeactivate;
+        const item = data.catalog.find((c) => (c._id || c.id || "").toString() === id);
         const confirmAction = confirm("Deactivate this catalog item?");
         if (!confirmAction) return;
-        apiFetch(`/planner-items/${id}`, {
-          method: "PATCH",
-          body: JSON.stringify({ status: "deleted" })
-        })
-          .then(() => loadData())
-          .catch((err) => alert(err?.message || "Unable to deactivate item."));
+        if (isObjectId(id)) {
+          try {
+            await apiFetch(`/planner/items/${id}`, {
+              method: "PATCH",
+              body: JSON.stringify({ status: "deleted" })
+            });
+            loadData();
+          } catch (err) {
+            alert(err?.message || "Unable to deactivate item.");
+          }
+          return;
+        }
+        if (!item) {
+          alert("Catalog item not found.");
+          return;
+        }
+        const clientKey = item.clientKey || id;
+        const itemData = buildCatalogItemData(item, clientKey);
+        try {
+          const changeRes = await apiFetch("/planner/item-requests", {
+            method: "POST",
+            body: JSON.stringify({ action: "delete", clientKey, itemData })
+          });
+          const changeId = changeRes?.data?._id || changeRes?.data?.id;
+          if (changeId) {
+            await apiFetch(`/planner/item-requests/${changeId}/approve`, {
+              method: "PATCH",
+              body: JSON.stringify({ note: "" })
+            });
+          }
+          loadData();
+        } catch (err) {
+          alert(err?.message || "Unable to deactivate item.");
+        }
+        return;
+      }
+      const card = e.target.closest(".catalog-card");
+      if (card) {
+        const id = card.dataset.catalogId;
+        if (id) openImagePreviewById(id);
       }
     };
   };
@@ -1550,7 +1728,7 @@
       }
       actionBtn.disabled = true;
       actionBtn.textContent = action === "approve" ? "Approving..." : "Rejecting...";
-      apiFetch(`/planner-item-changes/${changeId}/${action}`, {
+      apiFetch(`/planner/item-requests/${changeId}/${action}`, {
         method: "PATCH",
         body: JSON.stringify({ note: "" })
       })
@@ -1662,24 +1840,34 @@
     }));
 
   const normalizeCatalog = (items = []) =>
-    items.map((item) => ({
-      _id: item._id || item.id,
-      id: item._id || item.id,
-      clientKey: item.clientKey || buildCatalogKey(item),
-      title: item.title || item.name || "Catalog item",
-      name: item.title || item.name || "Catalog item",
-      image: item.image || item.thumbnail || "",
-      category: item.category || item.service || "",
-      service: item.service || item.category || "",
-      eventType: item.eventType || item.event || "",
-      price: item.priceMax || item.priceMin || item.price || 0,
-      priceMin: item.priceMin,
-      priceMax: item.priceMax,
-      description: item.description || "",
-      status: item.status || "pending",
-      createdBy: item.owner,
-      usage: item.usage || 0
-    }));
+    items.map((item) => {
+      const serviceValue = (item.service || item.category || "").toString().toLowerCase();
+      const isCatering = serviceValue === "catering";
+      return {
+        _id: item._id || item.id,
+        id: item._id || item.id,
+        clientKey: item.clientKey || buildCatalogKey(item),
+        title: item.title || item.name || "Catalog item",
+        name: item.title || item.name || "Catalog item",
+        image: item.image || item.thumbnail || "",
+        category: item.category || item.service || "",
+        service: item.service || item.category || "",
+        eventType: isCatering ? "" : normalizeEventType(item.eventType || item.event || ""),
+        price: item.priceMax || item.priceMin || item.price || 0,
+        priceMin: item.priceMin,
+        priceMax: item.priceMax,
+        description: item.description || "",
+        status: item.status || "pending",
+        createdBy: item.owner,
+        usage: item.usage || 0
+      };
+    });
+  const normalizeVenueCategory = (item = {}) => {
+    const haystack = [item.type, item.priceTier, item.category, item.description, item.title, item.name].filter(Boolean).join(" ").toLowerCase();
+    if (haystack.includes("outdoor")) return "Outdoor";
+    if (haystack.includes("indoor")) return "Indoor";
+    return "";
+  };
 
   const openModal = (title, fields = [], onSubmit) => {
     const overlay = document.createElement("div");

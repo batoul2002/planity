@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Event = require('../models/Event');
 const Vendor = require('../models/Vendor');
+const Message = require('../models/Message');
+const ChatRoom = require('../models/ChatRoom');
 const ApiError = require('../utils/ApiError');
 const User = require('../models/User');
 const Favorite = require('../models/Favorite');
@@ -193,9 +195,39 @@ exports.assignPlanner = async (req, res, next) => {
   const planner = await User.findOne({ _id: plannerId, role: 'planner' });
   if (!planner) return next(new ApiError(404, 'Planner not found'));
 
+  const existingPlannerId = event.planner ? event.planner.toString() : null;
+  const isSamePlanner = existingPlannerId && existingPlannerId === plannerId;
+  const isReassign = existingPlannerId && existingPlannerId !== plannerId;
+
   event.planner = plannerId;
+  event.lastActivityAt = new Date();
+  if (!event.status || event.status === 'pending_assignment') {
+    event.status = 'assigned';
+    event.statusHistory.push({ status: 'assigned', changedAt: new Date(), changedBy: req.user._id });
+  }
   await event.save();
   const populated = await event.populate('planner client', 'name email role');
+
+  let chat = await ChatRoom.findOne({ event: event._id });
+  const desiredParticipants = [event.client, plannerId].filter(Boolean);
+  if (!chat) {
+    chat = await ChatRoom.create({
+      event: event._id,
+      participants: desiredParticipants,
+      createdBy: req.user._id
+    });
+  } else if (!isSamePlanner) {
+    chat.participants = desiredParticipants;
+    await chat.save();
+  }
+
+  if (!isSamePlanner) {
+    await Message.create({
+      event: event._id,
+      sender: req.user._id,
+      content: isReassign ? 'A planner has been reassigned to your event.' : 'A planner has been assigned to your event.'
+    });
+  }
 
   await notifyEventParticipants({
     event: populated,

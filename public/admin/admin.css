@@ -705,8 +705,11 @@ body {
 
 .catalog-filters .add-btn {
   margin-left: auto;
-  box-shadow: 0 14px 22px rgba(80, 105, 91, 0.16);
   flex: 0 0 auto;
+  background: linear-gradient(180deg, #e5ece4, #d8e2d9);
+  color: #2f4638;
+  border: 1px solid #cbd6cc;
+  box-shadow: 0 14px 24px rgba(62, 83, 73, 0.16);
 }
 
 /* Assignment page */
@@ -834,27 +837,181 @@ body {
   font-size: 0.9rem;
 }
 
+body[data-page="assignment"] .assignment-hero-copy,
+body[data-page="assignment"] .assignment-hero-actions {
+  animation: assignmentFadeUp 0.5s ease both;
+}
+
+body[data-page="assignment"] .assignment-hero-actions {
+  animation-delay: 0.08s;
+}
+
+body[data-page="assignment"] .assignment-section {
+  animation: assignmentFadeUp 0.5s ease both;
+}
+
+body[data-page="assignment"] .assignment-section:nth-of-type(2) {
+  animation-delay: 0.06s;
+}
+
+body[data-page="assignment"] .assignment-section:nth-of-type(3) {
+  animation-delay: 0.12s;
+}
+
+body[data-page="assignment"] .assignment-search {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+body[data-page="assignment"] .assignment-search:hover,
+body[data-page="assignment"] .assignment-search:focus-within {
+  border-color: #d8ccb6;
+  box-shadow: inset 0 1px 0 #fff, 0 16px 28px rgba(62, 83, 73, 0.14);
+  transform: translateY(-1px);
+}
+
+body[data-page="assignment"] .assignment-planner-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  animation: assignmentFadeUp 0.45s ease both;
+}
+
+body[data-page="assignment"] .assignment-planner-card:hover {
+  transform: translateY(-6px);
+  border-color: #d9ccb8;
+  box-shadow: 0 22px 36px rgba(79, 107, 88, 0.18);
+}
+
+body[data-page="assignment"] .assignment-avatar {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body[data-page="assignment"] .assignment-planner-card:hover .assignment-avatar {
+  transform: scale(1.05);
+  box-shadow: 0 14px 24px rgba(62, 83, 73, 0.24);
+}
+
+body[data-page="assignment"] .assignment-page .assign-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  animation: assignmentFadeUp 0.45s ease both;
+}
+
+body[data-page="assignment"] .assignment-page .assign-card:hover {
+  transform: translateY(-6px);
+  border-color: #d9ccb8;
+  box-shadow: 0 24px 40px rgba(79, 107, 88, 0.18);
+}
+
+body[data-page="assignment"] .assignment-page .assign-card:hover .assign-card-icon {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(62, 83, 73, 0.18);
+}
+
+body[data-page="assignment"] .assignment-page .assign-card-icon {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+body[data-page="assignment"] .assignment-page .assign-select .select,
+body[data-page="assignment"] .assignment-page .assign-actions .btn,
+body[data-page="assignment"] .assignment-page .assign-actions .btn-assign {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+body[data-page="assignment"] .assignment-page .assign-select .select:focus {
+  border-color: #c9d8cc;
+  box-shadow: inset 0 1px 0 #fff, 0 10px 18px rgba(80, 105, 91, 0.14);
+}
+
+body[data-page="assignment"] .assignment-page .assign-actions .btn:hover,
+body[data-page="assignment"] .assignment-page .assign-actions .btn-assign:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(62, 83, 73, 0.22);
+}
+
+body[data-page="assignment"] .assignment-page .workload-bar {
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+body[data-page="assignment"] .assignment-page .workload-fill {
+  transform-origin: left;
+  animation: assignmentFill 0.6s ease;
+}
+
+@keyframes assignmentFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes assignmentFill {
+  from {
+    transform: scaleX(0.2);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 body[data-page="planners"] .panel {
   background: transparent;
   border: none;
   box-shadow: none;
+  padding: 0;
+}
+
+body[data-page="planners"] .page {
+  gap: 8px;
+  padding-top: 20px;
+  padding-bottom: 8px;
+  max-width: 1440px;
+}
+
+body[data-page="planners"] .page-hero {
+  gap: 0;
+  margin-bottom: 0;
 }
 
 body[data-page="planners"] #plannerGrid {
-  margin-top: 18px;
+  margin-top: 4px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+body[data-page="planners"] .topbar {
+  padding-inline: 0;
+  padding-top: 0px;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+body[data-page="planners"] .panel-head {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+body[data-page="planners"] .search {
+  padding: 15px 12px;
 }
 
 .planner-card {
   border: 1px solid #e3dccf;
   border-radius: 18px;
-  padding: 16px;
+  padding: 14px;
   background: linear-gradient(180deg, #ffffff 0%, #fffaf2 100%);
   box-shadow: 0 18px 30px rgba(79, 107, 88, 0.12);
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 body[data-page="planners"] .planner-card {
+  min-height: 360px;
+  align-content: space-evenly;
+  row-gap: 3px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -871,7 +1028,7 @@ body[data-page="planners"] .planner-card:active {
 .planner-card-head {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -881,9 +1038,10 @@ body[data-page="planners"] .planner-card:active {
   border-radius: 999px;
   display: grid;
   place-items: center;
-  color: #fff;
-  background: linear-gradient(135deg, #f6b748, #e4911c);
-  box-shadow: 0 10px 18px rgba(62, 83, 73, 0.2);
+  color: #4a6a58;
+  background: linear-gradient(135deg, #e5ece4, #d8e2d9);
+  border: 1px solid #cbd6cc;
+  box-shadow: 0 10px 18px rgba(62, 83, 73, 0.16);
 }
 
 .planner-card-title {
@@ -896,6 +1054,12 @@ body[data-page="planners"] .planner-card:active {
 .planner-card-title strong {
   font-size: 1.05rem;
   color: var(--admin-ink);
+}
+
+.planner-card-title .pill {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  gap: 6px;
 }
 
 .planner-card-email {
@@ -983,7 +1147,7 @@ body[data-page="planners"] .planner-card:active {
 
 .planner-card-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
   gap: 10px;
 }
 
@@ -991,7 +1155,8 @@ body[data-page="planners"] .planner-card:active {
   border: 1px solid #e2d8c7;
   background: #f8f4ea;
   border-radius: 14px;
-  padding: 10px;
+  padding: 25px 3px;
+  min-height: 84px;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto auto;
@@ -1013,14 +1178,14 @@ body[data-page="planners"] .planner-stat:hover {
 }
 
 .planner-stat i {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   grid-column: 1;
   grid-row: 1;
   line-height: 1;
 }
 
 .planner-stat-value {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--admin-ink);
   grid-column: 2;
@@ -1030,7 +1195,7 @@ body[data-page="planners"] .planner-stat:hover {
 }
 
 .planner-stat-label {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #6c7a71;
   font-weight: 600;
   grid-column: 1 / -1;
@@ -1064,7 +1229,7 @@ body[data-page="planners"] .planner-stat:hover {
 .planner-card-contact {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
   color: #6a7b70;
   font-weight: 600;
   font-size: 0.9rem;
@@ -1112,12 +1277,13 @@ body[data-page="planners"] .planner-menu-item:hover {
 
 .assignment-page .assign-card {
   border: 1px solid #e3dccf;
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: 20px;
+  padding: 18px;
   background: linear-gradient(180deg, #ffffff 0%, #fffaf2 100%);
-  box-shadow: 0 18px 30px rgba(79, 107, 88, 0.12);
+  box-shadow: 0 18px 32px rgba(79, 107, 88, 0.12);
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  position: relative;
 }
 
 .assignment-page .assign-card.priority-high {
@@ -1140,25 +1306,30 @@ body[data-page="planners"] .planner-menu-item:hover {
 .assignment-page .assign-card-head {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
   align-items: flex-start;
 }
 
 .assignment-page .assign-card-title {
   display: flex;
-  gap: 10px;
-  align-items: flex-start;
+  gap: 12px;
+  align-items: center;
+}
+
+.assignment-page .assign-card-title > div {
+  display: grid;
+  gap: 6px;
 }
 
 .assignment-page .assign-card-title h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .assignment-page .assign-card-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
   background: #f2eee4;
   border: 1px solid #e4dbc9;
   display: grid;
@@ -1171,6 +1342,13 @@ body[data-page="planners"] .planner-menu-item:hover {
   gap: 8px;
   flex-wrap: wrap;
   align-items: center;
+  margin-top: 2px;
+}
+
+body[data-page="assignment"] .priority-badge {
+  align-self: flex-start;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
 }
 
 .assignment-page .assign-chip {
@@ -1188,26 +1366,37 @@ body[data-page="planners"] .planner-menu-item:hover {
 
 .assignment-page .assign-details {
   display: grid;
-  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
 }
 
 .assignment-page .assign-details-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #5f6c64;
+  color: #4f5f52;
   font-weight: 600;
   font-size: 0.95rem;
+  background: #f8f4ea;
+  border: 1px solid #e4dbc9;
+  border-radius: 12px;
+  padding: 8px 10px;
+  min-width: 0;
 }
 
 .assignment-page .assign-details-item i {
   color: #6b7f72;
 }
 
+.assignment-page .assign-details-item.is-wide {
+  grid-column: 1 / -1;
+}
+
 .assignment-page .assign-tag-list {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  margin-top: 2px;
 }
 
 .assignment-page .assign-tag {
@@ -1223,15 +1412,17 @@ body[data-page="planners"] .planner-menu-item:hover {
 .assignment-page .assign-footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  border-top: 1px solid #e8e1d4;
+  padding-top: 12px;
 }
 
 .assignment-page .assign-actions {
   display: flex;
   gap: 10px;
-  align-items: flex-end;
+  align-items: center;
   flex-wrap: wrap;
 }
 
@@ -1291,7 +1482,8 @@ body[data-page="planners"] .planner-menu-item:hover {
 }
 
 .catalog-grid .card-actions {
-  gap: 10px;
+  gap: 0;
+  justify-content: space-between;
   padding-top: 8px;
   margin-top: 8px;
   border-top: 1px solid #e6ddce;
@@ -1317,6 +1509,14 @@ body[data-page="planners"] .planner-menu-item:hover {
   .assignment-page .assign-select .select {
     width: 100%;
   }
+
+  .assignment-page .assign-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-page="planners"] #plannerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 960px) {
@@ -1326,5 +1526,11 @@ body[data-page="planners"] .planner-menu-item:hover {
 
   .admin-shell .content-area {
     width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  body[data-page="planners"] #plannerGrid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
