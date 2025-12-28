@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catalog Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body data-page="catalog">
+    <div class="planner-shell admin-shell">
+      <aside class="sidebar admin-sidebar">
+        <div class="brand">
+          <img class="brand-logo" src="../images/logo.original.png" alt="Admin logo" />
+          <div>
+            <strong>EventPro</strong>
+            <p class="muted small">Admin Panel</p>
+          </div>
+        </div>
+        <nav class="nav admin-nav">
+          <a href="dashboard.html" data-nav="dashboard">
+            <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+            <span class="nav-label">Dashboard</span>
+            <span class="nav-count"></span>
+          </a>
+          <a href="event-requests.html" data-nav="requests">
+            <span class="nav-icon"><i class="fa-solid fa-calendar-plus"></i></span>
+            <span class="nav-label">Event Requests</span>
+            <span class="nav-count" data-count-for="requests"></span>
+          </a>
+          <a href="assignment.html" data-nav="assignment">
+            <span class="nav-icon"><i class="fa-solid fa-user-check"></i></span>
+            <span class="nav-label">Planner Assignment</span>
+            <span class="nav-count" data-count-for="assignment"></span>
+          </a>
+          <a href="events-monitoring.html" data-nav="events">
+            <span class="nav-icon"><i class="fa-solid fa-eye"></i></span>
+            <span class="nav-label">Events Monitoring</span>
+            <span class="nav-count" data-count-for="events"></span>
+          </a>
+          <a href="planners.html" data-nav="planners">
+            <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+            <span class="nav-label">Planners</span>
+            <span class="nav-count" data-count-for="planners"></span>
+          </a>
+          <a href="catalog.html" data-nav="catalog">
+            <span class="nav-icon"><i class="fa-solid fa-book-open"></i></span>
+            <span class="nav-label">Catalog</span>
+            <span class="nav-count" data-count-for="catalog"></span>
+          </a>
+          <a href="approvals.html" data-nav="approvals">
+            <span class="nav-icon"><i class="fa-solid fa-check-to-slot"></i></span>
+            <span class="nav-label">Approvals</span>
+            <span class="nav-count" data-count-for="approvals"></span>
+          </a>
+          <a href="payments.html" data-nav="payments">
+            <span class="nav-icon"><i class="fa-solid fa-file-contract"></i></span>
+            <span class="nav-label">Payments & Contracts</span>
+            <span class="nav-count" data-count-for="payments"></span>
+          </a>
+          <a href="notifications.html" data-nav="notifications">
+            <span class="nav-icon"><i class="fa-solid fa-bell"></i></span>
+            <span class="nav-label">Notifications</span>
+            <span class="nav-count" data-count-for="notifications"></span>
+          </a>
+        </nav>
+        <footer>
+          Signed in as admin<br />
+          <small>Official platform catalog</small>
+        </footer>
+      </aside>
+
+      <div class="content-area admin-content">
+        <div class="topbar">
+          <div class="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="catalogSearchTop" placeholder="Search catalog items..." />
+          </div>
+        </div>
+
+        <main class="page">
+          <header class="page-hero">
+            <p class="eyebrow">Global items</p>
+            <h1>Catalog Management</h1>
+            <p class="muted">Create, edit, and deactivate the global catalog that planners and clients can see.</p>
+          </header>
+
+          <section class="panel filter-panel catalog-filters">
+            <div class="filter-row">
+              <div class="filter-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="catalogSearch" placeholder="Search..." />
+              </div>
+              <select class="input" id="catalogService">
+                <option value="all">All Services</option>
+              </select>
+              <select class="input" id="catalogEvent">
+                <option value="all">All Events</option>
+              </select>
+              <select class="input" id="catalogCategory">
+                <option value="all">All Categories</option>
+              </select>
+              <button class="btn btn-amber add-btn" type="button" id="catalogAddBtn"><i class="fa-solid fa-plus"></i> Add New Item</button>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h3>Catalog</h3>
+              <span class="badge pending">Admin approval required</span>
+            </div>
+            <div id="catalogTable"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script src="../js/decoration-gallery.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planity | Catering Houses</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="decor-page catering-page">
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Planity Logo" class="logo" />
+    </div>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
+          <ul class="dropdown-menu">
+            <li><a href="wedding-engagement.html">Wedding &amp; Engagement</a></li>
+            <li><a href="birthday.html">Birthday</a></li>
+            <li><a href="graduation.html">Graduation</a></li>
+            <li><a href="gender-reveal.html">Gender Reveal</a></li>
+            <li><a href="madeef.html">Madeef Ashouraii</a></li>
+            <li><a href="ramadan.html">Ramadan Gathering</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="services.html" class="dropbtn active">Services &#9662;</a>
+          <ul class="dropdown-menu">
+            <li><a href="venue.html">Venue</a></li>
+            <li><a href="decoration.html">Decoration</a></li>
+            <li><a href="catering.html" class="active-sub">Catering</a></li>
+
+            <li><a href="photographer.html">Photographer</a></li>
+            <li><a href="services.html">DJ</a></li>
+            <li><a href="invitation-cards.html">Invitation Card</a></li>
+          </ul>
+        </li>
+        <li><a href="plan-event.html">Plan Event</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="login.html">Log In</a></li>
+      </ul>
+      <ul class="nav-icons">
+        <li>
+          <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
+        </li>
+        <li>
+          <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="about-hero">
+      <div class="ah-container">
+        <div class="ah-copy sr-item" style="--sr-delay:.05s">
+          <h1 class="about-title">Catering Houses</h1>
+          <p class="hero-script">Dahye &amp; Beirut south staples</p>
+          <p class="about-lead">
+            Curated patisseries and sweet houses your guests already know: Al Jawad, Cremino, Tasty Bees, Al Sultan,
+            Al Sharek, Al Bohsali 1870, Sea Sweet, and Al Baba. We line up tastings, portion counts, and drop-off plans
+            so trays and live stations arrive on time.
+          </p>
+          <a href="#cater-grid"><button class="intro-button">Browse houses</button></a>
+        </div>
+        <div class="ah-collage sr-item" style="--sr-delay:.12s" aria-hidden="true">
+          <div class="col-img col-1" style="background-image:url('images/services/catering.jpg')"></div>
+          <div class="col-img col-2" style="background-image:url('images/services2/catering2.jpeg')"></div>
+          <div class="col-img col-3" style="background-image:url('images/catering/cateringPage.jpg')"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="decor-events">
+      <div class="decor-section-head">
+        <p class="decor-eyebrow">Dahye &amp; Airport Road</p>
+        <h2>Pick a patisserie or sweets house</h2>
+        <p class="decor-copy">
+          Verified locations and best sellers gathered from their published menus and in-person visits. Tap a card to see
+          what to order for events and how they deliver to Beirut south venues.
+        </p>
+      </div>
+      <div class="decor-event-grid" data-cater-grid id="cater-grid"></div>
+    </section>
+
+    <section class="decor-details is-hidden" id="cater-details">
+      <div class="decor-details-card">
+        <div class="decor-details-head">
+          <div>
+            <p class="decor-eyebrow" data-selected-eyebrow>Select a house</p>
+            <h2 data-detail-title>Choose a patisserie to view specialties</h2>
+            <p class="decor-copy" data-detail-copy>Tap any card above to load event notes and ordering tips.</p>
+          </div>
+          <div class="decor-head-actions">
+            <button class="wishlist" type="button" data-cater-fav aria-label="Save this house" aria-pressed="false">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+          </div>
+        </div>
+        <div class="cater-meta-block">
+          <div class="cater-meta-copy" data-cater-meta>Browse a house to see ordering notes.</div>
+          <div class="cater-gallery" data-cater-gallery aria-label="Gallery preview"></div>
+        </div>
+        <div class="decor-detail-grid" data-cater-detail-grid>
+          <!-- Filled by catering.js -->
+        </div>
+      </div>
+    </section>
+
+    <section class="planner-public-section" data-service="Catering">
+      <div class="container">
+        <div class="planner-public-head">
+          <h2>New from our planners</h2>
+          <p class="muted">Approved catering additions curated by planners</p>
+        </div>
+        <div class="planner-public-grid" data-planner-grid></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="footer-left">
+      <img src="images/logo.png" alt="Planity Logo" class="footer-logo" />
+    </div>
+    <div class="footer-center">
+      <div class="footer-sentence">We Turn Moments Into Memories.</div>
+      <div class="footer-copyright">
+        &copy; 2026 Planity. All rights reserved.
+      </div>
+    </div>
+    <div class="footer-right">
+      <div class="contact-item">
+        <span class="icon-col">
+          <i class="fa-solid fa-location-dot"></i>
+        </span>
+        <span class="text-col">Lebanon</span>
+      </div>
+      <a href="tel:+96112345678" class="contact-item">
+        <span class="icon-col">
+          <i class="fa-solid fa-phone"></i>
+        </span>
+        <span class="text-col">+961 12345678</span>
+      </a>
+      <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <span class="icon-col">
+          <i class="fa-brands fa-instagram"></i>
+        </span>
+        <span class="text-col">Planity.lb</span>
+      </a>
+      <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
+        <span class="icon-col">
+          <i class="fa-brands fa-facebook-f"></i>
+        </span>
+        <span class="text-col">Planity Events</span>
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/catering.js" defer></script>
+  <script src="js/planner-public-items.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
+
+
+

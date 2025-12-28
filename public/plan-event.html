@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,7 +13,7 @@
   <body class="plan-event-page">
     <header>
       <div class="logo-container">
-        <img src="images/logo.png" alt="Planity Logo" class="logo">
+        <img src="images/logo.png" alt="Planity Logo" class="logo" />
       </div>
 
       <nav>
@@ -22,13 +22,14 @@
           <li class="dropdown">
             <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
             <ul class="dropdown-menu">
-              <li><a href="wedding-engagement.html">Wedding &amp; Engagement</a></li>
+              <li>
+                <a href="wedding-engagement.html">Wedding &amp; Engagement</a>
+              </li>
               <li><a href="birthday.html">Birthday</a></li>
               <li><a href="graduation.html">Graduation</a></li>
               <li><a href="gender-reveal.html">Gender Reveal</a></li>
               <li><a href="madeef.html">Madeef Ashouraii</a></li>
               <li><a href="ramadan.html">Ramadan Gathering</a></li>
-              <li><a href="other.html">Other</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -39,7 +40,7 @@
               <li><a href="catering.html">Catering</a></li>
 
               <li><a href="photographer.html">Photographer</a></li>
-              <li><a href="services.html">DJ</a></li>
+              <li><a href="services.html">DJ &amp; Lighting System</a></li>
               <li><a href="invitation-cards.html">Invitation Card</a></li>
             </ul>
           </li>
@@ -49,10 +50,14 @@
         </ul>
         <ul class="nav-icons">
           <li>
-            <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
+            <a href="favorites.html" class="icon-link"
+              ><i class="fa-solid fa-heart"></i
+            ></a>
           </li>
           <li>
-            <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
+            <a href="account.html" class="icon-link"
+              ><i class="fa-solid fa-user"></i
+            ></a>
           </li>
         </ul>
       </nav>
@@ -63,12 +68,15 @@
         <p class="plan-eyebrow">Planity Planner</p>
         <h1>Plan your next event with us</h1>
         <p class="plan-lead">
-          Share client and event details so a planner can prepare a tailored proposal for you.
+          Share client and event details so a planner can prepare a tailored
+          proposal for you.
         </p>
         <div class="plan-auth-notice hidden" id="planAuthNotice">
           <i class="fa-solid fa-lock"></i>
           <span>Log in so we can save and track this request for you.</span>
-          <a href="login.html" class="plan-auth-link" id="planAuthAction">Log In</a>
+          <a href="login.html" class="plan-auth-link" id="planAuthAction"
+            >Log In</a
+          >
         </div>
       </div>
 
@@ -90,7 +98,11 @@
           </div>
         </div>
 
-        <div class="plan-step is-active" data-plan-step data-step-label="Client information">
+        <div
+          class="plan-step is-active"
+          data-plan-step
+          data-step-label="Client information"
+        >
           <div class="plan-card">
             <div class="plan-card-head">
               <div class="plan-card-title">
@@ -100,7 +112,9 @@
                   <p class="plan-card-sub">How can we reach you?</p>
                 </div>
               </div>
-              <div class="plan-card-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="plan-card-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
             </div>
 
             <div class="plan-field">
@@ -156,11 +170,26 @@
             <div class="plan-field">
               <label for="clientUpload">Upload images (150x150)</label>
               <div class="plan-file">
-                <input type="file" id="clientUpload" name="clientUpload" accept="image/*" multiple />
-                <span class="plan-file-label" id="clientUploadLabel">No file chosen</span>
+                <input
+                  type="file"
+                  id="clientUpload"
+                  name="clientUpload"
+                  accept="image/*"
+                  multiple
+                />
+                <span class="plan-file-label" id="clientUploadLabel"
+                  >No file chosen</span
+                >
               </div>
-              <p class="plan-hint">You can add multiple square images; choose at least 150x150 for best display.</p>
-              <div class="plan-upload-preview" id="planUploadPreview" aria-live="polite"></div>
+              <p class="plan-hint">
+                You can add multiple square images; choose at least 150x150 for
+                best display.
+              </p>
+              <div
+                class="plan-upload-preview"
+                id="planUploadPreview"
+                aria-live="polite"
+              ></div>
             </div>
           </div>
         </div>
@@ -175,7 +204,9 @@
                   <p class="plan-card-sub">Tell us what you are planning.</p>
                 </div>
               </div>
-              <div class="plan-card-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="plan-card-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
             </div>
 
             <div class="plan-field">
@@ -203,11 +234,22 @@
             <div class="plan-row">
               <div class="plan-field">
                 <label for="eventDate">Date</label>
-                <input class="plan-input" type="date" id="eventDate" name="eventDate" required />
+                <input
+                  class="plan-input"
+                  type="date"
+                  id="eventDate"
+                  name="eventDate"
+                  required
+                />
               </div>
               <div class="plan-field">
                 <label for="eventTime">Time</label>
-                <input class="plan-input" type="time" id="eventTime" name="eventTime" />
+                <input
+                  class="plan-input"
+                  type="time"
+                  id="eventTime"
+                  name="eventTime"
+                />
               </div>
             </div>
 
@@ -229,7 +271,12 @@
             <div class="plan-row">
               <div class="plan-field">
                 <label for="eventType">Event Type</label>
-                <select class="plan-select" id="eventType" name="eventType" required>
+                <select
+                  class="plan-select"
+                  id="eventType"
+                  name="eventType"
+                  required
+                >
                   <option value="" disabled selected>Select type</option>
                   <option value="Wedding">Wedding &amp; Engagement</option>
                   <option value="Birthday">Birthday</option>
@@ -282,13 +329,32 @@
 
         <div class="plan-actions">
           <div class="plan-actions-nav">
-            <button type="button" class="plan-nav-btn ghost" id="planPrevBtn" disabled>Previous</button>
-            <div class="plan-step-hint" id="planStepHint" aria-live="polite">Step 1 of 2</div>
-            <button type="button" class="plan-nav-btn" id="planNextBtn">Next: Event</button>
+            <button
+              type="button"
+              class="plan-nav-btn ghost"
+              id="planPrevBtn"
+              disabled
+            >
+              Previous
+            </button>
+            <div class="plan-step-hint" id="planStepHint" aria-live="polite">
+              Step 1 of 2
+            </div>
+            <button type="button" class="plan-nav-btn" id="planNextBtn">
+              Next: Event
+            </button>
           </div>
-          <button type="submit" class="plan-submit hidden" id="planSubmitBtn">Create Event Now</button>
-          <p class="plan-hint">We will confirm details with you shortly after you submit.</p>
-          <div id="planEventMessage" class="plan-event-message" role="status"></div>
+          <button type="submit" class="plan-submit hidden" id="planSubmitBtn">
+            Create Event Now
+          </button>
+          <p class="plan-hint">
+            We will confirm details with you shortly after you submit.
+          </p>
+          <div
+            id="planEventMessage"
+            class="plan-event-message"
+            role="status"
+          ></div>
         </div>
       </form>
     </section>
@@ -342,10 +408,6 @@
           <span class="text-col">Planity.lb</span>
         </a>
       </div>
-      AÃ¿AÃ¿AÃ¿AÃ¿
     </footer>
   </body>
 </html>
-
-
-

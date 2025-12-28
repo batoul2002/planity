@@ -1,162 +1,208 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planity | Decoration Styles</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body class="decor-page">
-  <header>
-    <div class="logo-container">
-      <img src="images/logo.png" alt="Planity Logo" class="logo" />
-    </div>
-
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li class="dropdown">
-          <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
-          <ul class="dropdown-menu">
-            <li><a href="wedding-engagement.html">Wedding &amp; Engagement</a></li>
-            <li><a href="birthday.html">Birthday</a></li>
-            <li><a href="graduation.html">Graduation</a></li>
-            <li><a href="gender-reveal.html">Gender Reveal</a></li>
-            <li><a href="madeef.html">Madeef Ashouraii</a></li>
-            <li><a href="ramadan.html">Ramadan Gathering</a></li>
-            <li><a href="other.html">Other</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="services.html" class="dropbtn active">Services &#9662;</a>
-          <ul class="dropdown-menu">
-            <li><a href="venue.html">Venue</a></li>
-            <li><a href="decoration.html" class="active-sub">Decoration</a></li>
-            <li><a href="catering.html">Catering</a></li>
-
-            <li><a href="photographer.html">Photographer</a></li>
-            <li><a href="services.html">DJ</a></li>
-            <li><a href="invitation-cards.html">Invitation Card</a></li>
-          </ul>
-        </li>
-        <li><a href="plan-event.html">Plan Event</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="login.html">Log In</a></li>
-      </ul>
-      <ul class="nav-icons">
-        <li>
-          <a href="favorites.html" class="icon-link"><i class="fa-solid fa-heart"></i></a>
-        </li>
-        <li>
-          <a href="account.html" class="icon-link"><i class="fa-solid fa-user"></i></a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section class="about-hero">
-      <div class="ah-container">
-        <div class="ah-copy sr-item sr-revealed" style="--sr-delay:.05s">
-          <h1 class="about-title">Decoration Styles</h1>
-          <p class="hero-script">Curate it beautifully</p>
-          <p class="about-lead">
-            We design full-room stories for every celebration â€” stage backdrops, tablescapes, lantern trails, floral stands, and dessert corners styled to your palette. Pick an event type to explore the complete decoration concept weâ€™ll build for you.
-          </p>
-          <a href="#events"><button class="intro-button">Browse styles</button></a>
-        </div>
-        <div class="ah-collage sr-item sr-revealed" style="--sr-delay:.15s" aria-hidden="true">
-          <div class="col-img col-1" style="background-image:url('images/image3.jpg')"></div>
-          <div class="col-img col-2" style="background-image:url('images/services2/table.jpg')"></div>
-          <div class="col-img col-3" style="background-image:url('images/services2/invitationCards2.jpeg')"></div>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planity | Decoration Styles</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body class="decor-page">
+    <header>
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Planity Logo" class="logo" />
       </div>
-    </section>
 
-    <section class="decor-events">
-      <div class="decor-section-head">
-        <p class="decor-eyebrow">Event Type &#9662;</p>
-        <h2>Pick an event to see its full decoration recipe</h2>
-        <p class="decor-copy">Tap a card to reveal the elements we style for that celebration. Each layout includes palette, props, and guest flow cues.</p>
-      </div>
-      <div class="decor-event-grid" data-event-grid>
-        <!-- Event cards injected by JS -->
-      </div>
-    </section>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="event-type.html" class="dropbtn">Event Type &#9662;</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="wedding-engagement.html">Wedding &amp; Engagement</a>
+              </li>
+              <li><a href="birthday.html">Birthday</a></li>
+              <li><a href="graduation.html">Graduation</a></li>
+              <li><a href="gender-reveal.html">Gender Reveal</a></li>
+              <li><a href="madeef.html">Madeef Ashouraii</a></li>
+              <li><a href="ramadan.html">Ramadan Gathering</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="services.html" class="dropbtn active">Services &#9662;</a>
+            <ul class="dropdown-menu">
+              <li><a href="venue.html">Venue</a></li>
+              <li><a href="decoration.html" class="active">Decoration</a></li>
+              <li><a href="catering.html">Catering</a></li>
 
-    <section class="decor-details is-hidden" id="decor-details">
-      <div class="decor-details-card">
-        <div class="decor-details-head">
-          <div>
-            <p class="decor-eyebrow" data-selected-eyebrow>Select an event</p>
-            <h2 data-detail-title>Choose an event to view its decoration elements</h2>
-            <p class="decor-copy" data-detail-copy>Tap any event card above to load the full setup we style for that celebration.</p>
+              <li><a href="photographer.html">Photographer</a></li>
+              <li><a href="services.html">DJ &amp; Lighting System</a></li>
+              <li><a href="invitation-cards.html">Invitation Card</a></li>
+            </ul>
+          </li>
+          <li><a href="plan-event.html">Plan Event</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="login.html">Log In</a></li>
+        </ul>
+        <ul class="nav-icons">
+          <li>
+            <a href="favorites.html" class="icon-link"
+              ><i class="fa-solid fa-heart"></i
+            ></a>
+          </li>
+          <li>
+            <a href="account.html" class="icon-link"
+              ><i class="fa-solid fa-user"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="about-hero">
+        <div class="ah-container">
+          <div class="ah-copy sr-item sr-revealed" style="--sr-delay: 0.05s">
+            <h1 class="about-title">Decoration Styles</h1>
+            <p class="hero-script">Curate it beautifully</p>
+            <p class="about-lead">
+              We design full-room stories for every celebration Ã¢â‚¬â€ stage
+              backdrops, tablescapes, lantern trails, floral stands, and dessert
+              corners styled to your palette. Pick an event type to explore the
+              complete decoration concept weÃ¢â‚¬â„¢ll build for you.
+            </p>
+            <a href="#events"
+              ><button class="intro-button">Browse styles</button></a
+            >
           </div>
-          <div class="decor-detail-chip" data-selected-chip>Awaiting selection</div>
+          <div
+            class="ah-collage sr-item sr-revealed"
+            style="--sr-delay: 0.15s"
+            aria-hidden="true"
+          >
+            <div
+              class="col-img col-1"
+              style="background-image: url('images/image3.jpg')"
+            ></div>
+            <div
+              class="col-img col-2"
+              style="background-image: url('images/services2/table.jpg')"
+            ></div>
+            <div
+              class="col-img col-3"
+              style="
+                background-image: url('images/services2/invitationCards2.jpeg');
+              "
+            ></div>
+          </div>
         </div>
-        <div class="decor-detail-grid" data-detail-grid>
-          <!-- Detail cards injected by JS -->
+      </section>
+
+      <section class="decor-events">
+        <div class="decor-section-head">
+          <p class="decor-eyebrow">Event Type &#9662;</p>
+          <h2>Pick an event to see its full decoration recipe</h2>
+          <p class="decor-copy">
+            Tap a card to reveal the elements we style for that celebration.
+            Each layout includes palette, props, and guest flow cues.
+          </p>
+        </div>
+        <div class="decor-event-grid" data-event-grid>
+          <!-- Event cards injected by JS -->
+        </div>
+      </section>
+
+      <section class="decor-details is-hidden" id="decor-details">
+        <div class="decor-details-card">
+          <div class="decor-details-head">
+            <div>
+              <p class="decor-eyebrow" data-selected-eyebrow>Select an event</p>
+              <h2 data-detail-title>
+                Choose an event to view its decoration elements
+              </h2>
+              <p class="decor-copy" data-detail-copy>
+                Tap any event card above to load the full setup we style for
+                that celebration.
+              </p>
+            </div>
+            <div class="decor-detail-chip" data-selected-chip>
+              Awaiting selection
+            </div>
+          </div>
+          <div class="decor-detail-grid" data-detail-grid>
+            <!-- Detail cards injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <section class="planner-public-section" data-service="Decoration">
+        <div class="container">
+          <div class="planner-public-head">
+            <h2>New from our planners</h2>
+            <p class="muted">Approved additions curated by planners</p>
+          </div>
+          <div class="planner-public-grid" data-planner-grid></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <div class="footer-left">
+        <img src="images/logo.png" alt="Planity Logo" class="footer-logo" />
+      </div>
+      <div class="footer-center">
+        <div class="footer-sentence">We Turn Moments Into Memories.</div>
+        <div class="footer-copyright">
+          &copy; 2026 Planity. All rights reserved.
         </div>
       </div>
-    </section>
-
-    <section class="planner-public-section" data-service="Decoration">
-      <div class="container">
-        <div class="planner-public-head">
-          <h2>New from our planners</h2>
-          <p class="muted">Approved additions curated by planners</p>
+      <div class="footer-right">
+        <div class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <span class="text-col">Lebanon</span>
         </div>
-        <div class="planner-public-grid" data-planner-grid></div>
+        <a href="tel:+96112345678" class="contact-item">
+          <span class="icon-col">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span class="text-col">+961 12345678</span>
+        </a>
+        <a
+          href="https://www.instagram.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="icon-col">
+            <i class="fa-brands fa-instagram"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
+        <a
+          href="https://www.facebook.com/yourpage"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <span class="icon-col">
+            <i class="fa-brands fa-facebook-f"></i>
+          </span>
+          <span class="text-col">Planity.lb</span>
+        </a>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <footer class="main-footer">
-    <div class="footer-left">
-      <img src="images/logo.png" alt="Planity Logo" class="footer-logo" />
-    </div>
-    <div class="footer-center">
-      <div class="footer-sentence">We Turn Moments Into Memories.</div>
-      <div class="footer-copyright">
-        &copy; 2026 Planity. All rights reserved.
-      </div>
-    </div>
-    <div class="footer-right">
-      <div class="contact-item">
-        <span class="icon-col">
-          <i class="fa-solid fa-location-dot"></i>
-        </span>
-        <span class="text-col">Lebanon</span>
-      </div>
-      <a href="tel:+96112345678" class="contact-item">
-        <span class="icon-col">
-          <i class="fa-solid fa-phone"></i>
-        </span>
-        <span class="text-col">+961 12345678</span>
-      </a>
-      <a href="https://www.instagram.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
-        <span class="icon-col">
-          <i class="fa-brands fa-instagram"></i>
-        </span>
-        <span class="text-col">Planity.lb</span>
-      </a>
-      <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="contact-item">
-        <span class="icon-col">
-          <i class="fa-brands fa-facebook-f"></i>
-        </span>
-        <span class="text-col">Planity.lb</span>
-      </a>
-    </div>
-  </footer>
-
-  <script src="js/decoration.js" defer></script>
-  <script src="js/planner-public-items.js" defer></script>
-</body>
+    <script src="js/decoration.js" defer></script>
+    <script src="js/planner-public-items.js" defer></script>
+  </body>
 </html>
-
-
-
-
-

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Requests</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body data-page="requests">
+    <div class="planner-shell admin-shell">
+      <aside class="sidebar admin-sidebar">
+        <div class="brand">
+          <img class="brand-logo" src="../images/logo.original.png" alt="Admin logo" />
+          <div>
+            <strong>EventPro</strong>
+            <p class="muted small">Admin Panel</p>
+          </div>
+        </div>
+        <nav class="nav admin-nav">
+          <a href="dashboard.html" data-nav="dashboard">
+            <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+            <span class="nav-label">Dashboard</span>
+            <span class="nav-count"></span>
+          </a>
+          <a href="event-requests.html" data-nav="requests">
+            <span class="nav-icon"><i class="fa-solid fa-calendar-plus"></i></span>
+            <span class="nav-label">Event Requests</span>
+            <span class="nav-count" data-count-for="requests"></span>
+          </a>
+          <a href="assignment.html" data-nav="assignment">
+            <span class="nav-icon"><i class="fa-solid fa-user-check"></i></span>
+            <span class="nav-label">Planner Assignment</span>
+            <span class="nav-count" data-count-for="assignment"></span>
+          </a>
+          <a href="events-monitoring.html" data-nav="events">
+            <span class="nav-icon"><i class="fa-solid fa-eye"></i></span>
+            <span class="nav-label">Events Monitoring</span>
+            <span class="nav-count" data-count-for="events"></span>
+          </a>
+          <a href="planners.html" data-nav="planners">
+            <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+            <span class="nav-label">Planners</span>
+            <span class="nav-count" data-count-for="planners"></span>
+          </a>
+          <a href="catalog.html" data-nav="catalog">
+            <span class="nav-icon"><i class="fa-solid fa-book-open"></i></span>
+            <span class="nav-label">Catalog</span>
+            <span class="nav-count" data-count-for="catalog"></span>
+          </a>
+          <a href="approvals.html" data-nav="approvals">
+            <span class="nav-icon"><i class="fa-solid fa-check-to-slot"></i></span>
+            <span class="nav-label">Approvals</span>
+            <span class="nav-count" data-count-for="approvals"></span>
+          </a>
+          <a href="payments.html" data-nav="payments">
+            <span class="nav-icon"><i class="fa-solid fa-file-contract"></i></span>
+            <span class="nav-label">Payments & Contracts</span>
+            <span class="nav-count" data-count-for="payments"></span>
+          </a>
+          <a href="notifications.html" data-nav="notifications">
+            <span class="nav-icon"><i class="fa-solid fa-bell"></i></span>
+            <span class="nav-label">Notifications</span>
+            <span class="nav-count" data-count-for="notifications"></span>
+          </a>
+        </nav>
+        <footer>
+          Signed in as admin<br />
+          <small>Gatekeeper for new requests</small>
+        </footer>
+      </aside>
+
+      <div class="content-area admin-content">
+        <div class="topbar">
+          <div class="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Search requests..." />
+          </div>
+          <span class="pill soft">No chat yet</span>
+        </div>
+
+        <main class="page">
+          <header class="page-hero">
+            <p class="eyebrow">Before assignment</p>
+            <h1>Event Requests</h1>
+            <p class="muted">Client requests awaiting planner assignment. Capture favorites, add notes, and set priority before routing.</p>
+          </header>
+
+          <section class="panel filter-panel">
+            <div class="filter-row">
+              <div class="filter-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="searchRequests" type="search" placeholder="Search by client, type, or location" />
+              </div>
+              <select class="select" aria-label="Priority filter">
+                <option>All priorities</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+              </select>
+              <select class="select" aria-label="Date filter">
+                <option>By date</option>
+                <option>Soonest first</option>
+                <option>Newest submission</option>
+              </select>
+              <select class="select" aria-label="Budget filter">
+                <option>All budgets</option>
+                <option>Under $20k</option>
+                <option>$20k - $50k</option>
+                <option>$50k+</option>
+              </select>
+              <a class="link-btn" href="assignment.html"><i class="fa-solid fa-user-plus"></i> Assign planners</a>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>Requests</h3>
+                <p class="muted small">Favorites captured, admin note ready, no chat yet.</p>
+              </div>
+              <span class="pill soft" id="requestsCount"></span>
+            </div>
+            <div id="requestsTable"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

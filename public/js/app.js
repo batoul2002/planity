@@ -14,6 +14,7 @@
   function setAuth(token, user) {
     localStorage.setItem('token', token);
     if (user) localStorage.setItem('user', JSON.stringify(user));
+    if (user && user.role) localStorage.setItem('role', user.role);
   }
 
   function clearAuth() {
@@ -68,7 +69,14 @@
       });
       if (!data.success || !data.token) throw new Error('Login failed');
       setAuth(data.token, data.user);
-      window.location.href = 'index.html';
+      const role = (data.user && data.user.role) || 'client';
+      if (role === 'admin') {
+        window.location.href = 'admin/dashboard.html';
+      } else if (role === 'planner') {
+        window.location.href = 'planner/dashboard.html';
+      } else {
+        window.location.href = 'index.html';
+      }
     } catch (err) {
       const message = err?.message?.toLowerCase?.() || '';
       if (message.includes('invalid') || message.includes('credential') || message.includes('password')) {

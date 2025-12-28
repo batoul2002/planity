@@ -3,6 +3,7 @@ const Event = require('../models/Event');
 const Vendor = require('../models/Vendor');
 const ApiError = require('../utils/ApiError');
 const User = require('../models/User');
+const Favorite = require('../models/Favorite');
 const sendEmail = require('../utils/email');
 
 const ensureEventAccess = (event, user) => {
@@ -49,8 +50,26 @@ exports.createEvent = async (req, res, next) => {
     location,
     notes,
     plannerId,
-    vendors = []
+    vendors = [],
+    clientSubmission
   } = req.body;
+
+  let favoritesSnapshot = [];
+  try {
+    const favorites = await Favorite.find({ user: req.user._id }).populate('vendor', 'name category city photos slug');
+    favoritesSnapshot = favorites
+      .filter(f => f.vendor)
+      .map(f => ({
+        vendor: f.vendor._id,
+        name: f.vendor.name,
+        category: f.vendor.category,
+        city: f.vendor.city,
+        slug: f.vendor.slug,
+        photo: Array.isArray(f.vendor.photos) && f.vendor.photos.length ? f.vendor.photos[0] : undefined
+      }));
+  } catch (_) {
+    favoritesSnapshot = [];
+  }
 
   const eventData = {
     type,
@@ -60,8 +79,20 @@ exports.createEvent = async (req, res, next) => {
     guests,
     location,
     notes,
-    client: req.user._id
+    client: req.user._id,
+    favoritesSnapshot,
+    status: 'pending_assignment',
+    lastActivityAt: new Date()
   };
+  if (clientSubmission && typeof clientSubmission === 'object') {
+    const uploads = Array.isArray(clientSubmission.uploads) ? clientSubmission.uploads.filter(Boolean) : [];
+    const cleaned = ['name', 'email', 'phone', 'designation', 'requestedStatus'].reduce((acc, key) => {
+      if (clientSubmission[key]) acc[key] = clientSubmission[key];
+      return acc;
+    }, {});
+    if (uploads.length) cleaned.uploads = uploads;
+    if (Object.keys(cleaned).length) eventData.clientSubmission = cleaned;
+  }
 
   if (plannerId) {
     if (!mongoose.Types.ObjectId.isValid(plannerId)) {
