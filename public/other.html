@@ -14,7 +14,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
   </head>
-  <body class="wedding-page">
+  <body class="wedding-page other-page">
     <header>
       <div class="logo-container">
         <img src="images/logo.png" alt="Planity Logo" class="logo" />
@@ -31,7 +31,6 @@
               <li><a href="graduation.html">Graduation</a></li>
               <li><a href="gender-reveal.html">Gender Reveal</a></li>
               <li><a href="ramadan.html">Ramadan Gathering</a></li>
-              <li><a href="other.html">Other</a></li>
               <li><a href="other.html" class="active">Other</a></li>
             </ul>
           </li>
@@ -74,13 +73,13 @@
             <img src="images/types/other/o3.jpeg" alt="Stage setup ready for a special event" />
           </div>
           <div class="wc-item">
-            <img src="images/types/other/o4.jpeg" alt="Candlelit hall prepared for guests" />
+            <img src="images/types/other/o4.JPG" alt="Candlelit hall prepared for guests" />
           </div>
           <div class="wc-item">
             <img src="images/types/other/o5.jpg" alt="Lux seating arrangement with florals" />
           </div>
           <div class="wc-item">
-            <img src="images/types/other/o6.jpg" alt="Banquet layout for a formal occasion" />
+            <img src="images/types/other/o6.JPG" alt="Banquet layout for a formal occasion" />
           </div>
         </div>
 
@@ -159,7 +158,20 @@
         const nextBtn = lightbox?.querySelector(".wg-next");
         const closeBtn = lightbox?.querySelector(".wg-close");
 
-        const featured = ["o1.jpg", "o2.jpg", "o3.jpeg", "o4.jpeg", "o5.jpg", "o6.jpg"];
+        const featured = ["o1.jpg", "o2.jpg", "o3.jpeg", "o4.JPG", "o5.jpg", "o6.JPG"];
+        const excluded = new Set([
+          "2.jpg",
+          "6.jpg",
+          "10.jpg",
+          "15.jpg",
+          "16.jpeg",
+          "19.jpeg",
+          "20.jpeg",
+          "26.jpeg",
+          "27.jpeg",
+          "33.jpeg",
+          "35.jpeg",
+        ]);
         const allImages = [
           "1.jpg",
           "2.jpg",
@@ -202,7 +214,7 @@
           "39.jpg",
           "40.jpeg",
           "41.jpeg",
-        ].filter((name) => !featured.includes(name));
+        ].filter((name) => !featured.includes(name) && !excluded.has(name));
 
         // shuffle remaining images for a fresh order
         for (let i = allImages.length - 1; i > 0; i--) {

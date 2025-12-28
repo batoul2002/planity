@@ -126,7 +126,20 @@ section {
 }
 
 /* ===== SVX (servic.html) ===== */
-.svx-page { --svx-sage:var(--color-logo); --svx-sage-dark:#324139; --svx-cream:#f7f4ee; --svx-soft:#ece5db; --svx-warm:var(--color-light-brown); --svx-ink:#1f2622; }
+.svx-page {
+  --svx-sage:var(--color-logo);
+  --svx-sage-dark:#324139;
+  --svx-cream:#f7f4ee;
+  --svx-soft:#ece5db;
+  --svx-warm:var(--color-light-brown);
+  --svx-ink:#1f2622;
+  background-image:
+    radial-gradient(80% 80% at 10% 0%, rgba(255,255,255,1) 0%, rgba(251,250,248,0.95) 40%, rgba(245,243,240,0.9) 100%),
+    url('../images/background-types.jpg');
+  background-size: auto, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .svx-hero { position:relative; margin:0; max-width:none; padding:0; background:linear-gradient(140deg, var(--svx-cream), var(--color-bg-section)); border-bottom:1px solid rgba(0,0,0,.05); }
 .svx-hero-inner { max-width:1300px; margin:0 auto; padding:70px 5% 60px; display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:32px; align-items:flex-start; }
 .svx-hero-copy { max-width:540px; opacity:0; animation:svxFadeUp .9s ease forwards; }
@@ -3248,6 +3261,7 @@ button {
   color: #2d2a32;
 }
 
+
 .wedding-wrapper {
   max-width: 1200px;
   margin: 48px auto;
@@ -3439,6 +3453,10 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+}
+
+.other-page .wg-copy-line {
+  white-space: nowrap;
 }
 
 .wg-copy-line::before,
