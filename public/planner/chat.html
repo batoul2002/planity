@@ -39,7 +39,25 @@
     .role-toggle button.active { background:var(--panel); color:var(--text); box-shadow:0 6px 20px rgba(15,23,42,0.12); }
     .icon-button { border:1px solid var(--border); background:var(--panel); border-radius:12px; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text); }
     .icon-button.ghost { border:none; background:transparent; }
-    .layout { display:grid; grid-template-columns:1fr 420px; min-height:0; height:100%; }
+    .layout { display:grid; grid-template-columns:280px minmax(0,1fr) 420px; min-height:0; height:100%; }
+    .thread-panel { border-right:1px solid var(--border); background:linear-gradient(180deg,#fff 0%,#f8fafc 100%); display:flex; flex-direction:column; min-width:0; min-height:0; }
+    .thread-head { padding:16px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+    .thread-head .eyebrow { font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin:0 0 4px 0; }
+    .thread-head h3 { margin:0; font-size:16px; }
+    .thread-search { display:flex; align-items:center; gap:8px; padding:10px 16px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:#fff; }
+    .thread-search input { border:none; background:transparent; width:100%; font-size:13px; color:var(--text); outline:none; }
+    .thread-list { flex:1 1 auto; min-height:0; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:10px; }
+    .thread-card { border:1px solid var(--border); background:#fff; border-radius:14px; padding:12px; text-align:left; cursor:pointer; color:inherit; display:flex; flex-direction:column; gap:6px; transition:border-color 0.2s ease, box-shadow 0.2s ease; }
+    .thread-card:hover { border-color:var(--accent); }
+    .thread-card.active { border-color:var(--accent); box-shadow:0 10px 22px rgba(15,23,42,0.12); }
+    .thread-card:focus-visible { outline:2px solid rgba(13,123,127,0.35); outline-offset:2px; }
+    .thread-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .thread-title { font-weight:700; color:var(--text); font-size:14px; }
+    .thread-sub { color:var(--muted); font-size:12px; }
+    .thread-preview { color:var(--text); font-size:13px; }
+    .thread-meta { display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px; color:var(--muted); }
+    .thread-time { font-size:11px; color:var(--muted); }
+    .thread-empty { padding:12px; border:1px dashed var(--border); border-radius:12px; text-align:center; color:var(--muted); background:#fff; }
     .chat-panel { position:relative; border-right:1px solid var(--border); background:linear-gradient(180deg,#fff 0%,#f8fafc 100%); display:flex; flex-direction:column; min-width:0; min-height:0; height:100%; }
     .chat-scroll { flex:1 1 auto; min-height:0; overflow-y:auto; overflow-x:visible; padding:24px 28px 24px 28px; display:flex; flex-direction:column; gap:16px; width:100%; max-width:100%; margin:0; }
     .chat-banner { width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(193,202,195,0.2); color:var(--text); font-size:13px; box-shadow:0 6px 14px rgba(62,83,73,0.08); margin:0 0 12px 0; display:flex; align-items:center; gap:8px; }
@@ -97,7 +115,8 @@
     .menu-panel button { border:none; background:transparent; padding:12px 14px; text-align:left; cursor:pointer; font-weight:600; color:var(--text); }
     .menu-panel button:hover { background:#f8fafc; }
     .menu.open .menu-panel { display:flex; }
-    @media (max-width:1080px){ .layout{grid-template-columns:1fr;height:100%;min-height:0;} .details-panel{order:-1;height:100%;min-height:0;} .chat-panel{height:100%;min-height:0;} .chat-scroll,.composer{max-width:100%;} }
+    @media (max-width:1280px){ .layout{grid-template-columns:240px minmax(0,1fr) 360px;} }
+    @media (max-width:1080px){ .layout{grid-template-columns:1fr;height:100%;min-height:0;} .thread-panel{order:0;height:auto;min-height:0;border-right:none;border-bottom:1px solid var(--border);} .chat-panel{order:1;height:100%;min-height:0;} .details-panel{order:2;height:100%;min-height:0;} .chat-scroll,.composer{max-width:100%;} }
     @media (max-width:720px){ .role-toggle span{display:none;} .title-stack .title{font-size:16px;} .layout{height:100%;min-height:0;} .chat-panel{height:100%;} .chat-scroll{height:100%;max-height:none;} .composer{max-width:100%;} }
   </style>
 </head>
@@ -131,8 +150,8 @@
               <div class="app-bar__left">
                 <button class="icon-button ghost" aria-label="Back" onclick="history.back()"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="title-stack">
-                  <div class="title">Sarah's Wedding</div>
-                  <div class="subtitle">Sarah Chen &bull; Online <span class="presence-dot"></span></div>
+                  <div class="title" id="chatTitle">Sarah's Wedding</div>
+                  <div class="subtitle"><span id="chatSubtitleText">Sarah Chen - Online</span> <span class="presence-dot" id="chatPresence"></span></div>
                 </div>
               </div>
               <div class="app-bar__right">
@@ -155,6 +174,19 @@
             </header>
 
             <main class="layout">
+              <aside class="thread-panel">
+                <div class="thread-head">
+                  <div>
+                    <p class="eyebrow">Saved chats</p>
+                    <h3>Event types</h3>
+                  </div>
+                </div>
+                <div class="thread-search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input id="threadSearch" type="search" placeholder="Search chats" />
+                </div>
+                <div class="thread-list" id="threadList"></div>
+              </aside>
               <section class="chat-panel">
                 <div id="chatConnectionBanner" class="chat-banner"></div>
                 <div class="chat-scroll" id="messageList"></div>
@@ -186,7 +218,7 @@
                   </form>
                   <div class="favorites">
                     <div class="favorites-head">
-                      <span>Selected Services</span>
+                      <span>Favorites snapshot</span>
                       <div class="chip-row">
                         <button class="text-link" id="addService">Add</button>
                         <span class="pill" id="rulesChip">Planner can edit</span>

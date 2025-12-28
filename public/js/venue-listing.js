@@ -11,6 +11,47 @@ document.addEventListener("DOMContentLoaded", () => {
   const cards = Array.from(document.querySelectorAll(".venue-card"));
   if (!cards.length) return;
 
+  const normalizeKey = (value = "") => slugify(String(value || "").trim());
+  const buildDeletedSet = (items = []) => {
+    const set = new Set();
+    items.forEach((item) => {
+      if (!item) return;
+      const clientKey = normalizeKey(item.clientKey || "");
+      const titleKey = normalizeKey(item.title || item.name || "");
+      if (clientKey) set.add(clientKey);
+      if (titleKey) set.add(titleKey);
+    });
+    return set;
+  };
+
+  const hideDeletedCards = (deletedSet = new Set()) => {
+    if (!deletedSet.size) return;
+    cards.forEach((card) => {
+      const name = card.querySelector("h3")?.textContent?.trim() || "";
+      const slugFromData = normalizeKey(card.dataset.venueSlug || "");
+      const slugFromTitle = normalizeKey(name);
+      if (deletedSet.has(slugFromData) || deletedSet.has(slugFromTitle)) {
+        card.style.display = "none";
+        card.setAttribute("aria-hidden", "true");
+      }
+    });
+  };
+
+  const fetchDeletedVenues = async () => {
+    try {
+      const params = new URLSearchParams();
+      params.append("service", "Venue");
+      params.append("status", "deleted");
+      const res = await fetch(`/api/v1/public/planner-items?${params.toString()}`);
+      if (!res.ok) return new Set();
+      const data = await res.json();
+      const items = Array.isArray(data.data) ? data.data : [];
+      return buildDeletedSet(items);
+    } catch (_) {
+      return new Set();
+    }
+  };
+
   const linkCards = (slugMap = {}) => {
     cards.forEach((card) => {
       const name = card.querySelector("h3")?.textContent?.trim();
@@ -29,6 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  const applyVenueLinks = async (slugMap = {}) => {
+    linkCards(slugMap);
+    const deletedSet = await fetchDeletedVenues();
+    hideDeletedCards(deletedSet);
+  };
+
   fetch("data/venue-details.json")
     .then((res) => res.json())
     .then((venues) => {
@@ -39,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (dataSlug) map[dataSlug] = venue.slug || dataSlug;
         if (titleSlug) map[titleSlug] = venue.slug || dataSlug;
       });
-      linkCards(map);
+      applyVenueLinks(map);
     })
-    .catch(() => linkCards());
+    .catch(() => applyVenueLinks());
 });

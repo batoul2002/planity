@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assigned Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="planner.css" />
+  </head>
+  <body data-page="assigned">
+    <div class="planner-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img class="brand-logo" src="../images/logo.original.png" alt="Event Planner Logo" />
+        </div>
+        <nav class="nav">
+          <a href="dashboard.html" data-nav="dashboard"><span class="dot"></span>Dashboard</a>
+          <a href="assigned-events.html" data-nav="assigned"><span class="dot"></span>Assigned Events</a>
+          <a href="chat.html" data-nav="chat"><span class="dot"></span>Chat</a>
+          <a href="catalog.html" data-nav="catalog"><span class="dot"></span>Catalog</a>
+          <a href="my-items.html" data-nav="my-items"><span class="dot"></span>My Items</a>
+          <a href="pending-approval.html" data-nav="pending"><span class="dot"></span>Pending Approval</a>
+          <a href="../account.html"><span class="dot"></span>Profile</a>
+        </nav>
+        <footer>
+          Signed in as planner<br />
+          <small>Track assigned event progress</small>
+        </footer>
+      </aside>
+
+      <div class="content-area">
+        <div class="topbar">
+          <button id="navToggle" class="btn-ghost" style="padding: 10px 12px; border-radius: 10px; display: none">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="searchTop" type="search" placeholder="Search your work" />
+          </div>
+          <div class="avatar">
+            <img src="../images/logo.png" alt="Planner avatar" />
+          </div>
+        </div>
+
+        <main class="page assigned-page">
+          <header class="page-hero">
+            <p class="eyebrow">Planner workspace</p>
+            <div class="hero-head">
+              <h1>Assigned Events</h1>
+              <span class="pill soft">Planner view</span>
+            </div>
+            <p class="muted">Track every assigned event and move it through each stage.</p>
+          </header>
+
+          <section class="summary-grid assigned-summary">
+            <div class="summary-card">
+              <div class="summary-icon blue"><i class="fa-solid fa-user-check"></i></div>
+              <div>
+                <p class="muted small">Assigned</p>
+                <h2 id="assignedStage0">0</h2>
+                <small class="muted">Newly assigned</small>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-icon green"><i class="fa-solid fa-comments"></i></div>
+              <div>
+                <p class="muted small">In Chat</p>
+                <h2 id="assignedStage1">0</h2>
+                <small class="muted">Active conversation</small>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-icon amber"><i class="fa-solid fa-file-lines"></i></div>
+              <div>
+                <p class="muted small">Proposal</p>
+                <h2 id="assignedStage2">0</h2>
+                <small class="muted">Drafting options</small>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-icon purple"><i class="fa-solid fa-circle-check"></i></div>
+              <div>
+                <p class="muted small">Approved</p>
+                <h2 id="assignedStage3">0</h2>
+                <small class="muted">Confirmed details</small>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-icon rose"><i class="fa-solid fa-flag-checkered"></i></div>
+              <div>
+                <p class="muted small">Done</p>
+                <h2 id="assignedStage4">0</h2>
+                <small class="muted">Completed events</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel filter-panel">
+            <div class="filter-row assigned-filter-row">
+              <div class="filter-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="assignedSearch" type="search" placeholder="Search by client, event type, or location..." />
+              </div>
+              <select class="input" id="assignedStage">
+                <option value="all">All stages</option>
+                <option value="0">Assigned</option>
+                <option value="1">In Chat</option>
+                <option value="2">Proposal</option>
+                <option value="3">Approved</option>
+                <option value="4">Done</option>
+              </select>
+              <select class="input" id="assignedSort">
+                <option value="date">Upcoming date</option>
+                <option value="recent">Last activity</option>
+                <option value="created">Newest created</option>
+              </select>
+              <button class="btn-outline" id="assignedClear" type="button">Clear</button>
+            </div>
+          </section>
+
+          <section class="panel assigned-panel">
+            <div class="panel-head">
+              <div>
+                <h3>Event Pipeline</h3>
+                <p class="muted small">Showing <span id="assignedCount">0 events</span></p>
+              </div>
+            </div>
+            <div class="assigned-list" id="assignedEventList"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="planner.js"></script>
+  </body>
+</html>
